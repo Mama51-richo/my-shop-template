@@ -4,7 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Store</title>
-    <script src="https://telegram.org"></script>
+    <script src="https://telegram.org"></function confirmOrder() {
+    tg.showConfirm("Are you sure you want to order this Streetwear Hoodie for 1,500 ETB?", function(approved) {
+        if (approved) {
+            tg.showAlert("Order confirmed! We are setting up your payment delivery next step.");
+        }
+    });
+}
+>
     <style>
         body { font-family: sans-serif; text-align: center; background: #fff; padding: 20px; }
         .card { border: 1px solid #ccc; border-radius: 10px; padding: 15px; max-width: 250px; margin: 20px auto; }
@@ -20,7 +27,7 @@
     </div>
     <script>
         const tg = window.Telegram.WebApp;
-        tg.expand();
+       <button class="btn" onclick="confirmOrder()">Order Now</button>
     </script>
 </body>
 </html>
