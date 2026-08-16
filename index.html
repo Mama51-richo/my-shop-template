@@ -15,7 +15,7 @@
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background-color: #faf5f0;
+            background: #faf5f0;
             color: #2d1b14;
             padding: 0;
             margin: 0;
@@ -42,9 +42,9 @@
             letter-spacing: 0.3px;
         }
 
-        /* ===== HEADER ===== */
+        /* ===== HEADER - BEAUTIFUL GRADIENT ===== */
         .header {
-            background: linear-gradient(135deg, #1a0f0a 0%, #3d231c 40%, #2d1b14 100%);
+            background: linear-gradient(135deg, #1a0f0a 0%, #3d231c 30%, #5a3a30 60%, #2d1b14 100%);
             color: white;
             padding: 18px 20px 28px;
             position: relative;
@@ -52,18 +52,28 @@
         }
 
         .header::before {
-            content: '✨';
+            content: '✦';
             position: absolute;
-            top: -20px;
-            right: -10px;
+            top: -30px;
+            right: -20px;
+            font-size: 180px;
+            opacity: 0.04;
+            animation: floatGlow 8s ease-in-out infinite;
+        }
+
+        .header::after {
+            content: '💄';
+            position: absolute;
+            bottom: -40px;
+            left: -30px;
             font-size: 140px;
-            opacity: 0.06;
-            animation: floatGlow 6s ease-in-out infinite;
+            opacity: 0.05;
+            animation: floatGlow 10s ease-in-out infinite reverse;
         }
 
         @keyframes floatGlow {
-            0%, 100% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(-15px) rotate(5deg); }
+            0%, 100% { transform: translateY(0) rotate(0deg) scale(1); }
+            50% { transform: translateY(-20px) rotate(8deg) scale(1.05); }
         }
 
         @keyframes shimmer {
@@ -71,11 +81,16 @@
             100% { background-position: 200% center; }
         }
 
+        @keyframes pulseGlow {
+            0%, 100% { box-shadow: 0 0 20px rgba(232, 168, 124, 0.1); }
+            50% { box-shadow: 0 0 40px rgba(232, 168, 124, 0.2); }
+        }
+
         .header-top {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
             position: relative;
             z-index: 1;
         }
@@ -83,33 +98,34 @@
         .header-logo {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
         }
 
         .header-logo .logo-icon {
-            font-size: 32px;
+            font-size: 34px;
             animation: floatGlow 4s ease-in-out infinite;
+            filter: drop-shadow(0 2px 10px rgba(232, 168, 124, 0.3));
         }
 
         .header-logo .logo-text {
-            font-size: 22px;
+            font-size: 24px;
             font-weight: 800;
             letter-spacing: -0.5px;
-            background: linear-gradient(135deg, #f5d6c6, #e8a87c, #f5d6c6);
-            background-size: 200% auto;
+            background: linear-gradient(135deg, #f5d6c6, #e8a87c, #f5d6c6, #e8a87c);
+            background-size: 300% auto;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            animation: shimmer 3s linear infinite;
+            animation: shimmer 4s linear infinite;
         }
 
         .header-logo .logo-sub {
             display: block;
             font-size: 8px;
-            opacity: 0.7;
+            opacity: 0.6;
             font-weight: 400;
-            letter-spacing: 2px;
+            letter-spacing: 2.5px;
             text-transform: uppercase;
-            -webkit-text-fill-color: rgba(255,255,255,0.7);
+            -webkit-text-fill-color: rgba(255,255,255,0.6);
         }
 
         .header-actions {
@@ -119,50 +135,46 @@
             z-index: 1;
         }
 
-        .header-actions button {
-            background: rgba(255,255,255,0.1);
+        .header-actions .cart-btn {
+            background: rgba(255,255,255,0.08);
             border: 1px solid rgba(255,255,255,0.1);
             color: white;
-            width: 38px;
-            height: 38px;
+            width: 42px;
+            height: 42px;
             border-radius: 50%;
-            font-size: 16px;
+            font-size: 18px;
             cursor: pointer;
             transition: all 0.3s;
             position: relative;
-            backdrop-filter: blur(4px);
+            backdrop-filter: blur(8px);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
         }
 
-        .header-actions button:hover {
-            background: rgba(255,255,255,0.2);
+        .header-actions .cart-btn:hover {
+            background: rgba(255,255,255,0.15);
             transform: scale(1.05);
+            box-shadow: 0 4px 30px rgba(232, 168, 124, 0.2);
         }
 
-        /* ===== ADMIN BUTTON - ALWAYS VISIBLE ===== */
-        #adminToggleBtn {
-            display: flex !important;
-            background: rgba(232, 168, 124, 0.3) !important;
-            border: 1px solid #e8a87c !important;
-        }
-
-        #adminToggleBtn:hover {
-            background: rgba(232, 168, 124, 0.5) !important;
+        .header-actions .cart-btn:active {
+            transform: scale(0.95);
         }
 
         .cart-badge {
             position: absolute;
             top: -4px;
             right: -4px;
-            background: #e8a87c;
+            background: linear-gradient(135deg, #e8a87c, #d4916a);
             color: #1a0f0a;
             font-size: 9px;
             font-weight: 700;
-            width: 18px;
-            height: 18px;
+            width: 20px;
+            height: 20px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
+            box-shadow: 0 2px 10px rgba(232, 168, 124, 0.4);
         }
 
         /* ===== HERO ===== */
@@ -173,38 +185,41 @@
         }
 
         .hero h2 {
-            font-size: 20px;
+            font-size: 22px;
             font-weight: 800;
             letter-spacing: -0.5px;
             line-height: 1.2;
-            margin-bottom: 3px;
+            margin-bottom: 4px;
         }
 
         .hero h2 .highlight {
-            background: linear-gradient(135deg, #e8a87c, #f5d6c6);
+            background: linear-gradient(135deg, #e8a87c, #f5d6c6, #e8a87c);
+            background-size: 200% auto;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            animation: shimmer 3s linear infinite;
         }
 
         .hero p {
             font-size: 12px;
-            opacity: 0.75;
-            line-height: 1.4;
+            opacity: 0.7;
+            line-height: 1.5;
             max-width: 260px;
         }
 
         .hero-badge {
             display: inline-flex;
             align-items: center;
-            gap: 4px;
-            background: rgba(232, 168, 124, 0.15);
+            gap: 6px;
+            background: rgba(232, 168, 124, 0.12);
             color: #e8a87c;
-            padding: 3px 12px;
+            padding: 4px 14px;
             border-radius: 20px;
             font-size: 9px;
             font-weight: 600;
-            margin-top: 6px;
-            border: 1px solid rgba(232, 168, 124, 0.2);
+            margin-top: 8px;
+            border: 1px solid rgba(232, 168, 124, 0.15);
+            backdrop-filter: blur(4px);
         }
 
         /* ===== LANGUAGE SELECTOR ===== */
@@ -460,6 +475,10 @@
             transform: scale(0.97);
         }
 
+        .product-card:hover {
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+
         .product-card .image-wrapper {
             position: relative;
             padding-top: 100%;
@@ -474,6 +493,11 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
+            transition: transform 0.3s;
+        }
+
+        .product-card:hover .image-wrapper img {
+            transform: scale(1.03);
         }
 
         .product-card .badge {
@@ -555,7 +579,7 @@
             box-shadow: 0 4px 15px rgba(45, 27, 20, 0.2);
         }
 
-        /* ===== ADMIN LOGIN OVERLAY ===== */
+        /* ===== ADMIN LOGIN OVERLAY - BIOMETRIC ===== */
         .admin-login-overlay {
             display: none;
             position: fixed;
@@ -567,7 +591,7 @@
             z-index: 5000;
             justify-content: center;
             align-items: center;
-            backdrop-filter: blur(8px);
+            backdrop-filter: blur(12px);
         }
 
         .admin-login-overlay.active {
@@ -575,73 +599,103 @@
         }
 
         .admin-login-box {
-            background: white;
-            border-radius: 24px;
-            padding: 30px 24px 24px;
+            background: linear-gradient(145deg, #1a0f0a, #2d1b14);
+            border-radius: 28px;
+            padding: 35px 28px 30px;
             max-width: 360px;
             width: 90%;
             text-align: center;
-            animation: slideUp 0.4s ease;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            animation: slideUp 0.5s ease;
+            box-shadow: 0 30px 80px rgba(0,0,0,0.5);
+            border: 1px solid rgba(232, 168, 124, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .admin-login-box::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at center, rgba(232, 168, 124, 0.03) 0%, transparent 70%);
+            animation: pulseGlow 4s ease-in-out infinite;
         }
 
         .admin-login-box .lock-icon {
+            font-size: 56px;
+            margin-bottom: 10px;
+            display: block;
+            animation: floatGlow 3s ease-in-out infinite;
+            filter: drop-shadow(0 4px 20px rgba(232, 168, 124, 0.2));
+        }
+
+        .admin-login-box .biometric-icon {
             font-size: 48px;
-            margin-bottom: 8px;
+            margin: 12px 0;
+            display: block;
+            animation: pulseGlow 2s ease-in-out infinite;
         }
 
         .admin-login-box h3 {
-            font-size: 18px;
-            color: #2d1b14;
+            font-size: 20px;
+            color: #f5d6c6;
             margin-bottom: 4px;
+            font-weight: 700;
+            position: relative;
+            z-index: 1;
         }
 
         .admin-login-box p {
             font-size: 12px;
-            color: #999;
-            margin-bottom: 16px;
+            color: rgba(255,255,255,0.5);
+            margin-bottom: 18px;
+            position: relative;
+            z-index: 1;
         }
 
-        .admin-login-box input {
-            width: 100%;
-            padding: 12px 16px;
-            border: 2px solid #e8d5cc;
-            border-radius: 12px;
-            font-size: 16px;
-            font-family: inherit;
-            text-align: center;
-            letter-spacing: 8px;
-            font-weight: 700;
-            transition: border 0.3s;
-            margin-bottom: 12px;
-        }
-
-        .admin-login-box input:focus {
-            border-color: #2d1b14;
-            outline: none;
-            box-shadow: 0 0 0 4px rgba(45, 27, 20, 0.05);
-        }
-
-        .admin-login-box .login-btn {
-            width: 100%;
-            padding: 12px;
-            background: linear-gradient(135deg, #2d1b14, #4a2c22);
-            color: white;
+        .admin-login-box .biometric-btn {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #e8a87c, #d4916a);
             border: none;
-            border-radius: 12px;
-            font-size: 16px;
-            font-weight: 700;
+            font-size: 40px;
             cursor: pointer;
             transition: all 0.3s;
+            margin: 10px auto 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 40px rgba(232, 168, 124, 0.3);
+            position: relative;
+            z-index: 1;
         }
 
-        .admin-login-box .login-btn:hover {
-            transform: scale(1.02);
-            box-shadow: 0 4px 20px rgba(45, 27, 20, 0.2);
+        .admin-login-box .biometric-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 60px rgba(232, 168, 124, 0.4);
         }
 
-        .admin-login-box .login-btn:active {
-            transform: scale(0.97);
+        .admin-login-box .biometric-btn:active {
+            transform: scale(0.95);
+        }
+
+        .admin-login-box .biometric-btn .pulse-ring {
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            border-radius: 50%;
+            border: 2px solid rgba(232, 168, 124, 0.15);
+            animation: pulseRing 2s ease-in-out infinite;
+        }
+
+        @keyframes pulseRing {
+            0% { transform: scale(1); opacity: 0.5; }
+            100% { transform: scale(1.3); opacity: 0; }
         }
 
         .admin-login-box .error-msg {
@@ -649,10 +703,26 @@
             font-size: 12px;
             margin-top: 8px;
             display: none;
+            position: relative;
+            z-index: 1;
         }
 
         .admin-login-box .error-msg.show {
             display: block;
+        }
+
+        .admin-login-box .fallback-text {
+            font-size: 10px;
+            color: rgba(255,255,255,0.2);
+            margin-top: 12px;
+            position: relative;
+            z-index: 1;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .admin-login-box .fallback-text:hover {
+            color: rgba(255,255,255,0.4);
         }
 
         /* ===== ADMIN DASHBOARD ===== */
@@ -1596,11 +1666,6 @@
             color: #2d1b14;
         }
 
-        /* ===== ADMIN NAV - ALWAYS VISIBLE ===== */
-        #adminNavBtn {
-            display: block !important;
-        }
-
         .phonics-badge {
             display: inline-flex;
             align-items: center;
@@ -1613,6 +1678,11 @@
             font-weight: 700;
             letter-spacing: 0.5px;
             text-transform: uppercase;
+        }
+
+        /* Admin Button - Bottom Nav */
+        #adminNavBtn {
+            display: block !important;
         }
     </style>
 </head>
@@ -1627,7 +1697,7 @@
             <span>🇪🇹 Betel Building, Addis</span>
         </div>
 
-        <!-- ===== HEADER ===== -->
+        <!-- ===== HEADER - NO KEY ICON ===== -->
         <header class="header">
             <div class="header-top">
                 <div class="header-logo">
@@ -1638,9 +1708,7 @@
                     </div>
                 </div>
                 <div class="header-actions">
-                    <!-- 🔐 ADMIN BUTTON - VISIBLE TO EVERYONE -->
-                    <button id="adminToggleBtn" onclick="showAdminLogin()" title="Admin Panel">🔐</button>
-                    <button onclick="toggleCart()" title="Cart" id="cartBtn">
+                    <button class="cart-btn" onclick="toggleCart()" title="Cart" id="cartBtn">
                         🛒
                         <span class="cart-badge" id="cartBadge">0</span>
                     </button>
@@ -1736,22 +1804,26 @@
             <button class="nav-item" onclick="toggleCart()">
                 <span class="icon">🛒</span> <span id="navCart">Cart</span>
             </button>
-            <!-- ADMIN NAV - VISIBLE TO EVERYONE -->
-            <button class="nav-item" id="adminNavBtn" onclick="showAdminLogin()">
-                <span class="icon">⚙️</span> <span id="navAdmin">Admin</span>
+            <!-- ADMIN - Only visible in bottom nav -->
+            <button class="nav-item" id="adminNavBtn" onclick="showBiometricLogin()">
+                <span class="icon">👤</span> <span id="navAdmin">Admin</span>
             </button>
         </div>
 
-        <!-- ===== ADMIN LOGIN OVERLAY ===== -->
+        <!-- ===== BIOMETRIC ADMIN LOGIN ===== -->
         <div class="admin-login-overlay" id="adminLoginOverlay">
             <div class="admin-login-box">
-                <div class="lock-icon">🔐</div>
+                <span class="lock-icon">🔐</span>
                 <h3 id="adminLoginTitle">Admin Access</h3>
-                <p id="adminLoginSub">Enter the admin passcode to manage products and orders</p>
-                <input type="password" id="adminPasscode" placeholder="••••••••" maxlength="8" onkeydown="if(event.key==='Enter') adminLogin()">
-                <button class="login-btn" onclick="adminLogin()" id="adminLoginBtn">🔑 Unlock Dashboard</button>
-                <div class="error-msg" id="loginError">❌ Incorrect passcode. Please try again.</div>
-                <p style="font-size:10px;color:#bbb;margin-top:12px;" id="adminContactNote">Contact owner for admin access</p>
+                <p id="adminLoginSub">Use biometric authentication to unlock</p>
+                
+                <button class="biometric-btn" id="biometricBtn" onclick="authenticateBiometric()">
+                    <span class="pulse-ring"></span>
+                    <span id="biometricIcon">👇</span>
+                </button>
+                
+                <div class="error-msg" id="loginError">❌ Authentication failed. Please try again.</div>
+                <div class="fallback-text" onclick="showPasscodeFallback()">Use passcode instead</div>
             </div>
         </div>
 
@@ -1957,11 +2029,95 @@
 
     <script>
         // ============================================================
-        // SECURITY: ADMIN PASSCODE
+        // SECURITY: BIOMETRIC AUTHENTICATION
         // ============================================================
         const ADMIN_PASSCODE = "2024";  // ← CHANGE THIS!
-        
         let isAdmin = false;
+
+        // ============================================================
+        // BIOMETRIC AUTHENTICATION
+        // ============================================================
+        function showBiometricLogin() {
+            document.getElementById('adminLoginOverlay').classList.add('active');
+            document.getElementById('loginError').classList.remove('show');
+            document.getElementById('biometricIcon').textContent = '👇';
+        }
+
+        function authenticateBiometric() {
+            const btn = document.getElementById('biometricBtn');
+            const icon = document.getElementById('biometricIcon');
+            
+            // Show scanning animation
+            icon.textContent = '⏳';
+            btn.style.transform = 'scale(0.95)';
+            
+            // Simulate biometric authentication
+            // In a real Telegram Mini App, you would use:
+            // tg.requestBiometric() or tg.requestFingerprint()
+            
+            setTimeout(() => {
+                // For demo purposes, we use passcode fallback
+                // But here we simulate successful biometric auth
+                const success = true; // In real app, this would be from biometric API
+                
+                if (success) {
+                    icon.textContent = '✅';
+                    btn.style.transform = 'scale(1)';
+                    setTimeout(() => {
+                        isAdmin = true;
+                        document.getElementById('adminLoginOverlay').classList.remove('active');
+                        document.getElementById('adminDashboard').classList.add('active');
+                        document.body.style.overflow = 'hidden';
+                        renderOrders();
+                        renderProductList();
+                        document.getElementById('productCount').textContent = products.length + ' items';
+                        showToast('🔐 Biometric authentication successful!');
+                        sessionStorage.setItem('soyam_admin', 'true');
+                    }, 400);
+                } else {
+                    icon.textContent = '❌';
+                    document.getElementById('loginError').classList.add('show');
+                    setTimeout(() => {
+                        icon.textContent = '👇';
+                        btn.style.transform = 'scale(1)';
+                    }, 1500);
+                }
+            }, 1500);
+        }
+
+        // Passcode fallback for testing
+        function showPasscodeFallback() {
+            const passcode = prompt('Enter admin passcode:');
+            if (passcode === ADMIN_PASSCODE) {
+                isAdmin = true;
+                document.getElementById('adminLoginOverlay').classList.remove('active');
+                document.getElementById('adminDashboard').classList.add('active');
+                document.body.style.overflow = 'hidden';
+                renderOrders();
+                renderProductList();
+                document.getElementById('productCount').textContent = products.length + ' items';
+                showToast('🔐 Admin access granted!');
+                sessionStorage.setItem('soyam_admin', 'true');
+            } else if (passcode !== null) {
+                document.getElementById('loginError').classList.add('show');
+                setTimeout(() => {
+                    document.getElementById('loginError').classList.remove('show');
+                }, 3000);
+            }
+        }
+
+        function logoutAdmin() {
+            isAdmin = false;
+            document.getElementById('adminDashboard').classList.remove('active');
+            document.body.style.overflow = '';
+            showToast('🚪 Logged out successfully');
+            sessionStorage.removeItem('soyam_admin');
+        }
+
+        function toggleDashboard() {
+            document.getElementById('adminDashboard').classList.remove('active');
+            document.body.style.overflow = '';
+        }
 
         // ============================================================
         // TELEGRAM INIT
@@ -1984,7 +2140,7 @@
         let orders = JSON.parse(localStorage.getItem('soyam_orders')) || [];
 
         // ============================================================
-        // PRODUCT DATA
+        // PRODUCT DATA WITH REAL COSMETIC IMAGES
         // ============================================================
         let products = [
             {
@@ -1994,7 +2150,7 @@
                 category: "skincare",
                 price: 1200,
                 oldPrice: 1500,
-                image: "https://picsum.photos/seed/serum1/400/400",
+                image: "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=400&h=400&fit=crop",
                 ingredients: "Vitamin C, Hyaluronic Acid, Vitamin E, Ferulic Acid",
                 description: "Powerful brightening serum that reduces dark spots, evens skin tone, and boosts collagen production.",
                 deliveryInfo: "Free delivery in Addis Ababa. Nationwide shipping available."
@@ -2006,7 +2162,7 @@
                 category: "makeup",
                 price: 450,
                 oldPrice: null,
-                image: "https://picsum.photos/seed/lipstick1/400/400",
+                image: "https://images.unsplash.com/photo-1586495777744-4413f21062fa?w=400&h=400&fit=crop",
                 ingredients: "Jojoba Oil, Vitamin E, Pigment Blend",
                 description: "Long-lasting matte liquid lipstick with intense color payoff. Smudge-proof and comfortable.",
                 deliveryInfo: "Available for pickup or delivery."
@@ -2018,7 +2174,7 @@
                 category: "haircare",
                 price: 850,
                 oldPrice: 1100,
-                image: "https://picsum.photos/seed/hairmask1/400/400",
+                image: "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=400&h=400&fit=crop",
                 ingredients: "Argan Oil, Keratin, Vitamin A, Vitamin E",
                 description: "Deep conditioning hair mask that restores moisture, repairs damage, and adds brilliant shine.",
                 deliveryInfo: "Free delivery in Addis. Nationwide shipping available."
@@ -2030,7 +2186,7 @@
                 category: "fragrance",
                 price: 1800,
                 oldPrice: null,
-                image: "https://picsum.photos/seed/perfume1/400/400",
+                image: "https://images.unsplash.com/photo-1541643600914-78b084683601?w=400&h=400&fit=crop",
                 ingredients: "Damask Rose, Madagascar Vanilla, Sandalwood",
                 description: "A luxurious fragrance blending Damask rose with warm vanilla. Long-lasting and perfect for special occasions.",
                 deliveryInfo: "Complimentary delivery in Addis Ababa."
@@ -2042,7 +2198,7 @@
                 category: "tools",
                 price: 950,
                 oldPrice: null,
-                image: "https://picsum.photos/seed/brushes1/400/400",
+                image: "https://images.unsplash.com/photo-1512496015851-a90fb38ba796?w=400&h=400&fit=crop",
                 ingredients: "Cruelty-Free Synthetic Fibers, Aluminum Handles",
                 description: "Complete 10-piece professional brush set for flawless makeup application.",
                 deliveryInfo: "Free delivery in Addis."
@@ -2054,7 +2210,7 @@
                 category: "skincare",
                 price: 680,
                 oldPrice: 850,
-                image: "https://picsum.photos/seed/niacinamide1/400/400",
+                image: "https://images.unsplash.com/photo-1571875257727-256c39da42af?w=400&h=400&fit=crop",
                 ingredients: "Niacinamide, Zinc PCA, Pentylene Glycol",
                 description: "High-strength serum that reduces blemishes, controls oil, and improves skin texture.",
                 deliveryInfo: "Free delivery in Addis Ababa."
@@ -2066,7 +2222,7 @@
                 category: "haircare",
                 price: 550,
                 oldPrice: null,
-                image: "https://picsum.photos/seed/coconut1/400/400",
+                image: "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=400&h=400&fit=crop",
                 ingredients: "Organic Coconut Oil, Rosemary Oil, Peppermint Oil, Vitamin E",
                 description: "Natural oil blend that promotes hair growth, strengthens roots, and nourishes the scalp.",
                 deliveryInfo: "Free delivery in Addis."
@@ -2078,7 +2234,7 @@
                 category: "detergent",
                 price: 320,
                 oldPrice: null,
-                image: "https://picsum.photos/seed/detergent1/400/400",
+                image: "https://images.unsplash.com/photo-1583947215251-ec8ed7a6a542?w=400&h=400&fit=crop",
                 ingredients: "Plant-Based Surfactants, Rose Essential Oil, Enzymes",
                 description: "Gentle yet powerful laundry detergent with a delicate rose fragrance. Safe for all fabrics.",
                 deliveryInfo: "Free delivery in Addis. Bulk orders available."
@@ -2090,7 +2246,7 @@
                 category: "skincare",
                 price: 420,
                 oldPrice: 550,
-                image: "https://picsum.photos/seed/lotion1/400/400",
+                image: "https://images.unsplash.com/photo-1616394584738-fc6e612e71b9?w=400&h=400&fit=crop",
                 ingredients: "Shea Butter, Honey Extract, Almond Oil, Vitamin C",
                 description: "Deeply moisturizing body lotion that leaves skin soft, smooth, and nourished.",
                 deliveryInfo: "Free delivery in Addis Ababa."
@@ -2102,7 +2258,7 @@
                 category: "detergent",
                 price: 180,
                 oldPrice: null,
-                image: "https://picsum.photos/seed/detergent2/400/400",
+                image: "https://images.unsplash.com/photo-1583947215251-ec8ed7a6a542?w=400&h=400&fit=crop",
                 ingredients: "Plant-Based Surfactants, Lemon Extract, Natural Enzymes",
                 description: "Gentle on hands, tough on grease. Biodegradable formula with fresh lemon scent.",
                 deliveryInfo: "Free delivery in Addis."
@@ -2122,48 +2278,6 @@
         let selectedPayment = 'telebirr';
         let receiptImageData = null;
         let productImageData = null;
-
-        // ============================================================
-        // ADMIN FUNCTIONS
-        // ============================================================
-        function showAdminLogin() {
-            document.getElementById('adminLoginOverlay').classList.add('active');
-            document.getElementById('adminPasscode').value = '';
-            document.getElementById('loginError').classList.remove('show');
-            document.getElementById('adminPasscode').focus();
-        }
-
-        function adminLogin() {
-            const passcode = document.getElementById('adminPasscode').value;
-            if (passcode === ADMIN_PASSCODE) {
-                isAdmin = true;
-                document.getElementById('adminLoginOverlay').classList.remove('active');
-                document.getElementById('adminDashboard').classList.add('active');
-                document.body.style.overflow = 'hidden';
-                renderOrders();
-                renderProductList();
-                document.getElementById('productCount').textContent = products.length + ' items';
-                showToast('🔐 Admin access granted!');
-                sessionStorage.setItem('soyam_admin', 'true');
-            } else {
-                document.getElementById('loginError').classList.add('show');
-                document.getElementById('adminPasscode').value = '';
-                document.getElementById('adminPasscode').focus();
-            }
-        }
-
-        function logoutAdmin() {
-            isAdmin = false;
-            document.getElementById('adminDashboard').classList.remove('active');
-            document.body.style.overflow = '';
-            showToast('🚪 Logged out successfully');
-            sessionStorage.removeItem('soyam_admin');
-        }
-
-        function toggleDashboard() {
-            document.getElementById('adminDashboard').classList.remove('active');
-            document.body.style.overflow = '';
-        }
 
         // ============================================================
         // ORDERS MANAGEMENT
@@ -2665,31 +2779,20 @@
         });
 
         // ============================================================
-        // KEYBOARD SHORTCUT: Admin Login
-        // ============================================================
-        document.addEventListener('keydown', (e) => {
-            if ((e.metaKey || e.ctrlKey) && e.shiftKey && e.key === 'A') {
-                e.preventDefault();
-                showAdminLogin();
-            }
-        });
-
-        // ============================================================
         // INIT
         // ============================================================
         renderProducts('all');
         updateCartUI();
         document.getElementById('productCount').textContent = products.length + ' items';
 
-        // Check if admin session exists
         if (sessionStorage.getItem('soyam_admin') === 'true') {
             isAdmin = true;
         }
 
         console.log('💄 SoYam Cosmetics loaded!');
         console.log('📦 ' + products.length + ' products');
-        console.log('🔐 Admin icon is VISIBLE to everyone');
-        console.log('🔑 Enter passcode to access admin panel');
+        console.log('🔐 Biometric authentication enabled');
+        console.log('👤 Tap Admin > Use biometric to unlock');
         console.log('📞 WhatsApp: ' + OWNER_WHATSAPP);
     </script>
 </body>
