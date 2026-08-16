@@ -9,46 +9,43 @@
         body { 
             font-family: sans-serif; 
             text-align: center; 
-            background-color: var(--tg-theme-bg-color, #ffffff); 
-            color: var(--tg-theme-text-color, #222222);
+            background-color: #ffffff; 
+            color: #222222;
             padding: 20px; 
             margin: 0;
         }
-        /* Grid layout to show items side-by-side or stacked cleanly */
         .catalog-container {
             display: flex;
             flex-direction: column;
             gap: 20px;
             align-items: center;
-            max-width: 500px;
-            margin: 0 auto;
+            margin: 20px auto;
         }
         .card { 
-            border: 1px solid var(--tg-theme-hint-color, #ccc); 
+            border: 1px solid #ccc; 
             border-radius: 12px; 
-            padding: 20px; 
-            width: 260px; 
-            background-color: var(--tg-theme-secondary-bg-color, #f9f9f9);
+            padding: 15px; 
+            width: 240px; 
+            background-color: #f9f9f9;
         }
         .item-img {
             width: 100%;
             border-radius: 8px;
-            background-color: #eee;
         }
         .price { 
-            font-size: 20px; 
+            font-size: 18px; 
             color: #2ec4b6; 
             font-weight: bold; 
-            margin: 15px 0;
+            margin: 10px 0;
         }
         .btn { 
-            background-color: var(--tg-theme-button-color, #2481cc); 
-            color: var(--tg-theme-button-text-color, #ffffff); 
+            background-color: #2481cc; 
+            color: #ffffff; 
             border: none; 
-            padding: 12px; 
+            padding: 10px; 
             width: 100%; 
-            border-radius: 8px; 
-            font-size: 16px;
+            border-radius: 6px; 
+            font-size: 14px;
             font-weight: bold;
             cursor: pointer; 
         }
@@ -58,34 +55,40 @@
 
     <h2>Clothing Catalog</h2>
     
-    <!-- This empty container will hold all our items dynamically -->
-    <div id="catalog" class="catalog-container"></div>
+    <div id="catalog" class="catalog-container">
+        <!-- Products will safely display here -->
+    </div>
 
     <script>
+        // Force the app environment to initialize
         const tg = window.Telegram.WebApp;
         tg.expand();
 
-        // 1. Digital Inventory List (Add as many items here as you want!)
-        const products = [
-            { id: 1, name: "Streetwear Hoodie", price: "1,500 ETB", img: "https://picsum.photos" },
-            { id: 2, name: "Classic Cargo Pants", price: "1,800 ETB", img: "https://picsum.photos" },
-            { id: 3, name: "Oversized Vintage Tee", price: "950 ETB", img: "https://picsum.photos" }
-        ];
+        // Run rendering only after the page is fully ready
+        window.addEventListener('DOMContentLoaded', () => {
+            const products = [
+                { name: "Streetwear Hoodie", price: "1,500 ETB", img: "https://picsum.photos" },
+                { name: "Classic Cargo Pants", price: "1,800 ETB", img: "https://picsum.photos" },
+                { name: "Oversized Vintage Tee", price: "950 ETB", img: "https://picsum.photos" }
+            ];
 
-        // 2. Loop through our list and inject them into the page layout automatically
-        const catalogDiv = document.getElementById("catalog");
-        products.forEach(item => {
-            catalogDiv.innerHTML += `
-                <div class="card">
-                    <img class="item-img" src="${item.img}" alt="${item.name}">
-                    <h3>${item.name}</h3>
-                    <p class="price">${item.price}</p>
-                    <button class="btn" onclick="confirmOrder('${item.name}', '${item.price}')">Order Now</button>
-                </div>
-            `;
+            const catalogDiv = document.getElementById("catalog");
+            
+            let htmlContent = "";
+            products.forEach(item => {
+                htmlContent += `
+                    <div class="card">
+                        <img class="item-img" src="${item.img}" alt="${item.name}">
+                        <h3>${item.name}</h3>
+                        <p class="price">${item.price}</p>
+                        <button class="btn" onclick="confirmOrder('${item.name}', '${item.price}')">Order Now</button>
+                    </div>
+                `;
+            });
+            
+            catalogDiv.innerHTML = htmlContent;
         });
 
-        // 3. Dynamic popup showing the correct item details
         function confirmOrder(itemName, itemPrice) {
             tg.showConfirm(`Are you sure you want to order the ${itemName} for ${itemPrice}?`, function(approved) {
                 if (approved) {
