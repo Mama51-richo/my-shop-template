@@ -15,7 +15,7 @@
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background-color: #fdf6f0;
+            background-color: #faf5f0;
             color: #2d1b14;
             padding: 0;
             margin: 0;
@@ -34,38 +34,59 @@
 
         /* ===== STATUS BAR ===== */
         .status-bar {
-            background: #2d1b14;
+            background: linear-gradient(135deg, #1a0f0a, #2d1b14);
             color: white;
             padding: 6px 16px;
-            font-size: 11px;
+            font-size: 10px;
             display: flex;
             justify-content: space-between;
             letter-spacing: 0.3px;
         }
 
-        /* ===== HEADER ===== */
+        /* ===== HEADER WITH ANIMATED LOGO ===== */
         .header {
-            background: linear-gradient(135deg, #2d1b14 0%, #4a2c22 100%);
+            background: linear-gradient(135deg, #1a0f0a 0%, #3d231c 40%, #2d1b14 100%);
             color: white;
-            padding: 20px 20px 30px;
+            padding: 18px 20px 28px;
             position: relative;
             overflow: hidden;
+        }
+
+        .header::before {
+            content: '✨';
+            position: absolute;
+            top: -20px;
+            right: -10px;
+            font-size: 140px;
+            opacity: 0.06;
+            animation: floatGlow 6s ease-in-out infinite;
         }
 
         .header::after {
             content: '💄';
             position: absolute;
-            top: -30px;
-            right: -20px;
-            font-size: 120px;
-            opacity: 0.08;
+            bottom: -30px;
+            left: -20px;
+            font-size: 100px;
+            opacity: 0.05;
+            animation: floatGlow 8s ease-in-out infinite reverse;
+        }
+
+        @keyframes floatGlow {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-15px) rotate(5deg); }
+        }
+
+        @keyframes shimmer {
+            0% { background-position: -200% center; }
+            100% { background-position: 200% center; }
         }
 
         .header-top {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
             position: relative;
             z-index: 1;
         }
@@ -76,46 +97,56 @@
             gap: 10px;
         }
 
-        .header-logo span {
-            font-size: 28px;
+        .header-logo .logo-icon {
+            font-size: 32px;
+            animation: floatGlow 4s ease-in-out infinite;
         }
 
-        .header-logo h1 {
-            font-size: 18px;
+        .header-logo .logo-text {
+            font-size: 22px;
             font-weight: 800;
             letter-spacing: -0.5px;
+            background: linear-gradient(135deg, #f5d6c6, #e8a87c, #f5d6c6);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shimmer 3s linear infinite;
         }
 
-        .header-logo small {
+        .header-logo .logo-sub {
             display: block;
-            font-size: 9px;
+            font-size: 8px;
             opacity: 0.7;
             font-weight: 400;
-            letter-spacing: 0.5px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            -webkit-text-fill-color: rgba(255,255,255,0.7);
         }
 
         .header-actions {
             display: flex;
-            gap: 12px;
+            gap: 10px;
             position: relative;
             z-index: 1;
         }
 
         .header-actions button {
-            background: rgba(255,255,255,0.12);
-            border: none;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.1);
             color: white;
             width: 38px;
             height: 38px;
             border-radius: 50%;
             font-size: 16px;
             cursor: pointer;
-            transition: background 0.3s;
+            transition: all 0.3s;
             position: relative;
+            backdrop-filter: blur(4px);
         }
 
         .header-actions button:hover {
-            background: rgba(255,255,255,0.22);
+            background: rgba(255,255,255,0.2);
+            transform: scale(1.05);
         }
 
         .cart-badge {
@@ -123,8 +154,8 @@
             top: -4px;
             right: -4px;
             background: #e8a87c;
-            color: #2d1b14;
-            font-size: 10px;
+            color: #1a0f0a;
+            font-size: 9px;
             font-weight: 700;
             width: 18px;
             height: 18px;
@@ -138,73 +169,134 @@
         .hero {
             position: relative;
             z-index: 1;
-            padding: 5px 0 0;
+            padding: 2px 0 0;
         }
 
         .hero h2 {
-            font-size: 22px;
+            font-size: 20px;
             font-weight: 800;
             letter-spacing: -0.5px;
             line-height: 1.2;
-            margin-bottom: 4px;
+            margin-bottom: 3px;
         }
 
-        .hero h2 span {
-            color: #e8a87c;
+        .hero h2 .highlight {
+            background: linear-gradient(135deg, #e8a87c, #f5d6c6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         .hero p {
-            font-size: 13px;
-            opacity: 0.8;
-            line-height: 1.5;
-            max-width: 280px;
+            font-size: 12px;
+            opacity: 0.75;
+            line-height: 1.4;
+            max-width: 260px;
         }
 
         .hero-badge {
-            display: inline-block;
-            background: rgba(232, 168, 124, 0.2);
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            background: rgba(232, 168, 124, 0.15);
             color: #e8a87c;
-            padding: 4px 14px;
+            padding: 3px 12px;
             border-radius: 20px;
-            font-size: 10px;
+            font-size: 9px;
             font-weight: 600;
-            margin-top: 8px;
+            margin-top: 6px;
+            border: 1px solid rgba(232, 168, 124, 0.2);
         }
 
-        /* ===== OWNER CONTACT BAR ===== */
-        .owner-contact {
-            background: #f8ede7;
-            padding: 10px 20px;
+        /* ===== SOCIAL & CONTACT BAR ===== */
+        .social-bar {
+            background: linear-gradient(135deg, #f8ede7, #f5e4d8);
+            padding: 10px 16px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
             gap: 6px;
-            border-bottom: 1px solid #f0e0d8;
+            border-bottom: 2px solid #e8d5cc;
         }
 
-        .owner-contact span {
-            font-size: 12px;
-            color: #4a2c22;
-            font-weight: 500;
+        .social-bar .social-links {
+            display: flex;
+            gap: 12px;
+            align-items: center;
         }
 
-        .owner-contact a {
-            color: #2d1b14;
+        .social-bar .social-links a {
             text-decoration: none;
-            font-weight: 600;
             font-size: 13px;
-            background: white;
+            font-weight: 600;
+            color: #2d1b14;
             padding: 4px 12px;
-            border-radius: 16px;
+            border-radius: 20px;
+            background: white;
             border: 1px solid #e8d5cc;
             transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 4px;
         }
 
-        .owner-contact a:hover {
+        .social-bar .social-links a:hover {
             background: #2d1b14;
             color: white;
             border-color: #2d1b14;
+            transform: scale(1.02);
+        }
+
+        .social-bar .social-links a.tiktok {
+            background: #000;
+            color: white;
+            border-color: #000;
+        }
+
+        .social-bar .social-links a.tiktok:hover {
+            background: #2d1b14;
+        }
+
+        .social-bar .whatsapp-btn {
+            background: #25D366;
+            color: white;
+            border: none;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .social-bar .whatsapp-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+        }
+
+        /* ===== LOCATION BANNER ===== */
+        .location-banner {
+            background: #1a0f0a;
+            color: white;
+            padding: 8px 16px;
+            text-align: center;
+            font-size: 11px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .location-banner span {
+            opacity: 0.8;
+        }
+
+        .location-banner strong {
+            color: #e8a87c;
         }
 
         /* ===== PURCHASE OPTIONS ===== */
@@ -212,48 +304,50 @@
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 10px;
-            padding: 14px 20px;
+            padding: 12px 16px;
             background: white;
             border-bottom: 1px solid #f0e0d8;
         }
 
         .purchase-option {
-            padding: 12px 14px;
+            padding: 10px 12px;
             border-radius: 12px;
             border: 2px solid #f0e0d8;
             background: white;
             cursor: pointer;
             transition: all 0.3s;
             text-align: center;
+            position: relative;
         }
 
         .purchase-option.active {
             border-color: #2d1b14;
             background: #fdf6f0;
+            box-shadow: 0 2px 12px rgba(45, 27, 20, 0.08);
         }
 
         .purchase-option .icon {
-            font-size: 22px;
+            font-size: 20px;
             display: block;
-            margin-bottom: 2px;
+            margin-bottom: 1px;
         }
 
         .purchase-option .label {
-            font-size: 12px;
+            font-size: 11px;
             font-weight: 600;
             color: #2d1b14;
         }
 
         .purchase-option .sub {
-            font-size: 10px;
+            font-size: 9px;
             color: #999;
         }
 
         /* ===== CATEGORY TABS ===== */
         .category-tabs {
             display: flex;
-            gap: 8px;
-            padding: 12px 20px 10px;
+            gap: 6px;
+            padding: 10px 14px 8px;
             overflow-x: auto;
             background: white;
             border-bottom: 1px solid #f0f0f0;
@@ -268,11 +362,11 @@
         }
 
         .category-tab {
-            padding: 6px 16px;
+            padding: 5px 14px;
             border-radius: 20px;
             border: 1px solid #e8d5cc;
             background: white;
-            font-size: 12px;
+            font-size: 11px;
             font-weight: 500;
             color: #666;
             cursor: pointer;
@@ -295,18 +389,21 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 16px 20px 8px;
+            padding: 14px 16px 6px;
         }
 
         .section-header h3 {
-            font-size: 16px;
+            font-size: 15px;
             font-weight: 700;
             color: #2d1b14;
+            display: flex;
+            align-items: center;
+            gap: 6px;
         }
 
         .section-header .action-btn {
             color: #e8a87c;
-            font-size: 12px;
+            font-size: 11px;
             font-weight: 600;
             background: none;
             border: none;
@@ -317,8 +414,8 @@
         .product-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 14px;
-            padding: 0 16px 20px;
+            gap: 12px;
+            padding: 0 14px 16px;
         }
 
         /* ===== PRODUCT CARD ===== */
@@ -326,14 +423,18 @@
             background: white;
             border-radius: 14px;
             overflow: hidden;
-            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
-            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+            transition: all 0.3s;
             cursor: pointer;
             border: 1px solid #f5ece6;
         }
 
         .product-card:active {
             transform: scale(0.97);
+        }
+
+        .product-card:hover {
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
         }
 
         .product-card .image-wrapper {
@@ -350,17 +451,22 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
+            transition: transform 0.3s;
+        }
+
+        .product-card:hover .image-wrapper img {
+            transform: scale(1.03);
         }
 
         .product-card .badge {
             position: absolute;
-            top: 8px;
-            left: 8px;
+            top: 6px;
+            left: 6px;
             background: #2d1b14;
             color: white;
-            font-size: 9px;
+            font-size: 8px;
             font-weight: 700;
-            padding: 2px 10px;
+            padding: 2px 8px;
             border-radius: 10px;
             text-transform: uppercase;
             letter-spacing: 0.3px;
@@ -372,22 +478,26 @@
 
         .product-card .badge.new {
             background: #e8a87c;
-            color: #2d1b14;
+            color: #1a0f0a;
+        }
+
+        .product-card .badge.popular {
+            background: #f39c12;
         }
 
         .product-card .wishlist-btn {
             position: absolute;
-            top: 8px;
-            right: 8px;
+            top: 6px;
+            right: 6px;
             background: rgba(255,255,255,0.9);
             border: none;
-            width: 28px;
-            height: 28px;
+            width: 26px;
+            height: 26px;
             border-radius: 50%;
-            font-size: 13px;
+            font-size: 12px;
             cursor: pointer;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-            transition: transform 0.3s;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            transition: all 0.3s;
         }
 
         .product-card .wishlist-btn:active {
@@ -395,14 +505,14 @@
         }
 
         .product-card .info {
-            padding: 10px 12px 12px;
+            padding: 8px 10px 10px;
         }
 
         .product-card .info .product-name {
-            font-size: 13px;
+            font-size: 12px;
             font-weight: 600;
             color: #2d1b14;
-            margin-bottom: 2px;
+            margin-bottom: 1px;
             display: -webkit-box;
             -webkit-line-clamp: 1;
             -webkit-box-orient: vertical;
@@ -410,45 +520,56 @@
         }
 
         .product-card .info .product-brand {
-            font-size: 10px;
+            font-size: 9px;
             color: #999;
+            margin-bottom: 2px;
+        }
+
+        .product-card .info .ingredients {
+            font-size: 8px;
+            color: #bbb;
             margin-bottom: 3px;
+            display: -webkit-box;
+            -webkit-line-clamp: 1;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
         }
 
         .product-card .info .price-row {
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 5px;
         }
 
         .product-card .info .price {
-            font-size: 15px;
+            font-size: 14px;
             font-weight: 700;
             color: #2d1b14;
         }
 
         .product-card .info .old-price {
-            font-size: 11px;
+            font-size: 10px;
             color: #999;
             text-decoration: line-through;
         }
 
         .add-to-cart-btn {
             width: 100%;
-            padding: 8px;
-            background: #2d1b14;
+            padding: 6px;
+            background: linear-gradient(135deg, #2d1b14, #4a2c22);
             color: white;
             border: none;
             border-radius: 8px;
-            font-size: 12px;
+            font-size: 11px;
             font-weight: 600;
             cursor: pointer;
-            transition: background 0.3s;
-            margin-top: 6px;
+            transition: all 0.3s;
+            margin-top: 4px;
         }
 
         .add-to-cart-btn:hover {
-            background: #4a2c22;
+            transform: scale(1.02);
+            box-shadow: 0 4px 15px rgba(45, 27, 20, 0.2);
         }
 
         .add-to-cart-btn.added {
@@ -500,19 +621,19 @@
             height: 4px;
             background: #ddd;
             border-radius: 2px;
-            margin: 12px auto 8px;
+            margin: 10px auto 6px;
         }
 
         .modal-close {
             position: absolute;
-            top: 14px;
-            right: 18px;
+            top: 12px;
+            right: 16px;
             background: rgba(0,0,0,0.06);
             border: none;
-            width: 34px;
-            height: 34px;
+            width: 32px;
+            height: 32px;
             border-radius: 50%;
-            font-size: 16px;
+            font-size: 15px;
             cursor: pointer;
             color: #333;
             z-index: 5;
@@ -520,93 +641,117 @@
 
         .modal-image {
             width: 100%;
-            height: 280px;
+            height: 250px;
             object-fit: cover;
             background: #faf3ef;
         }
 
         .modal-body {
-            padding: 18px 20px 10px;
+            padding: 14px 18px 8px;
         }
 
         .modal-body .product-name {
-            font-size: 20px;
+            font-size: 19px;
             font-weight: 700;
             color: #2d1b14;
-            margin-bottom: 2px;
+            margin-bottom: 1px;
         }
 
         .modal-body .product-brand {
-            font-size: 13px;
+            font-size: 12px;
             color: #999;
-            margin-bottom: 4px;
+            margin-bottom: 2px;
         }
 
         .modal-body .price-row {
             display: flex;
             align-items: baseline;
-            gap: 10px;
-            margin: 6px 0 10px;
+            gap: 8px;
+            margin: 4px 0 8px;
         }
 
         .modal-body .price {
-            font-size: 24px;
+            font-size: 22px;
             font-weight: 800;
             color: #2d1b14;
         }
 
         .modal-body .old-price {
-            font-size: 14px;
+            font-size: 13px;
             color: #999;
             text-decoration: line-through;
         }
 
-        .modal-body .description {
-            font-size: 14px;
-            line-height: 1.7;
+        .modal-body .ingredients-section {
+            background: #fdf6f0;
+            padding: 10px 12px;
+            border-radius: 10px;
+            margin: 6px 0 8px;
+            border-left: 3px solid #e8a87c;
+        }
+
+        .modal-body .ingredients-section .label {
+            font-size: 10px;
+            font-weight: 700;
+            color: #2d1b14;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .modal-body .ingredients-section .value {
+            font-size: 12px;
             color: #555;
-            margin: 8px 0 12px;
+            margin-top: 2px;
+            line-height: 1.5;
+        }
+
+        .modal-body .description {
+            font-size: 13px;
+            line-height: 1.6;
+            color: #555;
+            margin: 6px 0 10px;
         }
 
         .modal-body .delivery-info {
-            background: #fdf6f0;
-            padding: 12px 14px;
+            background: linear-gradient(135deg, #fdf6f0, #f8ede7);
+            padding: 10px 12px;
             border-radius: 10px;
-            margin: 12px 0;
-            font-size: 13px;
+            margin: 8px 0;
+            font-size: 12px;
             color: #4a2c22;
-            border-left: 3px solid #e8a87c;
+            border: 1px solid #f0e0d8;
         }
 
         .modal-body .delivery-info strong {
             display: block;
-            margin-bottom: 4px;
+            margin-bottom: 2px;
+            font-size: 12px;
         }
 
         .modal-body .purchase-type-section {
-            margin: 14px 0;
+            margin: 10px 0;
         }
 
         .modal-body .purchase-type-section label {
-            font-size: 13px;
+            font-size: 12px;
             font-weight: 600;
             color: #2d1b14;
             display: block;
-            margin-bottom: 6px;
+            margin-bottom: 4px;
         }
 
         .purchase-type-options {
             display: flex;
-            gap: 10px;
+            gap: 8px;
         }
 
         .purchase-type-options button {
             flex: 1;
-            padding: 10px;
+            padding: 8px;
             border: 2px solid #e8d5cc;
             border-radius: 10px;
             background: white;
-            font-size: 13px;
+            font-size: 11px;
             font-weight: 500;
             cursor: pointer;
             transition: all 0.3s;
@@ -615,8 +760,8 @@
 
         .purchase-type-options button .icon {
             display: block;
-            font-size: 20px;
-            margin-bottom: 2px;
+            font-size: 18px;
+            margin-bottom: 1px;
         }
 
         .purchase-type-options button.selected {
@@ -628,13 +773,14 @@
             border-color: #2d1b14;
         }
 
-        /* ===== DELIVERY DETAILS FORM ===== */
+        /* ===== DELIVERY FORM ===== */
         .delivery-form {
             display: none;
-            margin: 12px 0 14px;
-            padding: 14px;
+            margin: 10px 0 12px;
+            padding: 12px;
             background: #faf3ef;
             border-radius: 12px;
+            border: 1px solid #f0e0d8;
         }
 
         .delivery-form.show {
@@ -642,24 +788,24 @@
         }
 
         .delivery-form label {
-            font-size: 12px;
+            font-size: 11px;
             font-weight: 600;
             color: #2d1b14;
             display: block;
-            margin: 6px 0 2px;
+            margin: 4px 0 2px;
         }
 
         .delivery-form input,
         .delivery-form textarea,
         .delivery-form select {
             width: 100%;
-            padding: 10px 12px;
+            padding: 8px 10px;
             border: 1px solid #e8d5cc;
             border-radius: 8px;
-            font-size: 13px;
+            font-size: 12px;
             font-family: inherit;
             background: white;
-            margin-bottom: 6px;
+            margin-bottom: 4px;
             transition: border 0.3s;
         }
 
@@ -668,26 +814,27 @@
         .delivery-form select:focus {
             border-color: #2d1b14;
             outline: none;
+            box-shadow: 0 0 0 3px rgba(45, 27, 20, 0.05);
         }
 
         .delivery-form textarea {
-            min-height: 60px;
+            min-height: 50px;
             resize: vertical;
         }
 
         .delivery-form .payment-options {
-            display: flex;
-            gap: 10px;
-            margin: 6px 0;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 6px;
+            margin: 4px 0;
         }
 
         .delivery-form .payment-options button {
-            flex: 1;
-            padding: 10px;
+            padding: 8px 4px;
             border: 2px solid #e8d5cc;
             border-radius: 8px;
             background: white;
-            font-size: 12px;
+            font-size: 10px;
             font-weight: 500;
             cursor: pointer;
             transition: all 0.3s;
@@ -696,7 +843,8 @@
 
         .delivery-form .payment-options button .icon {
             display: block;
-            font-size: 18px;
+            font-size: 16px;
+            margin-bottom: 1px;
         }
 
         .delivery-form .payment-options button.selected {
@@ -704,30 +852,92 @@
             background: #fdf6f0;
         }
 
+        .delivery-form .receipt-upload {
+            margin: 6px 0;
+            padding: 10px;
+            border: 2px dashed #e8d5cc;
+            border-radius: 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            background: white;
+        }
+
+        .delivery-form .receipt-upload:hover {
+            border-color: #2d1b14;
+            background: #fdf6f0;
+        }
+
+        .delivery-form .receipt-upload .icon {
+            font-size: 24px;
+            display: block;
+            margin-bottom: 2px;
+        }
+
+        .delivery-form .receipt-upload .text {
+            font-size: 10px;
+            color: #999;
+        }
+
+        .delivery-form .receipt-preview {
+            margin-top: 6px;
+            display: none;
+            position: relative;
+        }
+
+        .delivery-form .receipt-preview.show {
+            display: block;
+        }
+
+        .delivery-form .receipt-preview img {
+            max-width: 100%;
+            max-height: 120px;
+            border-radius: 8px;
+            border: 1px solid #e8d5cc;
+        }
+
+        .delivery-form .receipt-preview .remove-btn {
+            position: absolute;
+            top: -6px;
+            right: -6px;
+            background: #e74c3c;
+            color: white;
+            border: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            font-size: 10px;
+            cursor: pointer;
+        }
+
         .modal-add-to-cart {
             width: 100%;
-            padding: 14px;
+            padding: 12px;
             background: linear-gradient(135deg, #2d1b14, #4a2c22);
             color: white;
             border: none;
             border-radius: 12px;
-            font-size: 16px;
+            font-size: 15px;
             font-weight: 700;
             cursor: pointer;
-            transition: transform 0.3s, box-shadow 0.3s;
+            transition: all 0.3s;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
-            margin-top: 6px;
+            gap: 8px;
+            margin-top: 4px;
         }
 
         .modal-add-to-cart:active {
             transform: scale(0.97);
         }
 
+        .modal-add-to-cart:hover {
+            box-shadow: 0 4px 20px rgba(45, 27, 20, 0.2);
+        }
+
         .modal-add-to-cart .icon {
-            font-size: 18px;
+            font-size: 16px;
         }
 
         /* ===== CART PANEL ===== */
@@ -741,7 +951,7 @@
             max-width: 420px;
             background: white;
             z-index: 1100;
-            box-shadow: -4px 0 30px rgba(0,0,0,0.15);
+            box-shadow: -4px 0 30px rgba(0,0,0,0.1);
             animation: slideInRight 0.35s ease;
         }
 
@@ -756,7 +966,7 @@
         }
 
         .cart-header {
-            padding: 18px 20px;
+            padding: 16px 18px;
             border-bottom: 1px solid #f0e0d8;
             display: flex;
             justify-content: space-between;
@@ -768,7 +978,7 @@
         }
 
         .cart-header h3 {
-            font-size: 18px;
+            font-size: 17px;
             font-weight: 700;
             color: #2d1b14;
         }
@@ -776,7 +986,7 @@
         .cart-header button {
             background: none;
             border: none;
-            font-size: 20px;
+            font-size: 18px;
             cursor: pointer;
             color: #666;
             padding: 4px 8px;
@@ -785,20 +995,20 @@
         .cart-items {
             flex: 1;
             overflow-y: auto;
-            padding: 10px 16px;
+            padding: 8px 14px;
         }
 
         .cart-item {
             display: flex;
-            gap: 12px;
-            padding: 12px 0;
+            gap: 10px;
+            padding: 10px 0;
             border-bottom: 1px solid #f5ece6;
             align-items: center;
         }
 
         .cart-item img {
-            width: 54px;
-            height: 54px;
+            width: 48px;
+            height: 48px;
             border-radius: 10px;
             object-fit: cover;
             background: #faf3ef;
@@ -809,58 +1019,58 @@
         }
 
         .cart-item .item-info .name {
-            font-size: 13px;
+            font-size: 12px;
             font-weight: 600;
             color: #2d1b14;
         }
 
         .cart-item .item-info .type {
-            font-size: 11px;
+            font-size: 10px;
             color: #999;
         }
 
         .cart-item .item-info .price {
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 700;
             color: #2d1b14;
-            margin-top: 2px;
+            margin-top: 1px;
         }
 
         .cart-item .qty-control {
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 4px;
         }
 
         .cart-item .qty-control button {
-            width: 26px;
-            height: 26px;
+            width: 24px;
+            height: 24px;
             border: 1px solid #e8d5cc;
             border-radius: 6px;
             background: white;
-            font-size: 13px;
+            font-size: 12px;
             cursor: pointer;
             font-weight: 600;
         }
 
         .cart-item .qty-control span {
             font-weight: 600;
-            min-width: 18px;
+            min-width: 16px;
             text-align: center;
-            font-size: 14px;
+            font-size: 13px;
         }
 
         .cart-item .remove-btn {
             background: none;
             border: none;
             color: #e74c3c;
-            font-size: 14px;
+            font-size: 13px;
             cursor: pointer;
             padding: 4px;
         }
 
         .cart-footer {
-            padding: 16px 20px;
+            padding: 14px 18px;
             border-top: 1px solid #f0e0d8;
             background: white;
             position: sticky;
@@ -870,27 +1080,27 @@
         .cart-footer .subtotal {
             display: flex;
             justify-content: space-between;
-            font-size: 15px;
-            margin-bottom: 10px;
+            font-size: 14px;
+            margin-bottom: 8px;
         }
 
         .cart-footer .subtotal .amount {
             font-weight: 700;
-            font-size: 17px;
+            font-size: 16px;
             color: #2d1b14;
         }
 
         .cart-footer .checkout-btn {
             width: 100%;
-            padding: 14px;
+            padding: 12px;
             background: linear-gradient(135deg, #e8a87c, #d4916a);
             color: white;
             border: none;
             border-radius: 12px;
-            font-size: 16px;
+            font-size: 15px;
             font-weight: 700;
             cursor: pointer;
-            transition: transform 0.3s;
+            transition: all 0.3s;
         }
 
         .cart-footer .checkout-btn:active {
@@ -922,7 +1132,7 @@
         }
 
         .dashboard-header {
-            padding: 18px 20px;
+            padding: 16px 18px;
             border-bottom: 1px solid #f0e0d8;
             display: flex;
             justify-content: space-between;
@@ -934,46 +1144,50 @@
         }
 
         .dashboard-header h3 {
-            font-size: 18px;
+            font-size: 17px;
             font-weight: 700;
             color: #2d1b14;
+            display: flex;
+            align-items: center;
+            gap: 6px;
         }
 
         .dashboard-header button {
             background: none;
             border: none;
-            font-size: 20px;
+            font-size: 18px;
             cursor: pointer;
             color: #666;
             padding: 4px 8px;
         }
 
         .dashboard-body {
-            padding: 16px 20px;
+            padding: 14px 16px;
         }
 
         .dashboard-body .form-group {
-            margin-bottom: 14px;
+            margin-bottom: 10px;
         }
 
         .dashboard-body .form-group label {
             display: block;
-            font-size: 13px;
+            font-size: 12px;
             font-weight: 600;
             color: #2d1b14;
-            margin-bottom: 4px;
+            margin-bottom: 3px;
         }
 
         .dashboard-body .form-group input,
         .dashboard-body .form-group textarea,
         .dashboard-body .form-group select {
             width: 100%;
-            padding: 10px 12px;
+            padding: 8px 10px;
             border: 1px solid #e8d5cc;
             border-radius: 8px;
-            font-size: 14px;
+            font-size: 13px;
             font-family: inherit;
             background: white;
+            transition: border 0.3s;
         }
 
         .dashboard-body .form-group input:focus,
@@ -981,39 +1195,95 @@
         .dashboard-body .form-group select:focus {
             border-color: #2d1b14;
             outline: none;
+            box-shadow: 0 0 0 3px rgba(45, 27, 20, 0.05);
         }
 
         .dashboard-body .form-group textarea {
-            min-height: 70px;
+            min-height: 60px;
             resize: vertical;
+        }
+
+        .dashboard-body .form-group .image-upload {
+            padding: 12px;
+            border: 2px dashed #e8d5cc;
+            border-radius: 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            background: #faf3ef;
+        }
+
+        .dashboard-body .form-group .image-upload:hover {
+            border-color: #2d1b14;
+            background: #fdf6f0;
+        }
+
+        .dashboard-body .form-group .image-upload .icon {
+            font-size: 28px;
+            display: block;
+            margin-bottom: 2px;
+        }
+
+        .dashboard-body .form-group .image-preview {
+            margin-top: 6px;
+            display: none;
+        }
+
+        .dashboard-body .form-group .image-preview.show {
+            display: block;
+        }
+
+        .dashboard-body .form-group .image-preview img {
+            max-width: 100%;
+            max-height: 150px;
+            border-radius: 8px;
+            border: 1px solid #e8d5cc;
         }
 
         .dashboard-body .submit-btn {
             width: 100%;
-            padding: 14px;
-            background: #2d1b14;
+            padding: 12px;
+            background: linear-gradient(135deg, #2d1b14, #4a2c22);
             color: white;
             border: none;
             border-radius: 12px;
-            font-size: 16px;
+            font-size: 15px;
             font-weight: 700;
             cursor: pointer;
-            transition: background 0.3s;
+            transition: all 0.3s;
         }
 
         .dashboard-body .submit-btn:hover {
-            background: #4a2c22;
+            box-shadow: 0 4px 20px rgba(45, 27, 20, 0.2);
+            transform: scale(1.01);
         }
 
         .dashboard-body .product-list {
-            margin-top: 20px;
+            margin-top: 16px;
+        }
+
+        .dashboard-body .product-list .list-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .dashboard-body .product-list .list-header h4 {
+            font-size: 14px;
+            color: #2d1b14;
+        }
+
+        .dashboard-body .product-list .list-header .count {
+            font-size: 11px;
+            color: #999;
         }
 
         .dashboard-body .product-list .list-item {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 10px 0;
+            padding: 8px 0;
             border-bottom: 1px solid #f5ece6;
         }
 
@@ -1023,43 +1293,43 @@
 
         .dashboard-body .product-list .list-item .info .name {
             font-weight: 600;
-            font-size: 14px;
+            font-size: 13px;
         }
 
-        .dashboard-body .product-list .list-item .info .price {
-            font-size: 13px;
-            color: #666;
+        .dashboard-body .product-list .list-item .info .details {
+            font-size: 11px;
+            color: #999;
         }
 
         .dashboard-body .product-list .list-item .delete-btn {
             background: #e74c3c;
             color: white;
             border: none;
-            padding: 4px 12px;
+            padding: 3px 10px;
             border-radius: 6px;
-            font-size: 12px;
+            font-size: 11px;
             cursor: pointer;
         }
 
         /* ===== TOAST ===== */
         .toast {
             position: fixed;
-            bottom: 30px;
+            bottom: 80px;
             left: 50%;
             transform: translateX(-50%);
             background: #2d1b14;
             color: white;
-            padding: 12px 22px;
+            padding: 10px 20px;
             border-radius: 12px;
-            font-size: 13px;
+            font-size: 12px;
             font-weight: 500;
             z-index: 2000;
             opacity: 0;
-            transition: opacity 0.4s, transform 0.4s;
+            transition: all 0.4s;
             pointer-events: none;
             max-width: 90%;
             text-align: center;
-            box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.15);
         }
 
         .toast.show {
@@ -1070,42 +1340,45 @@
         /* ===== EMPTY STATE ===== */
         .empty-cart {
             text-align: center;
-            padding: 50px 20px;
+            padding: 40px 20px;
             color: #999;
         }
 
         .empty-cart .icon {
-            font-size: 44px;
-            margin-bottom: 10px;
+            font-size: 40px;
+            margin-bottom: 8px;
         }
 
         .empty-cart h4 {
-            font-size: 17px;
+            font-size: 16px;
             color: #333;
-            margin-bottom: 3px;
+            margin-bottom: 2px;
         }
 
         /* ===== RESPONSIVE ===== */
         @media (max-width: 380px) {
             .product-grid {
-                gap: 10px;
+                gap: 8px;
                 padding: 0 10px 12px;
             }
             .product-card .info .product-name {
-                font-size: 12px;
+                font-size: 11px;
             }
             .product-card .info .price {
-                font-size: 13px;
+                font-size: 12px;
             }
             .header h2 {
-                font-size: 18px;
+                font-size: 17px;
             }
             .purchase-options {
                 gap: 6px;
-                padding: 10px 12px;
+                padding: 8px 10px;
             }
             .purchase-option {
-                padding: 8px 10px;
+                padding: 6px 8px;
+            }
+            .delivery-form .payment-options {
+                grid-template-columns: 1fr 1fr;
             }
         }
 
@@ -1139,7 +1412,7 @@
             border-top: 1px solid #f0e0d8;
             display: flex;
             justify-content: space-around;
-            padding: 8px 0 10px;
+            padding: 6px 0 8px;
             z-index: 50;
         }
 
@@ -1150,12 +1423,12 @@
             transition: color 0.3s;
             border: none;
             background: none;
-            font-size: 10px;
+            font-size: 9px;
         }
 
         .bottom-nav .nav-item .icon {
             display: block;
-            font-size: 20px;
+            font-size: 18px;
             margin-bottom: 1px;
         }
 
@@ -1167,6 +1440,53 @@
         .bottom-nav .nav-item:hover {
             color: #2d1b14;
         }
+
+        /* ===== PHONICS LOGO BADGE ===== */
+        .phonics-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            background: linear-gradient(135deg, #e8a87c, #d4916a);
+            color: white;
+            padding: 2px 10px;
+            border-radius: 12px;
+            font-size: 8px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            margin-left: 4px;
+        }
+
+        /* ===== FEATURED SECTION ===== */
+        .featured-banner {
+            background: linear-gradient(135deg, #fdf6f0, #f8ede7);
+            padding: 12px 16px;
+            margin: 6px 14px 10px;
+            border-radius: 14px;
+            border: 1px solid #f0e0d8;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .featured-banner .icon {
+            font-size: 28px;
+        }
+
+        .featured-banner .content {
+            flex: 1;
+        }
+
+        .featured-banner .content h4 {
+            font-size: 13px;
+            font-weight: 700;
+            color: #2d1b14;
+        }
+
+        .featured-banner .content p {
+            font-size: 11px;
+            color: #666;
+        }
     </style>
 </head>
 <body>
@@ -1176,18 +1496,18 @@
 
         <!-- ===== STATUS BAR ===== -->
         <div class="status-bar">
-            <span>SoYam Cosmetics</span>
-            <span>🇪🇹 Addis Ababa</span>
+            <span>✨ SoYam Cosmetics</span>
+            <span>🇪🇹 Betel Building, Addis</span>
         </div>
 
         <!-- ===== HEADER ===== -->
         <header class="header">
             <div class="header-top">
                 <div class="header-logo">
-                    <span>💄</span>
+                    <span class="logo-icon">💄</span>
                     <div>
-                        <h1>SoYam</h1>
-                        <small>Cosmetics & Beauty Shop</small>
+                        <span class="logo-text">SoYam</span>
+                        <span class="logo-sub">Cosmetics & Beauty</span>
                     </div>
                 </div>
                 <div class="header-actions">
@@ -1200,16 +1520,35 @@
             </div>
 
             <div class="hero">
-                <h2>✨ Premium <span>Beauty</span> Products</h2>
-                <p>Authentic cosmetics from top brands. Shop in-person or get delivery anywhere in Ethiopia.</p>
-                <span class="hero-badge">📍 Betel Commercial Building, Addis Ababa</span>
+                <h2>✨ Premium <span class="highlight">Beauty</span> Essentials</h2>
+                <p>Authentic cosmetics, detergents & beauty products. Shop with confidence.</p>
+                <div class="hero-badge">
+                    📍 Betel Commercial Building, Addis Ababa
+                </div>
             </div>
         </header>
 
-        <!-- ===== OWNER CONTACT ===== -->
-        <div class="owner-contact">
-            <span>📞 Owner: <a href="tel:+251920353460">0920353460</a> | <a href="tel:+251919096451">0919096451</a></span>
-            <span style="font-size:11px; color:#999;">📦 Delivery available nationwide</span>
+        <!-- ===== SOCIAL & CONTACT BAR ===== -->
+        <div class="social-bar">
+            <div class="social-links">
+                <a href="#" class="tiktok" onclick="showToast('📱 Follow us on TikTok @rm!')">
+                    🎵 @rm
+                </a>
+                <a href="#" onclick="showToast('📞 WhatsApp: 0919096451')">
+                    📱 0919096451
+                </a>
+            </div>
+            <button class="whatsapp-btn" onclick="openWhatsApp()">
+                💬 Message Us
+            </button>
+        </div>
+
+        <!-- ===== LOCATION BANNER ===== -->
+        <div class="location-banner">
+            <span>📍</span>
+            <span>Betel Commercial Building, <strong>Addis Ababa</strong></span>
+            <span>|</span>
+            <span>📦 <strong>Nationwide Delivery</strong></span>
         </div>
 
         <!-- ===== PURCHASE OPTIONS ===== -->
@@ -1233,12 +1572,26 @@
             <button class="category-tab" data-category="makeup">Makeup</button>
             <button class="category-tab" data-category="fragrance">Fragrance</button>
             <button class="category-tab" data-category="haircare">Haircare</button>
+            <button class="category-tab" data-category="detergent">Detergent</button>
             <button class="category-tab" data-category="tools">Tools</button>
+        </div>
+
+        <!-- ===== FEATURED BANNER ===== -->
+        <div class="featured-banner">
+            <span class="icon">🌟</span>
+            <div class="content">
+                <h4>New Arrivals This Week</h4>
+                <p>Check out our latest premium beauty and detergent products</p>
+            </div>
+            <span style="font-size:20px;">→</span>
         </div>
 
         <!-- ===== SECTION HEADER ===== -->
         <div class="section-header">
-            <h3>🌸 Featured Products</h3>
+            <h3>
+                🌸 Featured Products
+                <span class="phonics-badge">✨ Premium</span>
+            </h3>
             <button class="action-btn" onclick="document.querySelector('.category-tabs').scrollIntoView({behavior:'smooth'})">Browse All →</button>
         </div>
 
@@ -1282,10 +1635,17 @@
                         <span class="price" id="modalPrice">0 ETB</span>
                         <span class="old-price" id="modalOldPrice"></span>
                     </div>
+                    
+                    <div class="ingredients-section">
+                        <div class="label">🧪 Ingredients & Formula</div>
+                        <div class="value" id="modalIngredients">Premium quality ingredients carefully selected for best results.</div>
+                    </div>
+
                     <div class="description" id="modalDescription">Product description goes here.</div>
-                    <div class="delivery-info" id="deliveryInfo">
-                        <strong>📦 Delivery Info</strong>
-                        Free delivery in Addis Ababa. Nationwide shipping available.
+                    
+                    <div class="delivery-info">
+                        <strong>📦 Delivery & Payment</strong>
+                        <span id="modalDeliveryInfo">Free delivery in Addis Ababa. Nationwide shipping available. Pay via TeleBirr or cash on delivery.</span>
                     </div>
 
                     <div class="purchase-type-section">
@@ -1302,6 +1662,7 @@
                         </div>
                     </div>
 
+                    <!-- ===== DELIVERY FORM ===== -->
                     <div class="delivery-form" id="deliveryForm">
                         <label>Full Name *</label>
                         <input type="text" id="deliveryName" placeholder="Enter your full name">
@@ -1337,7 +1698,19 @@
                                 Bank Transfer
                             </button>
                         </div>
-                        <p style="font-size:11px; color:#999; margin-top:4px;">💳 TeleBirr: 0920353460 (SoYam Cosmetics)</p>
+                        <p style="font-size:10px; color:#999; margin:4px 0;">💳 TeleBirr: 0919096451 (SoYam Cosmetics)</p>
+
+                        <label>Upload Payment Receipt (Optional)</label>
+                        <div class="receipt-upload" onclick="document.getElementById('receiptInput').click()">
+                            <span class="icon">📸</span>
+                            <span class="text">Tap to upload receipt photo</span>
+                            <input type="file" id="receiptInput" accept="image/*" style="display:none;" onchange="handleReceiptUpload(event)">
+                        </div>
+                        <div class="receipt-preview" id="receiptPreview">
+                            <img id="receiptImage" src="" alt="Receipt">
+                            <button class="remove-btn" onclick="removeReceipt()">✕</button>
+                        </div>
+                        <p style="font-size:9px; color:#bbb; margin-top:2px;">Upload your payment receipt for faster order confirmation</p>
                     </div>
 
                     <button class="modal-add-to-cart" onclick="addToCartFromModal()">
@@ -1357,7 +1730,7 @@
                 <div class="empty-cart">
                     <div class="icon">🛍️</div>
                     <h4>Your cart is empty</h4>
-                    <p style="font-size:13px; color:#aaa;">Start adding beauty products!</p>
+                    <p style="font-size:12px; color:#aaa;">Start adding beauty products!</p>
                 </div>
             </div>
             <div class="cart-footer">
@@ -1365,26 +1738,29 @@
                     <span>Total</span>
                     <span class="amount" id="cartTotal">0 ETB</span>
                 </div>
-                <button class="checkout-btn" id="checkoutBtn" onclick="checkout()">Proceed to Checkout</button>
+                <button class="checkout-btn" id="checkoutBtn" onclick="checkout()">📦 Proceed to Checkout</button>
             </div>
         </div>
 
         <!-- ===== OWNER DASHBOARD ===== -->
         <div class="dashboard-panel" id="dashboardPanel">
             <div class="dashboard-header">
-                <h3>⚙️ Owner Dashboard</h3>
+                <h3>⚙️ Owner Dashboard <span class="phonics-badge">Admin</span></h3>
                 <button onclick="toggleDashboard()">✕</button>
             </div>
             <div class="dashboard-body">
-                <h4 style="margin-bottom:12px; font-size:15px;">Add New Product</h4>
+                <h4 style="margin-bottom:10px; font-size:14px;">📦 Add New Product</h4>
+                
                 <div class="form-group">
                     <label>Product Name *</label>
-                    <input type="text" id="newProductName" placeholder="e.g., Vitamin C Serum">
+                    <input type="text" id="newProductName" placeholder="e.g., Vitamin C Brightening Serum">
                 </div>
+                
                 <div class="form-group">
                     <label>Brand</label>
-                    <input type="text" id="newProductBrand" placeholder="e.g., L'Oréal">
+                    <input type="text" id="newProductBrand" placeholder="e.g., L'Oréal Paris">
                 </div>
+                
                 <div class="form-group">
                     <label>Category *</label>
                     <select id="newProductCategory">
@@ -1392,29 +1768,55 @@
                         <option value="makeup">Makeup</option>
                         <option value="fragrance">Fragrance</option>
                         <option value="haircare">Haircare</option>
+                        <option value="detergent">Detergent</option>
                         <option value="tools">Tools</option>
                     </select>
                 </div>
+                
                 <div class="form-group">
                     <label>Price (ETB) *</label>
                     <input type="number" id="newProductPrice" placeholder="e.g., 1500">
                 </div>
+                
                 <div class="form-group">
-                    <label>Old Price (optional)</label>
+                    <label>Old Price (optional - for discount display)</label>
                     <input type="number" id="newProductOldPrice" placeholder="e.g., 2000">
                 </div>
+                
+                <div class="form-group">
+                    <label>Ingredients / Formula *</label>
+                    <textarea id="newProductIngredients" placeholder="e.g., Vitamin C, Hyaluronic Acid, Niacinamide"></textarea>
+                </div>
+                
                 <div class="form-group">
                     <label>Description *</label>
                     <textarea id="newProductDescription" placeholder="Product description..."></textarea>
                 </div>
+                
                 <div class="form-group">
-                    <label>Image URL</label>
-                    <input type="text" id="newProductImage" placeholder="https://picsum.photos/seed/...">
+                    <label>Delivery Info (optional)</label>
+                    <input type="text" id="newProductDelivery" placeholder="e.g., Free delivery in Addis, nationwide shipping available">
                 </div>
-                <button class="submit-btn" onclick="addProduct()">➕ Add Product</button>
+                
+                <div class="form-group">
+                    <label>Product Image</label>
+                    <div class="image-upload" onclick="document.getElementById('productImageInput').click()">
+                        <span class="icon">📸</span>
+                        <span>Tap to upload from gallery</span>
+                        <input type="file" id="productImageInput" accept="image/*" style="display:none;" onchange="handleProductImageUpload(event)">
+                    </div>
+                    <div class="image-preview" id="productImagePreview">
+                        <img id="productImagePreviewImg" src="" alt="Preview">
+                    </div>
+                </div>
 
-                <div class="product-list" id="productList">
-                    <h4 style="margin:20px 0 8px; font-size:15px;">Manage Products</h4>
+                <button class="submit-btn" onclick="addProduct()">➕ Add Product to Store</button>
+
+                <div class="product-list">
+                    <div class="list-header">
+                        <h4>📋 Manage Products</h4>
+                        <span class="count" id="productCount">0 items</span>
+                    </div>
                     <div id="productListItems"></div>
                 </div>
             </div>
@@ -1437,42 +1839,49 @@
         // ============================================================
         // OWNER CONTACT
         // ============================================================
-        const OWNER_PHONES = ['0920353460', '0919096451'];
+        const OWNER_WHATSAPP = '0919096451';
         const OWNER_TELEGRAM = '@SoYamBeauty';
+        const TIKTOK_HANDLE = '@rm';
 
         // ============================================================
-        // PRODUCT DATA (SoYam Cosmetics)
+        // PRODUCT DATA (SoYam Cosmetics - Focus on Beauty & Detergent)
         // ============================================================
         let products = [
             {
                 id: 1,
                 name: "Vitamin C Brightening Serum",
-                brand: "L'Oréal",
+                brand: "L'Oréal Paris",
                 category: "skincare",
                 price: 1200,
                 oldPrice: 1500,
                 image: "https://picsum.photos/seed/serum1/400/400",
-                description: "Powerful Vitamin C serum that brightens skin, reduces dark spots, and evens skin tone. Suitable for all skin types."
+                ingredients: "Vitamin C, Hyaluronic Acid, Vitamin E, Ferulic Acid",
+                description: "Powerful brightening serum that reduces dark spots, evens skin tone, and boosts collagen production. Suitable for all skin types.",
+                deliveryInfo: "Free delivery in Addis Ababa. Nationwide shipping available."
             },
             {
                 id: 2,
-                name: "Matte Liquid Lipstick",
+                name: "Matte Liquid Lipstick - Ruby Red",
                 brand: "Maybelline",
                 category: "makeup",
                 price: 450,
                 oldPrice: null,
                 image: "https://picsum.photos/seed/lipstick1/400/400",
-                description: "Long-lasting matte liquid lipstick with intense color payoff. Smudge-proof and comfortable to wear."
+                ingredients: "Jojoba Oil, Vitamin E, Pigment Blend",
+                description: "Long-lasting matte liquid lipstick with intense color payoff. Smudge-proof and comfortable to wear for hours.",
+                deliveryInfo: "Available for pickup or delivery. Free delivery on orders above 1000 ETB."
             },
             {
                 id: 3,
-                name: "Argan Oil Hair Mask",
+                name: "Argan Oil Deep Repair Hair Mask",
                 brand: "Moroccanoil",
                 category: "haircare",
                 price: 850,
                 oldPrice: 1100,
                 image: "https://picsum.photos/seed/hairmask1/400/400",
-                description: "Deep conditioning hair mask with pure argan oil. Restores moisture, repairs damage, and adds shine."
+                ingredients: "Argan Oil, Keratin, Vitamin A, Vitamin E, Omega-3 Fatty Acids",
+                description: "Deep conditioning hair mask that restores moisture, repairs damage, and adds brilliant shine. Perfect for dry and damaged hair.",
+                deliveryInfo: "Free delivery in Addis. Nationwide shipping available."
             },
             {
                 id: 4,
@@ -1482,51 +1891,85 @@
                 price: 1800,
                 oldPrice: null,
                 image: "https://picsum.photos/seed/perfume1/400/400",
-                description: "A luxurious blend of Damask rose and warm vanilla. Long-lasting fragrance perfect for special occasions."
+                ingredients: "Damask Rose Extract, Madagascar Vanilla, Sandalwood, Musk",
+                description: "A luxurious fragrance blending Damask rose with warm vanilla. Long-lasting and perfect for special occasions.",
+                deliveryInfo: "Complimentary delivery in Addis Ababa. Nationwide shipping available."
             },
             {
                 id: 5,
-                name: "Professional Makeup Brush Set",
+                name: "Professional Makeup Brush Set (10 Pcs)",
                 brand: "Real Techniques",
                 category: "tools",
                 price: 950,
                 oldPrice: null,
                 image: "https://picsum.photos/seed/brushes1/400/400",
-                description: "Complete 10-piece professional makeup brush set. Includes face and eye brushes with synthetic cruelty-free bristles."
+                ingredients: "Cruelty-Free Synthetic Fibers, Aluminum Handles",
+                description: "Complete 10-piece professional brush set. Includes face and eye brushes for flawless makeup application.",
+                deliveryInfo: "Free delivery in Addis. Nationwide shipping available."
             },
             {
                 id: 6,
-                name: "Niacinamide Face Serum",
+                name: "Niacinamide 10% + Zinc 1% Serum",
                 brand: "The Ordinary",
                 category: "skincare",
                 price: 680,
                 oldPrice: 850,
                 image: "https://picsum.photos/seed/niacinamide1/400/400",
-                description: "10% Niacinamide + 1% Zinc serum that helps reduce blemishes, control oil, and improve skin texture."
+                ingredients: "Niacinamide (Vitamin B3), Zinc PCA, Pentylene Glycol",
+                description: "High-strength serum that reduces blemishes, controls excess oil, and improves skin texture and tone.",
+                deliveryInfo: "Free delivery in Addis Ababa. Nationwide shipping available."
             },
             {
                 id: 7,
-                name: "Coconut Oil Hair Growth Elixir",
+                name: "Coconut Oil & Rosemary Hair Growth Elixir",
                 brand: "SoYam Naturals",
                 category: "haircare",
                 price: 550,
                 oldPrice: null,
                 image: "https://picsum.photos/seed/coconut1/400/400",
-                description: "Natural coconut oil blend with rosemary and peppermint. Promotes hair growth and scalp health."
+                ingredients: "Organic Coconut Oil, Rosemary Oil, Peppermint Oil, Vitamin E",
+                description: "Natural oil blend that promotes hair growth, strengthens roots, and nourishes the scalp for healthier hair.",
+                deliveryInfo: "Free delivery in Addis. Nationwide shipping available."
             },
             {
                 id: 8,
-                name: "Eyelash Curler & Mascara Set",
-                brand: "SoYam Beauty",
-                category: "makeup",
-                price: 720,
+                name: "Premium Laundry Detergent - Rose Scent",
+                brand: "SoYam Home",
+                category: "detergent",
+                price: 320,
                 oldPrice: null,
-                image: "https://picsum.photos/seed/mascara1/400/400",
-                description: "Set includes premium eyelash curler and volumizing mascara. Perfect for achieving that wide-eyed look."
+                image: "https://picsum.photos/seed/detergent1/400/400",
+                ingredients: "Plant-Based Surfactants, Rose Essential Oil, Enzymes",
+                description: "Gentle yet powerful laundry detergent with a delicate rose fragrance. Safe for all fabrics and skin-friendly.",
+                deliveryInfo: "Free delivery in Addis. Bulk orders get nationwide shipping."
+            },
+            {
+                id: 9,
+                name: "Luxury Body Lotion - Shea Butter & Honey",
+                brand: "SoYam Body",
+                category: "skincare",
+                price: 420,
+                oldPrice: 550,
+                image: "https://picsum.photos/seed/lotion1/400/400",
+                ingredients: "Shea Butter, Honey Extract, Almond Oil, Vitamin C",
+                description: "Deeply moisturizing body lotion that leaves skin soft, smooth, and nourished. Perfect for daily use.",
+                deliveryInfo: "Free delivery in Addis Ababa. Nationwide shipping available."
+            },
+            {
+                id: 10,
+                name: "Eco-Friendly Dishwashing Liquid",
+                brand: "SoYam Home",
+                category: "detergent",
+                price: 180,
+                oldPrice: null,
+                image: "https://picsum.photos/seed/detergent2/400/400",
+                ingredients: "Plant-Based Surfactants, Lemon Extract, Natural Enzymes",
+                description: "Gentle on hands, tough on grease. Biodegradable formula with fresh lemon scent.",
+                deliveryInfo: "Free delivery in Addis. Bulk orders available."
             }
         ];
 
-        let nextId = 9;
+        let nextId = 11;
 
         // ============================================================
         // STATE
@@ -1537,6 +1980,8 @@
         let purchaseType = 'inperson';
         let modalPurchaseType = 'inperson';
         let selectedPayment = 'telebirr';
+        let receiptImageData = null;
+        let productImageData = null;
 
         // ============================================================
         // RENDER PRODUCTS
@@ -1549,33 +1994,40 @@
             
             if (filtered.length === 0) {
                 grid.innerHTML = `
-                    <div style="grid-column:1/-1; text-align:center; padding:40px 0; color:#999;">
-                        <span style="font-size:40px; display:block; margin-bottom:8px;">💄</span>
-                        <p>No products in this category yet.</p>
-                        <p style="font-size:13px;">Check back soon!</p>
+                    <div style="grid-column:1/-1; text-align:center; padding:30px 0; color:#999;">
+                        <span style="font-size:36px; display:block; margin-bottom:6px;">🧴</span>
+                        <p style="font-size:13px;">No products in this category yet.</p>
+                        <p style="font-size:11px; color:#bbb;">Check back soon!</p>
                     </div>
                 `;
                 return;
             }
 
-            grid.innerHTML = filtered.map(p => `
+            grid.innerHTML = filtered.map(p => {
+                let badge = '';
+                if (p.oldPrice) badge = `<span class="badge sale">Sale</span>`;
+                else if (p.category === 'detergent') badge = `<span class="badge popular">Popular</span>`;
+                else badge = `<span class="badge new">New</span>`;
+                
+                return `
                 <div class="product-card" onclick="openModal(${p.id})">
                     <div class="image-wrapper">
                         <img src="${p.image}" alt="${p.name}" loading="lazy">
-                        ${p.oldPrice ? `<span class="badge sale">Sale</span>` : `<span class="badge new">New</span>`}
+                        ${badge}
                         <button class="wishlist-btn" onclick="event.stopPropagation(); showToast('❤️ Added to wishlist!')">♡</button>
                     </div>
                     <div class="info">
                         <div class="product-name">${p.name}</div>
                         <div class="product-brand">${p.brand}</div>
+                        <div class="ingredients">🧪 ${p.ingredients.substring(0, 30)}...</div>
                         <div class="price-row">
                             <span class="price">${p.price.toLocaleString()} ETB</span>
                             ${p.oldPrice ? `<span class="old-price">${p.oldPrice.toLocaleString()} ETB</span>` : ''}
                         </div>
-                        <button class="add-to-cart-btn" onclick="event.stopPropagation(); quickAdd(${p.id})">Add to Cart</button>
+                        <button class="add-to-cart-btn" onclick="event.stopPropagation(); quickAdd(${p.id})">🛒 Add to Cart</button>
                     </div>
                 </div>
-            `).join('');
+            `}).join('');
         }
 
         // ============================================================
@@ -1628,6 +2080,47 @@
         }
 
         // ============================================================
+        // RECEIPT UPLOAD
+        // ============================================================
+        function handleReceiptUpload(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                receiptImageData = e.target.result;
+                document.getElementById('receiptImage').src = receiptImageData;
+                document.getElementById('receiptPreview').classList.add('show');
+                showToast('📸 Receipt photo uploaded!');
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function removeReceipt() {
+            receiptImageData = null;
+            document.getElementById('receiptPreview').classList.remove('show');
+            document.getElementById('receiptInput').value = '';
+            showToast('🗑️ Receipt removed');
+        }
+
+        // ============================================================
+        // PRODUCT IMAGE UPLOAD (Dashboard)
+        // ============================================================
+        function handleProductImageUpload(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                productImageData = e.target.result;
+                document.getElementById('productImagePreviewImg').src = productImageData;
+                document.getElementById('productImagePreview').classList.add('show');
+                showToast('📸 Product image uploaded!');
+            };
+            reader.readAsDataURL(file);
+        }
+
+        // ============================================================
         // MODAL
         // ============================================================
         function openModal(productId) {
@@ -1639,6 +2132,9 @@
             document.getElementById('modalName').textContent = currentProduct.name;
             document.getElementById('modalBrand').textContent = currentProduct.brand;
             document.getElementById('modalPrice').textContent = currentProduct.price.toLocaleString() + ' ETB';
+            document.getElementById('modalIngredients').textContent = currentProduct.ingredients || 'Premium quality ingredients';
+            document.getElementById('modalDescription').textContent = currentProduct.description;
+            document.getElementById('modalDeliveryInfo').textContent = currentProduct.deliveryInfo || 'Free delivery in Addis Ababa. Nationwide shipping available.';
             
             const oldPriceEl = document.getElementById('modalOldPrice');
             if (currentProduct.oldPrice) {
@@ -1648,19 +2144,18 @@
                 oldPriceEl.style.display = 'none';
             }
             
-            document.getElementById('modalDescription').textContent = currentProduct.description;
-            
             // Reset to in-person by default
             modalPurchaseType = 'inperson';
             document.querySelectorAll('.purchase-type-options button').forEach(el => el.classList.remove('selected'));
             document.getElementById('modalInPerson').classList.add('selected');
             document.getElementById('deliveryForm').classList.remove('show');
 
-            // Reset delivery form
+            // Reset form
             document.getElementById('deliveryName').value = '';
             document.getElementById('deliveryPhone').value = '';
             document.getElementById('deliveryAddress').value = '';
             document.getElementById('deliveryCity').value = 'addis';
+            removeReceipt();
             
             document.querySelectorAll('.payment-options button').forEach(b => b.classList.remove('selected'));
             document.querySelector('.payment-options button[data-payment="telebirr"]').classList.add('selected');
@@ -1686,17 +2181,20 @@
             if (existing) {
                 existing.qty += qty;
             } else {
+                const deliveryDetails = modalPurchaseType === 'delivery' ? {
+                    name: document.getElementById('deliveryName').value || 'Not provided',
+                    phone: document.getElementById('deliveryPhone').value || 'Not provided',
+                    address: document.getElementById('deliveryAddress').value || 'Not provided',
+                    city: document.getElementById('deliveryCity').value || 'addis',
+                    payment: selectedPayment,
+                    receipt: receiptImageData || null
+                } : null;
+                
                 cart.push({ 
                     ...product, 
                     qty, 
                     purchaseType: modalPurchaseType,
-                    deliveryDetails: modalPurchaseType === 'delivery' ? {
-                        name: document.getElementById('deliveryName').value || 'Not provided',
-                        phone: document.getElementById('deliveryPhone').value || 'Not provided',
-                        address: document.getElementById('deliveryAddress').value || 'Not provided',
-                        city: document.getElementById('deliveryCity').value || 'addis',
-                        payment: selectedPayment
-                    } : null
+                    deliveryDetails: deliveryDetails
                 });
             }
             updateCartUI();
@@ -1710,7 +2208,6 @@
         function addToCartFromModal() {
             if (!currentProduct) return;
             
-            // Validate delivery form if needed
             if (modalPurchaseType === 'delivery') {
                 const name = document.getElementById('deliveryName').value.trim();
                 const phone = document.getElementById('deliveryPhone').value.trim();
@@ -1764,7 +2261,7 @@
                     <div class="empty-cart">
                         <div class="icon">🛍️</div>
                         <h4>Your cart is empty</h4>
-                        <p style="font-size:13px; color:#aaa;">Start adding beauty products!</p>
+                        <p style="font-size:12px; color:#aaa;">Start adding beauty products!</p>
                     </div>
                 `;
                 cartTotal.textContent = '0 ETB';
@@ -1816,29 +2313,35 @@
                 let details = '';
                 if (item.purchaseType === 'delivery' && item.deliveryDetails) {
                     details = `\n   📍 ${item.deliveryDetails.address}\n   📞 ${item.deliveryDetails.phone}\n   💳 ${item.deliveryDetails.payment || 'Not specified'}`;
+                    if (item.deliveryDetails.receipt) {
+                        details += `\n   📸 Receipt photo attached`;
+                    }
                 }
                 return `• ${item.name} x${item.qty} = ${(item.price * item.qty).toLocaleString()} ETB (${type})${details}`;
             }).join('\n');
 
-            const orderMessage = `🛍️ **SoYam Cosmetics - New Order!**\n\n${orderSummary}\n\n📦 **Total:** ${total.toLocaleString()} ETB\n📍 **Store:** Betel Commercial Building, Addis Ababa\n📞 **Contact:** 0920353460 / 0919096451`;
+            const orderMessage = `🛍️ **SoYam Cosmetics - New Order!**\n\n${orderSummary}\n\n📦 **Total:** ${total.toLocaleString()} ETB\n📍 **Store:** Betel Commercial Building, Addis Ababa\n📞 **WhatsApp:** ${OWNER_WHATSAPP}\n🎵 **TikTok:** ${TIKTOK_HANDLE}`;
 
-            // Try to send via Telegram
+            // Open WhatsApp with order details
+            const encoded = encodeURIComponent(orderMessage);
+            const whatsappUrl = `https://wa.me/251${OWNER_WHATSAPP}?text=${encoded}`;
+            
             if (tg) {
                 tg.showPopup({
                     title: '🎉 Order Received!',
-                    message: `Your order total is ${total.toLocaleString()} ETB.\n\n${cart.some(i => i.purchaseType === 'delivery') ? '🚚 We will contact you for delivery details.' : '🏪 Please pick up your order at our store.'}\n\n📞 For questions: 0920353460`,
-                    buttons: [{id: 'ok', type: 'default', text: 'Great!'}]
+                    message: `Your order total is ${total.toLocaleString()} ETB.\n\n${cart.some(i => i.purchaseType === 'delivery') ? '🚚 We will contact you for delivery details.' : '🏪 Please pick up your order at our store.'}\n\n📞 WhatsApp: ${OWNER_WHATSAPP}`,
+                    buttons: [{id: 'ok', type: 'default', text: '📱 Send via WhatsApp'}]
+                }, function(btn) {
+                    if (btn === 'ok') {
+                        window.open(whatsappUrl, '_blank');
+                    }
                 });
             } else {
-                // Fallback: open WhatsApp or copy message
-                const encoded = encodeURIComponent(orderMessage);
-                const whatsappUrl = `https://wa.me/251920353460?text=${encoded}`;
-                if (confirm(`📋 Order Summary:\n\n${orderSummary}\n\nTotal: ${total.toLocaleString()} ETB\n\n📱 Send via WhatsApp?`)) {
+                if (confirm(`📋 Order Summary:\n\n${orderSummary}\n\nTotal: ${total.toLocaleString()} ETB\n\n📱 Send via WhatsApp to ${OWNER_WHATSAPP}?`)) {
                     window.open(whatsappUrl, '_blank');
                 }
             }
 
-            // Clear cart
             cart = [];
             updateCartUI();
             toggleCart();
@@ -1854,20 +2357,21 @@
             document.body.style.overflow = panel.classList.contains('active') ? 'hidden' : '';
             if (panel.classList.contains('active')) {
                 renderProductList();
+                document.getElementById('productCount').textContent = products.length + ' items';
             }
         }
 
         function renderProductList() {
             const container = document.getElementById('productListItems');
             if (products.length === 0) {
-                container.innerHTML = '<p style="color:#999; font-size:13px;">No products added yet.</p>';
+                container.innerHTML = '<p style="color:#999; font-size:12px; padding:10px 0;">No products added yet.</p>';
                 return;
             }
             container.innerHTML = products.map(p => `
                 <div class="list-item">
                     <div class="info">
                         <div class="name">${p.name}</div>
-                        <div class="price">${p.price.toLocaleString()} ETB - ${p.brand}</div>
+                        <div class="details">${p.price.toLocaleString()} ETB · ${p.brand} · ${p.category}</div>
                     </div>
                     <button class="delete-btn" onclick="deleteProduct(${p.id})">Delete</button>
                 </div>
@@ -1876,40 +2380,51 @@
 
         function addProduct() {
             const name = document.getElementById('newProductName').value.trim();
-            const brand = document.getElementById('newProductBrand').value.trim();
+            const brand = document.getElementById('newProductBrand').value.trim() || 'SoYam Beauty';
             const category = document.getElementById('newProductCategory').value;
             const price = parseInt(document.getElementById('newProductPrice').value);
             const oldPrice = parseInt(document.getElementById('newProductOldPrice').value) || null;
+            const ingredients = document.getElementById('newProductIngredients').value.trim() || 'Premium quality ingredients';
             const description = document.getElementById('newProductDescription').value.trim();
-            const image = document.getElementById('newProductImage').value.trim() || `https://picsum.photos/seed/product${nextId}/400/400`;
+            const deliveryInfo = document.getElementById('newProductDelivery').value.trim() || 'Free delivery in Addis Ababa. Nationwide shipping available.';
 
             if (!name || !price || !description) {
                 showToast('⚠️ Please fill in all required fields');
                 return;
             }
 
+            // Use uploaded image or generate random
+            let image = productImageData || `https://picsum.photos/seed/product${nextId}/400/400`;
+
             const newProduct = {
                 id: nextId++,
                 name,
-                brand: brand || 'SoYam Beauty',
+                brand,
                 category,
                 price,
                 oldPrice,
+                image,
+                ingredients,
                 description,
-                image
+                deliveryInfo
             };
 
             products.push(newProduct);
             renderProducts(currentCategory);
             renderProductList();
+            document.getElementById('productCount').textContent = products.length + ' items';
             
             // Clear form
             document.getElementById('newProductName').value = '';
             document.getElementById('newProductBrand').value = '';
             document.getElementById('newProductPrice').value = '';
             document.getElementById('newProductOldPrice').value = '';
+            document.getElementById('newProductIngredients').value = '';
             document.getElementById('newProductDescription').value = '';
-            document.getElementById('newProductImage').value = '';
+            document.getElementById('newProductDelivery').value = '';
+            productImageData = null;
+            document.getElementById('productImagePreview').classList.remove('show');
+            document.getElementById('productImageInput').value = '';
 
             showToast('✅ Product added successfully!');
         }
@@ -1919,7 +2434,16 @@
             products = products.filter(p => p.id !== id);
             renderProducts(currentCategory);
             renderProductList();
+            document.getElementById('productCount').textContent = products.length + ' items';
             showToast('🗑️ Product deleted');
+        }
+
+        // ============================================================
+        // WHATSAPP
+        // ============================================================
+        function openWhatsApp() {
+            const msg = encodeURIComponent('Hello SoYam Cosmetics! I have a question about your products.');
+            window.open(`https://wa.me/251${OWNER_WHATSAPP}?text=${msg}`, '_blank');
         }
 
         // ============================================================
@@ -1954,6 +2478,7 @@
         // ============================================================
         renderProducts('all');
         updateCartUI();
+        document.getElementById('productCount').textContent = products.length + ' items';
 
         // ============================================================
         // TELEGRAM THEME SUPPORT
@@ -1967,7 +2492,8 @@
 
         console.log('💄 SoYam Cosmetics & Beauty Shop loaded!');
         console.log(`📦 ${products.length} products available`);
-        console.log('📞 Owner: 0920353460 / 0919096451');
+        console.log('📞 WhatsApp: 0919096451');
+        console.log('🎵 TikTok: @rm');
     </script>
 </body>
 </html>
