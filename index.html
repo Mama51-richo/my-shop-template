@@ -1,1 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Store</title>
+    <script src="https://telegram.org"></script>
+    <style>
+        body { font-family: sans-serif; text-align: center; background: #fff; padding: 20px; }
+        .card { border: 1px solid #ccc; border-radius: 10px; padding: 15px; max-width: 250px; margin: 20px auto; }
+        .btn { background: #2481cc; color: #fff; border: none; padding: 10px; width: 100%; border-radius: 5px; }
+    </style>
+</head>
+<body>
+    <h2>Clothing Shop</h2>
+    <div class="card">
+        <h3>Streetwear Hoodie</h3>
+        <p>1,500 ETB</p>
+        <button class="btn" onclick="tg.showAlert('Order Clicked!')">Order Now</button>
+    </div>
+    <script>
+        const tg = window.Telegram.WebApp;
+        tg.expand();
+    </script>
+</body>
+</html>
 
