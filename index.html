@@ -42,7 +42,7 @@
             letter-spacing: 0.3px;
         }
 
-        /* ===== HEADER - BEAUTIFUL GRADIENT ===== */
+        /* ===== HEADER ===== */
         .header {
             background: linear-gradient(135deg, #1a0f0a 0%, #3d231c 30%, #5a3a30 60%, #2d1b14 100%);
             color: white;
@@ -79,11 +79,6 @@
         @keyframes shimmer {
             0% { background-position: -200% center; }
             100% { background-position: 200% center; }
-        }
-
-        @keyframes pulseGlow {
-            0%, 100% { box-shadow: 0 0 20px rgba(232, 168, 124, 0.1); }
-            50% { box-shadow: 0 0 40px rgba(232, 168, 124, 0.2); }
         }
 
         .header-top {
@@ -153,11 +148,6 @@
         .header-actions .cart-btn:hover {
             background: rgba(255,255,255,0.15);
             transform: scale(1.05);
-            box-shadow: 0 4px 30px rgba(232, 168, 124, 0.2);
-        }
-
-        .header-actions .cart-btn:active {
-            transform: scale(0.95);
         }
 
         .cart-badge {
@@ -219,7 +209,51 @@
             font-weight: 600;
             margin-top: 8px;
             border: 1px solid rgba(232, 168, 124, 0.15);
-            backdrop-filter: blur(4px);
+        }
+
+        /* ===== ADVERTISEMENT BANNER ===== */
+        .ad-banner {
+            background: linear-gradient(135deg, #2d1b14, #4a2c22);
+            margin: 10px 16px;
+            border-radius: 16px;
+            padding: 16px 20px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            border: 1px solid rgba(232, 168, 124, 0.15);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+
+        .ad-banner .ad-icon {
+            font-size: 32px;
+            animation: floatGlow 3s ease-in-out infinite;
+        }
+
+        .ad-banner .ad-content {
+            flex: 1;
+        }
+
+        .ad-banner .ad-content h4 {
+            color: #f5d6c6;
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        .ad-banner .ad-content p {
+            color: rgba(255,255,255,0.6);
+            font-size: 11px;
+            margin-top: 2px;
+        }
+
+        .ad-banner .ad-content .ad-tag {
+            display: inline-block;
+            background: rgba(232, 168, 124, 0.15);
+            color: #e8a87c;
+            font-size: 8px;
+            font-weight: 600;
+            padding: 2px 10px;
+            border-radius: 12px;
+            margin-top: 4px;
         }
 
         /* ===== LANGUAGE SELECTOR ===== */
@@ -475,10 +509,6 @@
             transform: scale(0.97);
         }
 
-        .product-card:hover {
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-        }
-
         .product-card .image-wrapper {
             position: relative;
             padding-top: 100%;
@@ -579,7 +609,7 @@
             box-shadow: 0 4px 15px rgba(45, 27, 20, 0.2);
         }
 
-        /* ===== ADMIN LOGIN OVERLAY - BIOMETRIC ===== */
+        /* ===== ADMIN LOGIN OVERLAY ===== */
         .admin-login-overlay {
             display: none;
             position: fixed;
@@ -591,7 +621,7 @@
             z-index: 5000;
             justify-content: center;
             align-items: center;
-            backdrop-filter: blur(12px);
+            backdrop-filter: blur(10px);
         }
 
         .admin-login-overlay.active {
@@ -600,42 +630,20 @@
 
         .admin-login-box {
             background: linear-gradient(145deg, #1a0f0a, #2d1b14);
-            border-radius: 28px;
-            padding: 35px 28px 30px;
+            border-radius: 24px;
+            padding: 32px 24px 28px;
             max-width: 360px;
             width: 90%;
             text-align: center;
-            animation: slideUp 0.5s ease;
+            animation: slideUp 0.4s ease;
             box-shadow: 0 30px 80px rgba(0,0,0,0.5);
             border: 1px solid rgba(232, 168, 124, 0.1);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .admin-login-box::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle at center, rgba(232, 168, 124, 0.03) 0%, transparent 70%);
-            animation: pulseGlow 4s ease-in-out infinite;
         }
 
         .admin-login-box .lock-icon {
-            font-size: 56px;
-            margin-bottom: 10px;
-            display: block;
-            animation: floatGlow 3s ease-in-out infinite;
-            filter: drop-shadow(0 4px 20px rgba(232, 168, 124, 0.2));
-        }
-
-        .admin-login-box .biometric-icon {
             font-size: 48px;
-            margin: 12px 0;
+            margin-bottom: 8px;
             display: block;
-            animation: pulseGlow 2s ease-in-out infinite;
         }
 
         .admin-login-box h3 {
@@ -643,59 +651,61 @@
             color: #f5d6c6;
             margin-bottom: 4px;
             font-weight: 700;
-            position: relative;
-            z-index: 1;
         }
 
         .admin-login-box p {
             font-size: 12px;
             color: rgba(255,255,255,0.5);
-            margin-bottom: 18px;
-            position: relative;
-            z-index: 1;
+            margin-bottom: 16px;
         }
 
-        .admin-login-box .biometric-btn {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
+        .admin-login-box input {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid rgba(255,255,255,0.1);
+            border-radius: 12px;
+            font-size: 16px;
+            font-family: inherit;
+            text-align: center;
+            letter-spacing: 8px;
+            font-weight: 700;
+            background: rgba(255,255,255,0.05);
+            color: white;
+            transition: border 0.3s;
+            margin-bottom: 12px;
+        }
+
+        .admin-login-box input:focus {
+            border-color: #e8a87c;
+            outline: none;
+            box-shadow: 0 0 0 4px rgba(232, 168, 124, 0.1);
+        }
+
+        .admin-login-box input::placeholder {
+            letter-spacing: 2px;
+            color: rgba(255,255,255,0.2);
+        }
+
+        .admin-login-box .login-btn {
+            width: 100%;
+            padding: 12px;
             background: linear-gradient(135deg, #e8a87c, #d4916a);
+            color: #1a0f0a;
             border: none;
-            font-size: 40px;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 700;
             cursor: pointer;
             transition: all 0.3s;
-            margin: 10px auto 16px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 8px 40px rgba(232, 168, 124, 0.3);
-            position: relative;
-            z-index: 1;
         }
 
-        .admin-login-box .biometric-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 8px 60px rgba(232, 168, 124, 0.4);
+        .admin-login-box .login-btn:hover {
+            transform: scale(1.02);
+            box-shadow: 0 4px 30px rgba(232, 168, 124, 0.3);
         }
 
-        .admin-login-box .biometric-btn:active {
-            transform: scale(0.95);
-        }
-
-        .admin-login-box .biometric-btn .pulse-ring {
-            position: absolute;
-            top: -10px;
-            left: -10px;
-            right: -10px;
-            bottom: -10px;
-            border-radius: 50%;
-            border: 2px solid rgba(232, 168, 124, 0.15);
-            animation: pulseRing 2s ease-in-out infinite;
-        }
-
-        @keyframes pulseRing {
-            0% { transform: scale(1); opacity: 0.5; }
-            100% { transform: scale(1.3); opacity: 0; }
+        .admin-login-box .login-btn:active {
+            transform: scale(0.97);
         }
 
         .admin-login-box .error-msg {
@@ -703,29 +713,13 @@
             font-size: 12px;
             margin-top: 8px;
             display: none;
-            position: relative;
-            z-index: 1;
         }
 
         .admin-login-box .error-msg.show {
             display: block;
         }
 
-        .admin-login-box .fallback-text {
-            font-size: 10px;
-            color: rgba(255,255,255,0.2);
-            margin-top: 12px;
-            position: relative;
-            z-index: 1;
-            cursor: pointer;
-            transition: color 0.3s;
-        }
-
-        .admin-login-box .fallback-text:hover {
-            color: rgba(255,255,255,0.4);
-        }
-
-        /* ===== ADMIN DASHBOARD ===== */
+        /* ===== ADMIN DASHBOARD - CENTERED ===== */
         .admin-dashboard {
             display: none;
             position: fixed;
@@ -733,7 +727,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: white;
+            background: #faf5f0;
             z-index: 4000;
             animation: slideInRight 0.35s ease;
             overflow-y: auto;
@@ -745,12 +739,11 @@
         }
 
         .admin-dashboard .dashboard-header {
-            padding: 16px 18px;
-            border-bottom: 1px solid #f0e0d8;
+            padding: 16px 20px;
+            background: linear-gradient(135deg, #1a0f0a, #2d1b14);
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: white;
             position: sticky;
             top: 0;
             z-index: 5;
@@ -759,15 +752,15 @@
         .admin-dashboard .dashboard-header h3 {
             font-size: 17px;
             font-weight: 700;
-            color: #2d1b14;
+            color: #f5d6c6;
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 8px;
         }
 
         .admin-dashboard .dashboard-header .admin-badge {
-            background: #2d1b14;
-            color: white;
+            background: rgba(232, 168, 124, 0.2);
+            color: #e8a87c;
             font-size: 9px;
             padding: 2px 10px;
             border-radius: 12px;
@@ -775,115 +768,93 @@
         }
 
         .admin-dashboard .dashboard-header button {
-            background: none;
+            background: rgba(255,255,255,0.1);
             border: none;
             font-size: 18px;
             cursor: pointer;
-            color: #666;
+            color: white;
             padding: 4px 8px;
+            border-radius: 8px;
+            transition: background 0.3s;
+        }
+
+        .admin-dashboard .dashboard-header button:hover {
+            background: rgba(255,255,255,0.2);
         }
 
         .admin-dashboard .dashboard-body {
-            padding: 14px 16px;
+            padding: 16px 18px;
+            max-width: 480px;
+            margin: 0 auto;
         }
 
-        .admin-dashboard .dashboard-body .form-group {
-            margin-bottom: 10px;
-        }
-
-        .admin-dashboard .dashboard-body .form-group label {
-            display: block;
-            font-size: 12px;
-            font-weight: 600;
-            color: #2d1b14;
-            margin-bottom: 3px;
-        }
-
-        .admin-dashboard .dashboard-body .form-group input,
-        .admin-dashboard .dashboard-body .form-group textarea,
-        .admin-dashboard .dashboard-body .form-group select {
-            width: 100%;
-            padding: 8px 10px;
-            border: 1px solid #e8d5cc;
-            border-radius: 8px;
-            font-size: 13px;
-            font-family: inherit;
-            background: white;
-        }
-
-        .admin-dashboard .dashboard-body .form-group input:focus,
-        .admin-dashboard .dashboard-body .form-group textarea:focus {
-            border-color: #2d1b14;
-            outline: none;
-        }
-
-        .admin-dashboard .dashboard-body .form-group textarea {
-            min-height: 60px;
-            resize: vertical;
-        }
-
-        .admin-dashboard .dashboard-body .form-group .image-upload {
-            padding: 12px;
-            border: 2px dashed #e8d5cc;
-            border-radius: 8px;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.3s;
-            background: #faf3ef;
-        }
-
-        .admin-dashboard .dashboard-body .form-group .image-upload:hover {
-            border-color: #2d1b14;
-        }
-
-        .admin-dashboard .dashboard-body .form-group .image-upload .icon {
-            font-size: 28px;
-            display: block;
-        }
-
-        .admin-dashboard .dashboard-body .form-group .image-preview {
-            margin-top: 6px;
-            display: none;
-        }
-
-        .admin-dashboard .dashboard-body .form-group .image-preview.show {
-            display: block;
-        }
-
-        .admin-dashboard .dashboard-body .form-group .image-preview img {
-            max-width: 100%;
-            max-height: 120px;
-            border-radius: 8px;
-            border: 1px solid #e8d5cc;
-        }
-
-        .admin-dashboard .submit-btn {
-            width: 100%;
-            padding: 12px;
+        /* ===== ADMIN AD BANNER ===== */
+        .admin-ad-banner {
             background: linear-gradient(135deg, #2d1b14, #4a2c22);
-            color: white;
-            border: none;
-            border-radius: 12px;
-            font-size: 15px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.3s;
+            border-radius: 16px;
+            padding: 20px 24px;
+            text-align: center;
+            margin-bottom: 20px;
+            border: 1px solid rgba(232, 168, 124, 0.1);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
         }
 
-        .admin-dashboard .submit-btn:hover {
-            box-shadow: 0 4px 20px rgba(45, 27, 20, 0.2);
+        .admin-ad-banner .ad-icon {
+            font-size: 40px;
+            display: block;
+            margin-bottom: 6px;
+        }
+
+        .admin-ad-banner h4 {
+            color: #f5d6c6;
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        .admin-ad-banner p {
+            color: rgba(255,255,255,0.6);
+            font-size: 12px;
+            margin-top: 4px;
+        }
+
+        .admin-ad-banner .ad-stats {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 12px;
+        }
+
+        .admin-ad-banner .ad-stats .stat {
+            text-align: center;
+        }
+
+        .admin-ad-banner .ad-stats .stat .number {
+            color: #e8a87c;
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        .admin-ad-banner .ad-stats .stat .label {
+            color: rgba(255,255,255,0.4);
+            font-size: 9px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
         /* ===== ORDERS SECTION ===== */
         .orders-section {
-            margin-top: 20px;
+            margin-top: 16px;
+            background: white;
+            border-radius: 16px;
+            padding: 16px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.04);
         }
 
         .orders-section .section-title {
             font-size: 14px;
             font-weight: 700;
             color: #2d1b14;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -971,6 +942,7 @@
             display: flex;
             gap: 8px;
             margin-top: 8px;
+            flex-wrap: wrap;
         }
 
         .order-card .order-actions button {
@@ -1005,13 +977,17 @@
         /* ===== PRODUCT LIST (Admin) ===== */
         .product-list-admin {
             margin-top: 16px;
+            background: white;
+            border-radius: 16px;
+            padding: 16px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.04);
         }
 
         .product-list-admin .list-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 8px;
+            margin-bottom: 10px;
         }
 
         .product-list-admin .list-header h4 {
@@ -1025,6 +1001,10 @@
             align-items: center;
             padding: 8px 0;
             border-bottom: 1px solid #f5ece6;
+        }
+
+        .product-list-admin .list-item:last-child {
+            border-bottom: none;
         }
 
         .product-list-admin .list-item .info {
@@ -1049,6 +1029,118 @@
             border-radius: 6px;
             font-size: 11px;
             cursor: pointer;
+        }
+
+        /* ===== ADD PRODUCT FORM ===== */
+        .add-product-form {
+            background: white;
+            border-radius: 16px;
+            padding: 16px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+            margin-bottom: 16px;
+        }
+
+        .add-product-form .form-title {
+            font-size: 14px;
+            font-weight: 700;
+            color: #2d1b14;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .add-product-form .form-group {
+            margin-bottom: 10px;
+        }
+
+        .add-product-form .form-group label {
+            display: block;
+            font-size: 12px;
+            font-weight: 600;
+            color: #2d1b14;
+            margin-bottom: 3px;
+        }
+
+        .add-product-form .form-group input,
+        .add-product-form .form-group textarea,
+        .add-product-form .form-group select {
+            width: 100%;
+            padding: 8px 10px;
+            border: 1px solid #e8d5cc;
+            border-radius: 8px;
+            font-size: 13px;
+            font-family: inherit;
+            background: white;
+        }
+
+        .add-product-form .form-group input:focus,
+        .add-product-form .form-group textarea:focus {
+            border-color: #2d1b14;
+            outline: none;
+        }
+
+        .add-product-form .form-group textarea {
+            min-height: 50px;
+            resize: vertical;
+        }
+
+        .add-product-form .form-group .image-upload {
+            padding: 12px;
+            border: 2px dashed #e8d5cc;
+            border-radius: 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            background: #faf3ef;
+        }
+
+        .add-product-form .form-group .image-upload:hover {
+            border-color: #2d1b14;
+        }
+
+        .add-product-form .form-group .image-upload .icon {
+            font-size: 24px;
+            display: block;
+        }
+
+        .add-product-form .form-group .image-upload .text {
+            font-size: 11px;
+            color: #999;
+        }
+
+        .add-product-form .form-group .image-preview {
+            margin-top: 6px;
+            display: none;
+        }
+
+        .add-product-form .form-group .image-preview.show {
+            display: block;
+        }
+
+        .add-product-form .form-group .image-preview img {
+            max-width: 100%;
+            max-height: 120px;
+            border-radius: 8px;
+            border: 1px solid #e8d5cc;
+        }
+
+        .add-product-form .submit-btn {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, #2d1b14, #4a2c22);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .add-product-form .submit-btn:hover {
+            box-shadow: 0 4px 20px rgba(45, 27, 20, 0.2);
+            transform: scale(1.01);
         }
 
         /* ===== MODAL ===== */
@@ -1666,6 +1758,10 @@
             color: #2d1b14;
         }
 
+        #adminNavBtn {
+            display: block !important;
+        }
+
         .phonics-badge {
             display: inline-flex;
             align-items: center;
@@ -1679,11 +1775,6 @@
             letter-spacing: 0.5px;
             text-transform: uppercase;
         }
-
-        /* Admin Button - Bottom Nav */
-        #adminNavBtn {
-            display: block !important;
-        }
     </style>
 </head>
 <body>
@@ -1693,18 +1784,18 @@
 
         <!-- ===== STATUS BAR ===== -->
         <div class="status-bar">
-            <span>✨ SoYam Cosmetics</span>
-            <span>🇪🇹 Betel Building, Addis</span>
+            <span id="statusBarLeft">✨ SoYam Cosmetics</span>
+            <span id="statusBarRight">🇪🇹 Betel Building, Addis</span>
         </div>
 
-        <!-- ===== HEADER - NO KEY ICON ===== -->
+        <!-- ===== HEADER ===== -->
         <header class="header">
             <div class="header-top">
                 <div class="header-logo">
                     <span class="logo-icon">💄</span>
                     <div>
                         <span class="logo-text">SoYam</span>
-                        <span class="logo-sub">Cosmetics & Beauty</span>
+                        <span class="logo-sub" id="logoSub">Cosmetics & Beauty</span>
                     </div>
                 </div>
                 <div class="header-actions">
@@ -1718,9 +1809,19 @@
             <div class="hero">
                 <h2 id="heroTitle">✨ Premium <span class="highlight">Beauty</span> Essentials</h2>
                 <p id="heroSub">Authentic cosmetics, detergents & beauty products. Shop with confidence.</p>
-                <div class="hero-badge">📍 Betel Commercial Building, Addis Ababa</div>
+                <div class="hero-badge" id="heroBadge">📍 Betel Commercial Building, Addis Ababa</div>
             </div>
         </header>
+
+        <!-- ===== ADVERTISEMENT BANNER ===== -->
+        <div class="ad-banner">
+            <span class="ad-icon">🎉</span>
+            <div class="ad-content">
+                <h4 id="adTitle">New Arrivals This Week!</h4>
+                <p id="adSub">Get 15% off on all skincare products</p>
+                <span class="ad-tag" id="adTag">🔥 Limited Time Offer</span>
+            </div>
+        </div>
 
         <!-- ===== LANGUAGE SELECTOR ===== -->
         <div class="language-bar">
@@ -1743,8 +1844,8 @@
         <!-- ===== SOCIAL & CONTACT BAR ===== -->
         <div class="social-bar">
             <div class="social-links">
-                <a href="#" class="tiktok" onclick="showToast('📱 Follow us on TikTok @rm!')">🎵 @rm</a>
-                <a href="#" onclick="showToast('📞 WhatsApp: +251919096451')">📱 +251919096451</a>
+                <a href="#" class="tiktok" onclick="showToast(getTranslation('tiktok_follow'))">🎵 @rm</a>
+                <a href="#" onclick="showToast(getTranslation('whatsapp_contact'))">📱 +251919096451</a>
             </div>
             <button class="whatsapp-btn" onclick="openWhatsApp()">💬 <span id="whatsappLabel">Message Us</span></button>
         </div>
@@ -1804,39 +1905,121 @@
             <button class="nav-item" onclick="toggleCart()">
                 <span class="icon">🛒</span> <span id="navCart">Cart</span>
             </button>
-            <!-- ADMIN - Only visible in bottom nav -->
-            <button class="nav-item" id="adminNavBtn" onclick="showBiometricLogin()">
-                <span class="icon">👤</span> <span id="navAdmin">Admin</span>
+            <button class="nav-item" id="adminNavBtn" onclick="showAdminLogin()">
+                <span class="icon">⚙️</span> <span id="navAdmin">Admin</span>
             </button>
         </div>
 
-        <!-- ===== BIOMETRIC ADMIN LOGIN ===== -->
+        <!-- ===== ADMIN LOGIN OVERLAY ===== -->
         <div class="admin-login-overlay" id="adminLoginOverlay">
             <div class="admin-login-box">
                 <span class="lock-icon">🔐</span>
                 <h3 id="adminLoginTitle">Admin Access</h3>
-                <p id="adminLoginSub">Use biometric authentication to unlock</p>
-                
-                <button class="biometric-btn" id="biometricBtn" onclick="authenticateBiometric()">
-                    <span class="pulse-ring"></span>
-                    <span id="biometricIcon">👇</span>
-                </button>
-                
-                <div class="error-msg" id="loginError">❌ Authentication failed. Please try again.</div>
-                <div class="fallback-text" onclick="showPasscodeFallback()">Use passcode instead</div>
+                <p id="adminLoginSub">Enter the admin passcode to manage products and orders</p>
+                <input type="password" id="adminPasscode" placeholder="••••••••" maxlength="8" onkeydown="if(event.key==='Enter') adminLogin()">
+                <button class="login-btn" onclick="adminLogin()" id="adminLoginBtn">🔑 Unlock Dashboard</button>
+                <div class="error-msg" id="loginError">❌ Incorrect passcode. Please try again.</div>
+                <p style="font-size:10px;color:rgba(255,255,255,0.2);margin-top:12px;" id="adminContactNote">Contact owner for admin access</p>
             </div>
         </div>
 
         <!-- ===== ADMIN DASHBOARD ===== -->
         <div class="admin-dashboard" id="adminDashboard">
             <div class="dashboard-header">
-                <h3>⚙️ Admin Dashboard <span class="admin-badge">🔐 Secure</span></h3>
+                <h3>⚙️ <span id="adminDashTitle">Admin Dashboard</span> <span class="admin-badge">🔐 Secure</span></h3>
                 <div>
-                    <button onclick="logoutAdmin()" style="background:none;border:none;font-size:12px;color:#999;cursor:pointer;margin-right:8px;" id="logoutBtn">🚪 Logout</button>
-                    <button onclick="toggleDashboard()">✕</button>
+                    <button onclick="logoutAdmin()" style="background:rgba(255,255,255,0.1);border:none;font-size:12px;color:#f5d6c6;cursor:pointer;padding:6px 12px;border-radius:8px;margin-right:8px;" id="logoutBtn">🚪 Logout</button>
+                    <button onclick="toggleDashboard()" style="background:rgba(255,255,255,0.1);border:none;font-size:18px;color:white;cursor:pointer;padding:4px 10px;border-radius:8px;">✕</button>
                 </div>
             </div>
             <div class="dashboard-body">
+
+                <!-- ===== ADMIN AD BANNER ===== -->
+                <div class="admin-ad-banner">
+                    <span class="ad-icon">📊</span>
+                    <h4 id="adminAdTitle">Welcome to Your Dashboard</h4>
+                    <p id="adminAdSub">Manage your products, track orders, and grow your business</p>
+                    <div class="ad-stats">
+                        <div class="stat">
+                            <div class="number" id="statProducts">0</div>
+                            <div class="label" id="statProductsLabel">Products</div>
+                        </div>
+                        <div class="stat">
+                            <div class="number" id="statOrders">0</div>
+                            <div class="label" id="statOrdersLabel">Orders</div>
+                        </div>
+                        <div class="stat">
+                            <div class="number" id="statRevenue">0</div>
+                            <div class="label" id="statRevenueLabel">Revenue (ETB)</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== ADD PRODUCT FORM ===== -->
+                <div class="add-product-form">
+                    <div class="form-title">➕ <span id="addProductTitle">Add New Product</span></div>
+                    
+                    <div class="form-group">
+                        <label id="labelName">Product Name *</label>
+                        <input type="text" id="newProductName" placeholder="e.g., Vitamin C Brightening Serum">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label id="labelBrand">Brand</label>
+                        <input type="text" id="newProductBrand" placeholder="e.g., L'Oréal Paris">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label id="labelCategory">Category *</label>
+                        <select id="newProductCategory">
+                            <option value="skincare">Skincare</option>
+                            <option value="makeup">Makeup</option>
+                            <option value="fragrance">Fragrance</option>
+                            <option value="haircare">Haircare</option>
+                            <option value="detergent">Detergent</option>
+                            <option value="tools">Tools</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label id="labelPrice">Price (ETB) *</label>
+                        <input type="number" id="newProductPrice" placeholder="e.g., 1500">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label id="labelOldPrice">Old Price (optional)</label>
+                        <input type="number" id="newProductOldPrice" placeholder="e.g., 2000">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label id="labelIngredients">Ingredients / Formula</label>
+                        <textarea id="newProductIngredients" placeholder="e.g., Vitamin C, Hyaluronic Acid"></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label id="labelDescription">Description *</label>
+                        <textarea id="newProductDescription" placeholder="Product description..."></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label id="labelDelivery">Delivery Info (optional)</label>
+                        <input type="text" id="newProductDelivery" placeholder="Free delivery in Addis Ababa">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label id="labelImage">Product Image</label>
+                        <div class="image-upload" onclick="document.getElementById('productImageInput').click()">
+                            <span class="icon">📸</span>
+                            <span class="text" id="uploadImageText">Tap to upload from gallery</span>
+                            <input type="file" id="productImageInput" accept="image/*" style="display:none;" onchange="handleProductImageUpload(event)">
+                        </div>
+                        <div class="image-preview" id="productImagePreview">
+                            <img id="productImagePreviewImg" src="" alt="Preview">
+                        </div>
+                    </div>
+
+                    <button class="submit-btn" onclick="addProduct()" id="addProductBtn">➕ Add Product to Store</button>
+                </div>
 
                 <!-- ===== ORDERS SECTION ===== -->
                 <div class="orders-section">
@@ -1846,70 +2029,6 @@
                     </div>
                     <div id="ordersList"></div>
                 </div>
-
-                <!-- ===== ADD PRODUCT ===== -->
-                <h4 style="margin:16px 0 10px;font-size:14px;" id="addProductTitle">➕ Add New Product</h4>
-                
-                <div class="form-group">
-                    <label id="labelName">Product Name *</label>
-                    <input type="text" id="newProductName" placeholder="e.g., Vitamin C Brightening Serum">
-                </div>
-                
-                <div class="form-group">
-                    <label id="labelBrand">Brand</label>
-                    <input type="text" id="newProductBrand" placeholder="e.g., L'Oréal Paris">
-                </div>
-                
-                <div class="form-group">
-                    <label id="labelCategory">Category *</label>
-                    <select id="newProductCategory">
-                        <option value="skincare">Skincare</option>
-                        <option value="makeup">Makeup</option>
-                        <option value="fragrance">Fragrance</option>
-                        <option value="haircare">Haircare</option>
-                        <option value="detergent">Detergent</option>
-                        <option value="tools">Tools</option>
-                    </select>
-                </div>
-                
-                <div class="form-group">
-                    <label id="labelPrice">Price (ETB) *</label>
-                    <input type="number" id="newProductPrice" placeholder="e.g., 1500">
-                </div>
-                
-                <div class="form-group">
-                    <label id="labelOldPrice">Old Price (optional)</label>
-                    <input type="number" id="newProductOldPrice" placeholder="e.g., 2000">
-                </div>
-                
-                <div class="form-group">
-                    <label id="labelIngredients">Ingredients / Formula</label>
-                    <textarea id="newProductIngredients" placeholder="e.g., Vitamin C, Hyaluronic Acid"></textarea>
-                </div>
-                
-                <div class="form-group">
-                    <label id="labelDescription">Description *</label>
-                    <textarea id="newProductDescription" placeholder="Product description..."></textarea>
-                </div>
-                
-                <div class="form-group">
-                    <label id="labelDelivery">Delivery Info (optional)</label>
-                    <input type="text" id="newProductDelivery" placeholder="Free delivery in Addis Ababa">
-                </div>
-                
-                <div class="form-group">
-                    <label id="labelImage">Product Image</label>
-                    <div class="image-upload" onclick="document.getElementById('productImageInput').click()">
-                        <span class="icon">📸</span>
-                        <span style="font-size:12px;" id="uploadImageText">Tap to upload from gallery</span>
-                        <input type="file" id="productImageInput" accept="image/*" style="display:none;" onchange="handleProductImageUpload(event)">
-                    </div>
-                    <div class="image-preview" id="productImagePreview">
-                        <img id="productImagePreviewImg" src="" alt="Preview">
-                    </div>
-                </div>
-
-                <button class="submit-btn" onclick="addProduct()" id="addProductBtn">➕ Add Product to Store</button>
 
                 <!-- ===== PRODUCT LIST ===== -->
                 <div class="product-list-admin">
@@ -2029,95 +2148,648 @@
 
     <script>
         // ============================================================
-        // SECURITY: BIOMETRIC AUTHENTICATION
+        // MULTI-LANGUAGE SUPPORT - 10 Ethiopian Languages
+        // ============================================================
+        const translations = {
+            en: {
+                // Header
+                heroTitle: '✨ Premium <span class="highlight">Beauty</span> Essentials',
+                heroSub: 'Authentic cosmetics, detergents & beauty products. Shop with confidence.',
+                logoSub: 'Cosmetics & Beauty',
+                statusBarLeft: '✨ SoYam Cosmetics',
+                statusBarRight: '🇪🇹 Betel Building, Addis',
+                heroBadge: '📍 Betel Commercial Building, Addis Ababa',
+                
+                // Advertisement
+                adTitle: 'New Arrivals This Week!',
+                adSub: 'Get 15% off on all skincare products',
+                adTag: '🔥 Limited Time Offer',
+                
+                // Language
+                langLabel: 'Language:',
+                
+                // Social
+                whatsappLabel: 'Message Us',
+                tiktok_follow: '📱 Follow us on TikTok @rm!',
+                whatsapp_contact: '📞 WhatsApp: +251919096451',
+                
+                // Location
+                locationText: 'Betel Commercial Building, <strong>Addis Ababa</strong>',
+                deliveryText: 'Nationwide Delivery',
+                
+                // Purchase Options
+                inPersonLabel: 'In-Person',
+                inPersonSub: 'Pickup at store',
+                deliveryLabel: 'Delivery',
+                deliverySub: 'Nationwide shipping',
+                
+                // Categories
+                catAll: 'All',
+                catSkincare: 'Skincare',
+                catMakeup: 'Makeup',
+                catFragrance: 'Fragrance',
+                catHaircare: 'Haircare',
+                catDetergent: 'Detergent',
+                catTools: 'Tools',
+                
+                // Featured
+                featuredTitle: '🌸 Featured Products',
+                browseAll: 'Browse All →',
+                
+                // Navigation
+                navHome: 'Home',
+                navExplore: 'Explore',
+                navCart: 'Cart',
+                navAdmin: 'Admin',
+                
+                // Admin Login
+                adminLoginTitle: 'Admin Access',
+                adminLoginSub: 'Enter the admin passcode to manage products and orders',
+                adminLoginBtn: '🔑 Unlock Dashboard',
+                adminContactNote: 'Contact owner for admin access',
+                loginError: '❌ Incorrect passcode. Please try again.',
+                logoutBtn: '🚪 Logout',
+                adminDashTitle: 'Admin Dashboard',
+                
+                // Admin Ad
+                adminAdTitle: 'Welcome to Your Dashboard',
+                adminAdSub: 'Manage your products, track orders, and grow your business',
+                statProductsLabel: 'Products',
+                statOrdersLabel: 'Orders',
+                statRevenueLabel: 'Revenue (ETB)',
+                
+                // Admin
+                addProductTitle: 'Add New Product',
+                labelName: 'Product Name *',
+                labelBrand: 'Brand',
+                labelCategory: 'Category *',
+                labelPrice: 'Price (ETB) *',
+                labelOldPrice: 'Old Price (optional)',
+                labelIngredients: 'Ingredients / Formula',
+                labelDescription: 'Description *',
+                labelDelivery: 'Delivery Info (optional)',
+                labelImage: 'Product Image',
+                uploadImageText: 'Tap to upload from gallery',
+                addProductBtn: '➕ Add Product to Store',
+                manageProductsTitle: '📋 Manage Products',
+                ordersTitle: '📦 Orders',
+                
+                // Modal
+                ingredientsLabel: '🧪 Ingredients & Formula',
+                deliveryInfoTitle: '📦 Delivery & Payment',
+                purchaseMethodLabel: 'Choose Purchase Method',
+                modalInPersonLabel: 'In-Person',
+                modalDeliveryLabel: 'Delivery',
+                addToCartLabel: 'Add to Cart',
+                
+                // Delivery Form
+                formFullName: 'Full Name *',
+                formPhone: 'Phone Number *',
+                formAddress: 'Delivery Address *',
+                formCity: 'City *',
+                formPayment: 'Payment Method',
+                formReceipt: 'Upload Payment Receipt',
+                receiptUploadText: 'Tap to upload receipt photo',
+                telebirrInfo: '💳 TeleBirr: 0919096451 (SoYam Cosmetics)',
+                
+                // Cart
+                cartTitle: '🛒 Your Cart',
+                emptyCartTitle: 'Your cart is empty',
+                emptyCartSub: 'Start adding beauty products!',
+                totalLabel: 'Total',
+                checkoutLabel: 'Proceed to Checkout',
+                
+                // Toasts
+                added_to_cart: '✅ Added to cart!',
+                order_placed: '🎉 Order placed successfully!',
+                fill_delivery: '⚠️ Please fill in all delivery details',
+                valid_phone: '⚠️ Please enter a valid phone number',
+                receipt_uploaded: '📸 Receipt photo uploaded!',
+                receipt_removed: '🗑️ Receipt removed',
+                image_uploaded: '📸 Product image uploaded!',
+                product_added: '✅ Product added successfully!',
+                product_deleted: '🗑️ Product deleted',
+                admin_granted: '🔐 Admin access granted!',
+                admin_logout: '🚪 Logged out successfully',
+                inperson_selected: '🏪 In-person pickup selected',
+                delivery_selected: '🚚 Delivery mode selected',
+                order_confirmed: '✅ Order confirmed!',
+                order_delivered: '📦 Order delivered!',
+                order_deleted: '🗑️ Order deleted',
+                fill_required: '⚠️ Please fill in all required fields'
+            },
+            am: {
+                heroTitle: '✨ የላቀ <span class="highlight">ውበት</span> ምርቶች',
+                heroSub: 'እውነተኛ የመዋቢያ እቃዎች፣ ሳሙናዎች እና የውበት ምርቶች። በእምነት ይግዙ።',
+                logoSub: 'መዋቢያ እና ውበት',
+                statusBarLeft: '✨ ሶያም ኮስሞቲክስ',
+                statusBarRight: '🇪🇹 ቤቴል ህንፃ, አዲስ',
+                heroBadge: '📍 ቤቴል ንግድ ህንፃ፣ አዲስ አበባ',
+                adTitle: 'የሳምንቱ አዳዲስ ምርቶች!',
+                adSub: 'በሁሉም የቆዳ እንክብካቤ ምርቶች 15% ቅናሽ',
+                adTag: '🔥 የተወሰነ ጊዜ ቅናሽ',
+                langLabel: 'ቋንቋ:',
+                whatsappLabel: 'አግኙን',
+                tiktok_follow: '📱 በቲክቶክ @rm ይከተሉን!',
+                whatsapp_contact: '📞 ዋትስአፕ: +251919096451',
+                locationText: 'ቤቴል ንግድ ህንፃ፣ <strong>አዲስ አበባ</strong>',
+                deliveryText: 'በመላ አገሪቱ መላኪያ',
+                inPersonLabel: 'በአካል',
+                inPersonSub: 'ከሱቅ ማንሳት',
+                deliveryLabel: 'መላኪያ',
+                deliverySub: 'በመላ አገሪቱ',
+                catAll: 'ሁሉም',
+                catSkincare: 'የቆዳ እንክብካቤ',
+                catMakeup: 'መዋቢያ',
+                catFragrance: 'ሽቶ',
+                catHaircare: 'የፀጉር እንክብካቤ',
+                catDetergent: 'ሳሙና',
+                catTools: 'መሳሪያዎች',
+                featuredTitle: '🌸 ተመራጭ ምርቶች',
+                browseAll: 'ሁሉንም ይመልከቱ →',
+                navHome: 'መነሻ',
+                navExplore: 'ፈልግ',
+                navCart: 'ጋሪ',
+                navAdmin: 'አስተዳዳሪ',
+                adminLoginTitle: 'የአስተዳዳሪ መግቢያ',
+                adminLoginSub: 'ምርቶችን እና ትዕዛዞችን ለማስተዳደር የአስተዳዳሪ ፓስኮድ ያስገቡ',
+                adminLoginBtn: '🔑 ዳሽቦርድ ክፈት',
+                adminContactNote: 'ለአስተዳዳሪ መዳረሻ ባለቤቱን ያግኙ',
+                loginError: '❌ የተሳሳተ ፓስኮድ። እባክዎ እንደገና ይሞክሩ።',
+                logoutBtn: '🚪 ውጣ',
+                adminDashTitle: 'የአስተዳዳሪ ዳሽቦርድ',
+                adminAdTitle: 'ወደ ዳሽቦርድዎ እንኳን በደህና መጡ',
+                adminAdSub: 'ምርቶችዎን ያስተዳድሩ፣ ትዕዛዞችን ይከታተሉ እና ንግድዎን ያሳድጉ',
+                statProductsLabel: 'ምርቶች',
+                statOrdersLabel: 'ትዕዛዞች',
+                statRevenueLabel: 'ገቢ (ብር)',
+                addProductTitle: 'አዲስ ምርት ጨምር',
+                labelName: 'የምርት ስም *',
+                labelBrand: 'ብራንድ',
+                labelCategory: 'ምድብ *',
+                labelPrice: 'ዋጋ (ብር) *',
+                labelOldPrice: 'የድሮ ዋጋ (ካለ)',
+                labelIngredients: 'ንጥረ ነገሮች / ቀመር',
+                labelDescription: 'መግለጫ *',
+                labelDelivery: 'የመላኪያ መረጃ (ካለ)',
+                labelImage: 'የምርት ምስል',
+                uploadImageText: 'ለመስቀል ይንኩ',
+                addProductBtn: '➕ ምርት ወደ መደብር ጨምር',
+                manageProductsTitle: '📋 ምርቶችን ያስተዳድሩ',
+                ordersTitle: '📦 ትዕዛዞች',
+                ingredientsLabel: '🧪 ንጥረ ነገሮች እና ቀመር',
+                deliveryInfoTitle: '📦 መላኪያ እና ክፍያ',
+                purchaseMethodLabel: 'የግዢ ዘዴ ይምረጡ',
+                modalInPersonLabel: 'በአካል',
+                modalDeliveryLabel: 'መላኪያ',
+                addToCartLabel: 'ወደ ጋሪ ጨምር',
+                formFullName: 'ሙሉ ስም *',
+                formPhone: 'ስልክ ቁጥር *',
+                formAddress: 'የመላኪያ አድራሻ *',
+                formCity: 'ከተማ *',
+                formPayment: 'የክፍያ ዘዴ',
+                formReceipt: 'የክፍያ ደረሰኝ ያስገቡ',
+                receiptUploadText: 'የደረሰኝ ፎቶ ለመስቀል ይንኩ',
+                telebirrInfo: '💳 ቴሌብር: 0919096451 (ሶያም ኮስሞቲክስ)',
+                cartTitle: '🛒 የእርስዎ ጋሪ',
+                emptyCartTitle: 'ጋሪዎ ባዶ ነው',
+                emptyCartSub: 'የውበት ምርቶችን መጨመር ይጀምሩ!',
+                totalLabel: 'ጠቅላላ',
+                checkoutLabel: 'ወደ ክፍያ ይቀጥሉ',
+                added_to_cart: '✅ ወደ ጋሪ ተጨመረ!',
+                order_placed: '🎉 ትዕዛዝ በተሳካ ሁኔታ ተሰራ!',
+                fill_delivery: '⚠️ እባክዎ ሁሉንም የመላኪያ ዝርዝሮች ይሙሉ',
+                valid_phone: '⚠️ እባክዎ ትክክለኛ የስልክ ቁጥር ያስገቡ',
+                receipt_uploaded: '📸 የደረሰኝ ፎቶ ተሰቀለ!',
+                receipt_removed: '🗑️ ደረሰኝ ተወገደ',
+                image_uploaded: '📸 የምርት ምስል ተሰቀለ!',
+                product_added: '✅ ምርት በተሳካ ሁኔታ ተጨመረ!',
+                product_deleted: '🗑️ ምርት ተወገደ',
+                admin_granted: '🔐 የአስተዳዳሪ መዳረሻ ተሰጠ!',
+                admin_logout: '🚪 በተሳካ ሁኔታ ወጥተዋል',
+                inperson_selected: '🏪 በአካል መምረጥ ተመርጧል',
+                delivery_selected: '🚚 የመላኪያ ሁነታ ተመርጧል',
+                order_confirmed: '✅ ትዕዛዝ ተረጋግጧል!',
+                order_delivered: '📦 ትዕዛዝ ተላከ!',
+                order_deleted: '🗑️ ትዕዛዝ ተወገደ',
+                fill_required: '⚠️ እባክዎ ሁሉንም የሚፈለጉ መስኮች ይሙሉ'
+            },
+            or: {
+                heroTitle: '✨ <span class="highlight">Bilisa</span> Olaana',
+                heroSub: 'Akkaataa amantaa ta\'een kosmeetiksii, saamunaa fi meeshaa bilisaa mirgaa bitadhaa.',
+                logoSub: 'Kosmeetiksii fi Bilisa',
+                statusBarLeft: '✨ SoYam Kosmeetiksii',
+                statusBarRight: '🇪🇹 Daldala Betel, Finfinnee',
+                heroBadge: '📍 Dhaabbata Daldala Betel, Finfinnee',
+                adTitle: 'Meeshaalee Haaraa Torban Kana!',
+                adSub: 'Meeshaalee gogaa kunuunsa irratti 15% kaffaltii hir\'isa',
+                adTag: '🔥 Yeroo muraasaaf qofa',
+                langLabel: 'Afaan:',
+                whatsappLabel: 'Nu qunnamaa',
+                tiktok_follow: '📱 TikTok @rm irratti nu hordofaa!',
+                whatsapp_contact: '📞 WhatsApp: +251919096451',
+                locationText: 'Dhaabbata Daldala Betel, <strong>Finfinnee</strong>',
+                deliveryText: 'Biyyakeessatti erguu',
+                inPersonLabel: 'Lubbuun',
+                inPersonSub: 'Suuqii irraa fudhachuu',
+                deliveryLabel: 'Erguu',
+                deliverySub: 'Biayyatti erguu',
+                catAll: 'Hunda',
+                catSkincare: 'Goggogsa gogaa',
+                catMakeup: 'Faashii',
+                catFragrance: 'Urgooftuu',
+                catHaircare: 'Tiksa Rifeensa',
+                catDetergent: 'Saamunaa',
+                catTools: 'Meashaa',
+                featuredTitle: '🌸 Meeshaalee Filataman',
+                browseAll: 'Hunda ilaali →',
+                navHome: 'Mana',
+                navExplore: 'Barbaadi',
+                navCart: 'Garii',
+                navAdmin: 'Abbaa',
+                adminLoginTitle: 'Seensa Abbaa',
+                adminLoginSub: 'Meashaa fi ajajaa bulchuuf pasikoodii seennuu galchi',
+                adminLoginBtn: '🔑 Daashboordii banuu',
+                adminContactNote: 'Seensa abbaatiif abbaa qabataa quunnamaa',
+                loginError: '❌ Pasikoodiin dogoggora. Irra deddeebi\'aa.',
+                logoutBtn: '🚪 Bahuu',
+                adminDashTitle: 'Daashboordii Abbaa',
+                adminAdTitle: 'Daashboordii keessanitti baga nagaan dhufte!',
+                adminAdSub: 'Meeshaalee keessan bulchaa, ajajoota hordofaa, daldala keessan guddisaa',
+                statProductsLabel: 'Meeshaalee',
+                statOrdersLabel: 'Ajajoota',
+                statRevenueLabel: 'Gatii (Birrii)',
+                addProductTitle: 'Meeshaa haaraa dabaluu',
+                labelName: 'Maqaa meeshaa *',
+                labelBrand: 'Mallattoo',
+                labelCategory: 'Ramaddii *',
+                labelPrice: 'Gatii (Birrii) *',
+                labelOldPrice: 'Gatii moofaa (yoo jiraate)',
+                labelIngredients: 'Qabiyyee / Akkaataa',
+                labelDescription: 'Ibsa *',
+                labelDelivery: 'Odeeffannoo erguu (yoo jiraate)',
+                labelImage: 'Fotoo meeshaa',
+                uploadImageText: 'Fe\'uuf tuquu',
+                addProductBtn: '➕ Meeshaa suuqii dabaluu',
+                manageProductsTitle: '📋 Meeshaalee bulchuu',
+                ordersTitle: '📦 Ajajoota',
+                ingredientsLabel: '🧪 Qabiyyee fi Akkaataa',
+                deliveryInfoTitle: '📦 Erguu fi Kaffaltii',
+                purchaseMethodLabel: 'Haala bitannaa filadhu',
+                modalInPersonLabel: 'Lubbuun',
+                modalDeliveryLabel: 'Erguu',
+                addToCartLabel: 'Gariitti dabaluu',
+                formFullName: 'Maqaa guutuu *',
+                formPhone: 'Lakkoobsa bilbilaa *',
+                formAddress: 'Teessoo erguu *',
+                formCity: 'Magaalaa *',
+                formPayment: 'Haala kaffaltii',
+                formReceipt: 'Rasheedii kaffaltii fe\'uu',
+                receiptUploadText: 'Fotoo rasheedii fe\'uuf tuquu',
+                telebirrInfo: '💳 TeleBirr: 0919096451 (SoYam Cosmetics)',
+                cartTitle: '🛒 Garii keessan',
+                emptyCartTitle: 'Garii keessan duwwaa dha',
+                emptyCartSub: 'Meeshaalee bilisaa dabaluu eegalii!',
+                totalLabel: 'Iddoo',
+                checkoutLabel: 'Kaffaltiif itti fufuu',
+                added_to_cart: '✅ Gariitti dabalamte!',
+                order_placed: '🎉 Ajajni milkaa\'inaan kennamte!',
+                fill_delivery: '⚠️ Odeeffannoo erguu hunda guutaa',
+                valid_phone: '⚠️ Lakkoobsa bilbilaa sirrii ta\'e galchaa',
+                receipt_uploaded: '📸 Fotoon rasheedii fe\'ame!',
+                receipt_removed: '🗑️ Rasheedii balleeffame',
+                image_uploaded: '📸 Fotoon meeshaa fe\'ame!',
+                product_added: '✅ Meeshaan milkaa\'inaan dabalamte!',
+                product_deleted: '🗑️ Meeshaan balleeffame',
+                admin_granted: '🔐 Seensa abbaa kennamte!',
+                admin_logout: '🚪 Milkaa\'inaan bahaniiru',
+                inperson_selected: '🏪 Lubbuun filatame',
+                delivery_selected: '🚚 Haala erguu filatame',
+                order_confirmed: '✅ Ajajni mirkanaa\'e!',
+                order_delivered: '📦 Ajajni ergame!',
+                order_deleted: '🗑️ Ajajni balleeffame',
+                fill_required: '⚠️ Bakkeewwan barbaachisan hunda guutaa'
+            },
+            ti: {
+                heroTitle: '✨ ልዑል <span class="highlight">ውበት</span> ፍርያት',
+                heroSub: 'ሓቀኛ መዋቢያታት፣ ሳሙናታትን ምርት ውበትን ብምትእምኛን ዕደጉ።',
+                logoSub: 'መዋቢያታትን ውበትን',
+                statusBarLeft: '✨ ሶያም ኮስሞቲክስ',
+                statusBarRight: '🇪🇹 ቤቴል ህንጺ, ኣዲስ',
+                heroBadge: '📍 ቤቴል ንግዲ ህንፃ፣ ኣዲስ ኣበባ',
+                adTitle: 'ናይ ሰሙን ሓደሽቲ ፍርያት!',
+                adSub: 'ብኩሉ ፍርያት ክብካቤ ቘርበት 15% ቅናሽ',
+                adTag: '🔥 ንውሑድ ግዜ ጥራይ',
+                langLabel: 'ቋንቋ:',
+                whatsappLabel: 'ራኸበና',
+                tiktok_follow: '📱 ኣብ TikTok @rm ስዓቡና!',
+                whatsapp_contact: '📞 ዋትስአፕ: +251919096451',
+                locationText: 'ቤቴል ንግዲ ህንፃ፣ <strong>ኣዲስ ኣበባ</strong>',
+                deliveryText: 'ምልአ ሃገር ምዝዋው',
+                inPersonLabel: 'ብኣካል',
+                inPersonSub: 'ካብ ሱቕ ምቕባል',
+                deliveryLabel: 'ምዝዋው',
+                deliverySub: 'ምልአ ሃገር',
+                catAll: 'ኩሉ',
+                catSkincare: 'ክብካቤ ቘርበት',
+                catMakeup: 'መዋቢያ',
+                catFragrance: 'ሽቶ',
+                catHaircare: 'ክብካቤ ጸጕሪ',
+                catDetergent: 'ሳሙና',
+                catTools: 'መሳርሒታት',
+                featuredTitle: '🌸 ምርጽ ፍርያት',
+                browseAll: 'ኩሉ ርኣይ →',
+                navHome: 'ገዛ',
+                navExplore: 'ድለይ',
+                navCart: 'ቅርጢ',
+                navAdmin: 'ኣስተዳዳሪ',
+                adminLoginTitle: 'ምእትዋ ኣስተዳዳሪ',
+                adminLoginSub: 'ፍርያትን ትእዛዛትን ንምምራሕ ፓስኮድ ኣስተዳዳሪ ኣእትዉ',
+                adminLoginBtn: '🔑 ዳሽቦርድ ክፈት',
+                adminContactNote: 'ንመዳረሻ ኣስተዳዳሪ ባለቤቱ ራኸብዎ',
+                loginError: '❌ ጌጋ ፓስኮድ። በጃኹም ደጊምኩም ፈትኑ።',
+                logoutBtn: '🚪 ውጻእ',
+                adminDashTitle: 'ዳሽቦርድ ኣስተዳዳሪ',
+                adminAdTitle: 'ናብ ዳሽቦርድኹም ሰላም መጻእኩም!',
+                adminAdSub: 'ፍርያትኩም ኣስተዳድሩ፣ ትእዛዛት ስዓቡ፣ ንግድኩም ኣደብሩ',
+                statProductsLabel: 'ፍርያት',
+                statOrdersLabel: 'ትእዛዛት',
+                statRevenueLabel: 'ገብን (ብር)',
+                addProductTitle: 'ሓድሽ ፍርያት ወስኽ',
+                labelName: 'ስም ፍርያት *',
+                labelBrand: 'ብራንድ',
+                labelCategory: 'ምድብ *',
+                labelPrice: 'ዋጋ (ብር) *',
+                labelOldPrice: 'ናይ ቀደም ዋጋ (እንተሎ)',
+                labelIngredients: 'ንጥረ ነገራት / ቀመር',
+                labelDescription: 'መግለጺ *',
+                labelDelivery: 'ሓበሬታ ምዝዋው (እንተሎ)',
+                labelImage: 'ስእሊ ፍርያት',
+                uploadImageText: 'ንምስቃል ተውኩዎ',
+                addProductBtn: '➕ ፍርያት ናብ ሱቕ ወስኽ',
+                manageProductsTitle: '📋 ፍርያት ኣስተዳድር',
+                ordersTitle: '📦 ትእዛዛት',
+                ingredientsLabel: '🧪 ንጥረ ነገራትን ቀመርን',
+                deliveryInfoTitle: '📦 ምዝዋውን ክፍሊትን',
+                purchaseMethodLabel: 'መንገዲ ዕዳጋ ምረጽ',
+                modalInPersonLabel: 'ብኣካል',
+                modalDeliveryLabel: 'ምዝዋው',
+                addToCartLabel: 'ናብ ቅርጢ ወስኽ',
+                formFullName: 'ምሉእ ስም *',
+                formPhone: 'ቁጽሪ ተሌፎን *',
+                formAddress: 'ኣድራሻ ምዝዋው *',
+                formCity: 'ከተማ *',
+                formPayment: 'መንገዲ ክፍሊት',
+                formReceipt: 'ደረሰኝ ክፍሊት ስቀል',
+                receiptUploadText: 'ስእሊ ደረሰኝ ንምስቃል ተውኩዎ',
+                telebirrInfo: '💳 ቴሌብር: 0919096451 (ሶያም ኮስሞቲክስ)',
+                cartTitle: '🛒 ቅርጽኹም',
+                emptyCartTitle: 'ቅርጽኹም ባዶ እዩ',
+                emptyCartSub: 'ምርት ውበት ምውሳኽ ጀምሩ!',
+                totalLabel: 'ጠቕላላ',
+                checkoutLabel: 'ናብ ክፍሊት ቀጽሉ',
+                added_to_cart: '✅ ናብ ቅርጢ ተወሲኹ!',
+                order_placed: '🎉 ትእዛዝ ብሰናይ ምዃኑ ተፈጺሙ!',
+                fill_delivery: '⚠️ ኩሉ ሓበሬታ ምዝዋው ምልኡ',
+                valid_phone: '⚠️ ቅኑዕ ቁጽሪ ተሌፎን ኣእትዉ',
+                receipt_uploaded: '📸 ስእሊ ደረሰኝ ተስቂሉ!',
+                receipt_removed: '🗑️ ደረሰኝ ተወጊዱ',
+                image_uploaded: '📸 ስእሊ ፍርያት ተስቂሉ!',
+                product_added: '✅ ፍርያት ብሰናይ ምዃኑ ተወሲኹ!',
+                product_deleted: '🗑️ ፍርያት ተወጊዱ',
+                admin_granted: '🔐 መዳረሻ ኣስተዳዳሪ ተዋሂቡ!',
+                admin_logout: '🚪 ብሰናይ ምዃኑ ወጺእኩም',
+                inperson_selected: '🏪 ብኣካል ተመሪጹ',
+                delivery_selected: '🚚 ምዝዋው ተመሪጹ',
+                order_confirmed: '✅ ትእዛዝ ተረጋጊጹ!',
+                order_delivered: '📦 ትእዛዝ ተዘዊዑ!',
+                order_deleted: '🗑️ ትእዛዝ ተወጊዱ',
+                fill_required: '⚠️ ኩለን ዝድለያ መዳያት ምልኡ'
+            },
+            so: {
+                heroTitle: '✨ Alaabaha <span class="highlight">Quruxda</span> ah',
+                heroSub: 'Alaabaha saxda ah ee qurxinta, nadiifinta & quruxda. Ku iibso kalsooni leh.',
+                logoSub: 'Qurxinta & Quruxda',
+                statusBarLeft: '✨ SoYam Cosmetics',
+                statusBarRight: '🇪🇹 Dhismaha Betel, Addis',
+                heroBadge: '📍 Dhismaha Ganacsiga Betel, Addis Ababa',
+                adTitle: 'Alaabaha Cusub ee Usbuucan!',
+                adSub: '15% ka dhimo dhammaan alaabaha daryeelka maqaarka',
+                adTag: '🔥 Fursad Waqti Gaar ah',
+                langLabel: 'Luqadda:',
+                whatsappLabel: 'Nala soo xiriir',
+                tiktok_follow: '📱 Nagu xiriir TikTok @rm!',
+                whatsapp_contact: '📞 WhatsApp: +251919096451',
+                locationText: 'Dhismaha Ganacsiga Betel, <strong>Addis Ababa</strong>',
+                deliveryText: 'Dalka oo dhan',
+                inPersonLabel: 'Qof ahaan',
+                inPersonSub: 'Dukaanka ka soo qaad',
+                deliveryLabel: 'Gebis',
+                deliverySub: 'Dalka oo dhan',
+                catAll: 'Dhammaan',
+                catSkincare: 'Daryeelka Maqaarka',
+                catMakeup: 'Qurxin',
+                catFragrance: 'Uunsi',
+                catHaircare: 'Daryeelka Timaha',
+                catDetergent: 'Sabuun',
+                catTools: 'Qalab',
+                featuredTitle: '🌸 Alaabaha La Dooray',
+                browseAll: 'Dhamaan eeg →',
+                navHome: 'Guri',
+                navExplore: 'Baadhis',
+                navCart: 'Garii',
+                navAdmin: 'Maamule',
+                adminLoginTitle: 'Gelitaanka Maamulaha',
+                adminLoginSub: 'Geli koodka maamulaha si aad u maamusho alaabaha iyo dalabyada',
+                adminLoginBtn: '🔑 Fura Dashboard',
+                adminContactNote: 'La xiriir milkiilaha si aad u hesho gelitaan',
+                loginError: '❌ Koodka khaldan. Fadlan isku day mar kale.',
+                logoutBtn: '🚪 Bax',
+                adminDashTitle: 'Dashboard Maamulaha',
+                adminAdTitle: 'Ku soo dhawoow Dashboard-kaaga!',
+                adminAdSub: 'Maamul alaabahaada, raad raac dalabyada, kuna kori ganacsigaaga',
+                statProductsLabel: 'Alaabaha',
+                statOrdersLabel: 'Dalabyada',
+                statRevenueLabel: 'Dakhliga (ETB)',
+                addProductTitle: 'Ku dar Alaab Cusub',
+                labelName: 'Magaca Alaabta *',
+                labelBrand: 'Summad',
+                labelCategory: 'Qaybta *',
+                labelPrice: 'Qiimaha (ETB) *',
+                labelOldPrice: 'Qiimihii Hore (haddii uu jiro)',
+                labelIngredients: 'Qaybaha / Qaacidada',
+                labelDescription: 'Sharaxaad *',
+                labelDelivery: 'Macluumaadka Gebiska (haddii uu jiro)',
+                labelImage: 'Sawirka Alaabta',
+                uploadImageText: 'Taabo si aad u soo gudbisid',
+                addProductBtn: '➕ Ku Dar Alaabta Dukaanka',
+                manageProductsTitle: '📋 Maamul Alaabaha',
+                ordersTitle: '📦 Dalabyada',
+                ingredientsLabel: '🧪 Qaybaha & Qaacidada',
+                deliveryInfoTitle: '📦 Gebis & Bixinta',
+                purchaseMethodLabel: 'Dooro Habka Iibsiga',
+                modalInPersonLabel: 'Qof ahaan',
+                modalDeliveryLabel: 'Gebis',
+                addToCartLabel: 'Ku Dar Gariiga',
+                formFullName: 'Magaca Oo Dhan *',
+                formPhone: 'Lambarka Telefoonka *',
+                formAddress: 'Cinwaanka Gebiska *',
+                formCity: 'Magaalada *',
+                formPayment: 'Habka Bixinta',
+                formReceipt: 'Soo Gudbi Rasheedka Bixinta',
+                receiptUploadText: 'Taabo si aad u soo gudbisid sawirka rasheedka',
+                telebirrInfo: '💳 TeleBirr: 0919096451 (SoYam Cosmetics)',
+                cartTitle: '🛒 Gariigaaga',
+                emptyCartTitle: 'Gariigaagu waa madhan yahay',
+                emptyCartSub: 'Bilow inaad ku dartid alaabaha qurxinta!',
+                totalLabel: 'Wadarta',
+                checkoutLabel: 'U Gudub Bixinta',
+                added_to_cart: '✅ Lagu daray gariiga!',
+                order_placed: '🎉 Dalabka si guul leh loo dhamaystiray!',
+                fill_delivery: '⚠️ Fadlan buuxi dhammaan faahfaahinta gebiska',
+                valid_phone: '⚠️ Fadlan geli lambar telefoon oo sax ah',
+                receipt_uploaded: '📸 Sawirka rasheedka waa la soo gudbiyay!',
+                receipt_removed: '🗑️ Rasheedka waa la tirtiray',
+                image_uploaded: '📸 Sawirka alaabta waa la soo gudbiyay!',
+                product_added: '✅ Alaabta si guul leh loo daray!',
+                product_deleted: '🗑️ Alaabta waa la tirtiray',
+                admin_granted: '🔐 Gelitaanka maamulaha waa la siiyay!',
+                admin_logout: '🚪 Si guul leh ayaad u baxday',
+                inperson_selected: '🏪 Qof ahaan waa la doortay',
+                delivery_selected: '🚚 Habka gebiska waa la doortay',
+                order_confirmed: '✅ Dalabka waa la xaqiijiyay!',
+                order_delivered: '📦 Dalabka waa la geeyay!',
+                order_deleted: '🗑️ Dalabka waa la tirtiray',
+                fill_required: '⚠️ Fadlan buuxi dhammaan goobaha loo baahan yahay'
+            }
+        };
+
+        let currentLang = 'en';
+
+        function getTranslation(key) {
+            return translations[currentLang]?.[key] || translations.en[key] || key;
+        }
+
+        function setLanguage(lang) {
+            currentLang = lang;
+            document.querySelectorAll('.lang-selector button').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.lang === lang);
+            });
+            updateUI();
+            showToast(lang === 'en' ? '🌍 Language changed to English' : 
+                     lang === 'am' ? '🌍 ቋንቋ ወደ አማርኛ ተቀየረ' :
+                     lang === 'or' ? '🌍 Afaan Oromoofiitti jijjiirame' :
+                     lang === 'ti' ? '🌍 ቋንቋ ናብ ትግርኛ ተቀይሩ' :
+                     '🌍 Language changed');
+        }
+
+        function updateUI() {
+            // Header
+            document.getElementById('heroTitle').innerHTML = getTranslation('heroTitle');
+            document.getElementById('heroSub').textContent = getTranslation('heroSub');
+            document.getElementById('logoSub').textContent = getTranslation('logoSub');
+            document.getElementById('statusBarLeft').textContent = getTranslation('statusBarLeft');
+            document.getElementById('statusBarRight').textContent = getTranslation('statusBarRight');
+            document.getElementById('heroBadge').innerHTML = getTranslation('heroBadge');
+            
+            // Advertisement
+            document.getElementById('adTitle').textContent = getTranslation('adTitle');
+            document.getElementById('adSub').textContent = getTranslation('adSub');
+            document.getElementById('adTag').textContent = getTranslation('adTag');
+            
+            // Language
+            document.getElementById('langLabel').textContent = getTranslation('langLabel');
+            
+            // Social
+            document.getElementById('whatsappLabel').textContent = getTranslation('whatsappLabel');
+            document.getElementById('locationText').innerHTML = getTranslation('locationText');
+            document.getElementById('deliveryText').innerHTML = getTranslation('deliveryText');
+            
+            // Purchase Options
+            document.getElementById('inPersonLabel').textContent = getTranslation('inPersonLabel');
+            document.getElementById('inPersonSub').textContent = getTranslation('inPersonSub');
+            document.getElementById('deliveryLabel').textContent = getTranslation('deliveryLabel');
+            document.getElementById('deliverySub').textContent = getTranslation('deliverySub');
+            
+            // Categories
+            document.getElementById('catAll').textContent = getTranslation('catAll');
+            document.getElementById('catSkincare').textContent = getTranslation('catSkincare');
+            document.getElementById('catMakeup').textContent = getTranslation('catMakeup');
+            document.getElementById('catFragrance').textContent = getTranslation('catFragrance');
+            document.getElementById('catHaircare').textContent = getTranslation('catHaircare');
+            document.getElementById('catDetergent').textContent = getTranslation('catDetergent');
+            document.getElementById('catTools').textContent = getTranslation('catTools');
+            
+            // Featured
+            document.getElementById('featuredTitle').innerHTML = getTranslation('featuredTitle') + ' <span class="phonics-badge">✨ Premium</span>';
+            document.getElementById('browseAllBtn').textContent = getTranslation('browseAll');
+            
+            // Navigation
+            document.getElementById('navHome').textContent = getTranslation('navHome');
+            document.getElementById('navExplore').textContent = getTranslation('navExplore');
+            document.getElementById('navCart').textContent = getTranslation('navCart');
+            document.getElementById('navAdmin').textContent = getTranslation('navAdmin');
+            
+            // Admin Login
+            document.getElementById('adminLoginTitle').textContent = getTranslation('adminLoginTitle');
+            document.getElementById('adminLoginSub').textContent = getTranslation('adminLoginSub');
+            document.getElementById('adminLoginBtn').textContent = getTranslation('adminLoginBtn');
+            document.getElementById('adminContactNote').textContent = getTranslation('adminContactNote');
+            
+            // Admin Dashboard
+            document.getElementById('adminDashTitle').textContent = getTranslation('adminDashTitle');
+            document.getElementById('adminAdTitle').textContent = getTranslation('adminAdTitle');
+            document.getElementById('adminAdSub').textContent = getTranslation('adminAdSub');
+            document.getElementById('statProductsLabel').textContent = getTranslation('statProductsLabel');
+            document.getElementById('statOrdersLabel').textContent = getTranslation('statOrdersLabel');
+            document.getElementById('statRevenueLabel').textContent = getTranslation('statRevenueLabel');
+            document.getElementById('addProductTitle').textContent = getTranslation('addProductTitle');
+            document.getElementById('labelName').textContent = getTranslation('labelName');
+            document.getElementById('labelBrand').textContent = getTranslation('labelBrand');
+            document.getElementById('labelCategory').textContent = getTranslation('labelCategory');
+            document.getElementById('labelPrice').textContent = getTranslation('labelPrice');
+            document.getElementById('labelOldPrice').textContent = getTranslation('labelOldPrice');
+            document.getElementById('labelIngredients').textContent = getTranslation('labelIngredients');
+            document.getElementById('labelDescription').textContent = getTranslation('labelDescription');
+            document.getElementById('labelDelivery').textContent = getTranslation('labelDelivery');
+            document.getElementById('labelImage').textContent = getTranslation('labelImage');
+            document.getElementById('uploadImageText').textContent = getTranslation('uploadImageText');
+            document.getElementById('addProductBtn').textContent = getTranslation('addProductBtn');
+            document.getElementById('manageProductsTitle').textContent = getTranslation('manageProductsTitle');
+            document.getElementById('ordersTitle').textContent = getTranslation('ordersTitle');
+            document.getElementById('logoutBtn').textContent = getTranslation('logoutBtn');
+            
+            // Modal
+            document.getElementById('ingredientsLabel').textContent = getTranslation('ingredientsLabel');
+            document.getElementById('deliveryInfoTitle').textContent = getTranslation('deliveryInfoTitle');
+            document.getElementById('purchaseMethodLabel').textContent = getTranslation('purchaseMethodLabel');
+            document.getElementById('modalInPersonLabel').textContent = getTranslation('modalInPersonLabel');
+            document.getElementById('modalDeliveryLabel').textContent = getTranslation('modalDeliveryLabel');
+            document.getElementById('addToCartLabel').textContent = getTranslation('addToCartLabel');
+            
+            // Delivery Form
+            document.getElementById('formFullName').textContent = getTranslation('formFullName');
+            document.getElementById('formPhone').textContent = getTranslation('formPhone');
+            document.getElementById('formAddress').textContent = getTranslation('formAddress');
+            document.getElementById('formCity').textContent = getTranslation('formCity');
+            document.getElementById('formPayment').textContent = getTranslation('formPayment');
+            document.getElementById('formReceipt').textContent = getTranslation('formReceipt');
+            document.getElementById('receiptUploadText').textContent = getTranslation('receiptUploadText');
+            document.getElementById('telebirrInfo').textContent = getTranslation('telebirrInfo');
+            
+            // Cart
+            document.getElementById('cartTitle').textContent = getTranslation('cartTitle');
+            document.getElementById('emptyCartTitle').textContent = getTranslation('emptyCartTitle');
+            document.getElementById('emptyCartSub').textContent = getTranslation('emptyCartSub');
+            document.getElementById('totalLabel').textContent = getTranslation('totalLabel');
+            document.getElementById('checkoutLabel').textContent = getTranslation('checkoutLabel');
+        }
+
+        // ============================================================
+        // SECURITY: ADMIN PASSCODE
         // ============================================================
         const ADMIN_PASSCODE = "2024";  // ← CHANGE THIS!
         let isAdmin = false;
-
-        // ============================================================
-        // BIOMETRIC AUTHENTICATION
-        // ============================================================
-        function showBiometricLogin() {
-            document.getElementById('adminLoginOverlay').classList.add('active');
-            document.getElementById('loginError').classList.remove('show');
-            document.getElementById('biometricIcon').textContent = '👇';
-        }
-
-        function authenticateBiometric() {
-            const btn = document.getElementById('biometricBtn');
-            const icon = document.getElementById('biometricIcon');
-            
-            // Show scanning animation
-            icon.textContent = '⏳';
-            btn.style.transform = 'scale(0.95)';
-            
-            // Simulate biometric authentication
-            // In a real Telegram Mini App, you would use:
-            // tg.requestBiometric() or tg.requestFingerprint()
-            
-            setTimeout(() => {
-                // For demo purposes, we use passcode fallback
-                // But here we simulate successful biometric auth
-                const success = true; // In real app, this would be from biometric API
-                
-                if (success) {
-                    icon.textContent = '✅';
-                    btn.style.transform = 'scale(1)';
-                    setTimeout(() => {
-                        isAdmin = true;
-                        document.getElementById('adminLoginOverlay').classList.remove('active');
-                        document.getElementById('adminDashboard').classList.add('active');
-                        document.body.style.overflow = 'hidden';
-                        renderOrders();
-                        renderProductList();
-                        document.getElementById('productCount').textContent = products.length + ' items';
-                        showToast('🔐 Biometric authentication successful!');
-                        sessionStorage.setItem('soyam_admin', 'true');
-                    }, 400);
-                } else {
-                    icon.textContent = '❌';
-                    document.getElementById('loginError').classList.add('show');
-                    setTimeout(() => {
-                        icon.textContent = '👇';
-                        btn.style.transform = 'scale(1)';
-                    }, 1500);
-                }
-            }, 1500);
-        }
-
-        // Passcode fallback for testing
-        function showPasscodeFallback() {
-            const passcode = prompt('Enter admin passcode:');
-            if (passcode === ADMIN_PASSCODE) {
-                isAdmin = true;
-                document.getElementById('adminLoginOverlay').classList.remove('active');
-                document.getElementById('adminDashboard').classList.add('active');
-                document.body.style.overflow = 'hidden';
-                renderOrders();
-                renderProductList();
-                document.getElementById('productCount').textContent = products.length + ' items';
-                showToast('🔐 Admin access granted!');
-                sessionStorage.setItem('soyam_admin', 'true');
-            } else if (passcode !== null) {
-                document.getElementById('loginError').classList.add('show');
-                setTimeout(() => {
-                    document.getElementById('loginError').classList.remove('show');
-                }, 3000);
-            }
-        }
-
-        function logoutAdmin() {
-            isAdmin = false;
-            document.getElementById('adminDashboard').classList.remove('active');
-            document.body.style.overflow = '';
-            showToast('🚪 Logged out successfully');
-            sessionStorage.removeItem('soyam_admin');
-        }
-
-        function toggleDashboard() {
-            document.getElementById('adminDashboard').classList.remove('active');
-            document.body.style.overflow = '';
-        }
 
         // ============================================================
         // TELEGRAM INIT
@@ -2140,7 +2812,7 @@
         let orders = JSON.parse(localStorage.getItem('soyam_orders')) || [];
 
         // ============================================================
-        // PRODUCT DATA WITH REAL COSMETIC IMAGES
+        // PRODUCT DATA
         // ============================================================
         let products = [
             {
@@ -2280,6 +2952,55 @@
         let productImageData = null;
 
         // ============================================================
+        // ADMIN FUNCTIONS
+        // ============================================================
+        function showAdminLogin() {
+            document.getElementById('adminLoginOverlay').classList.add('active');
+            document.getElementById('adminPasscode').value = '';
+            document.getElementById('loginError').classList.remove('show');
+            document.getElementById('adminPasscode').focus();
+        }
+
+        function adminLogin() {
+            const passcode = document.getElementById('adminPasscode').value;
+            if (passcode === ADMIN_PASSCODE) {
+                isAdmin = true;
+                document.getElementById('adminLoginOverlay').classList.remove('active');
+                document.getElementById('adminDashboard').classList.add('active');
+                document.body.style.overflow = 'hidden';
+                renderOrders();
+                renderProductList();
+                updateStats();
+                showToast(getTranslation('admin_granted'));
+                sessionStorage.setItem('soyam_admin', 'true');
+            } else {
+                document.getElementById('loginError').classList.add('show');
+                document.getElementById('adminPasscode').value = '';
+                document.getElementById('adminPasscode').focus();
+            }
+        }
+
+        function logoutAdmin() {
+            isAdmin = false;
+            document.getElementById('adminDashboard').classList.remove('active');
+            document.body.style.overflow = '';
+            showToast(getTranslation('admin_logout'));
+            sessionStorage.removeItem('soyam_admin');
+        }
+
+        function toggleDashboard() {
+            document.getElementById('adminDashboard').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        function updateStats() {
+            document.getElementById('statProducts').textContent = products.length;
+            document.getElementById('statOrders').textContent = orders.length;
+            const totalRevenue = orders.reduce((sum, order) => sum + order.total, 0);
+            document.getElementById('statRevenue').textContent = totalRevenue.toLocaleString();
+        }
+
+        // ============================================================
         // ORDERS MANAGEMENT
         // ============================================================
         function saveOrders() {
@@ -2294,7 +3015,7 @@
                 container.innerHTML = `
                     <div style="text-align:center;padding:20px 0;color:#999;">
                         <span style="font-size:30px;display:block;margin-bottom:6px;">📭</span>
-                        <p style="font-size:13px;">No orders yet</p>
+                        <p style="font-size:13px;">${currentLang === 'am' ? 'ምንም ትዕዛዝ የለም' : 'No orders yet'}</p>
                     </div>
                 `;
                 return;
@@ -2321,8 +3042,8 @@
                         <span class="order-status ${order.status || 'pending'}">${(order.status || 'pending').toUpperCase()}</span>
                     </div>
                     <div class="order-actions">
-                        ${order.status !== 'confirmed' ? `<button class="confirm-btn" onclick="updateOrderStatus(${index}, 'confirmed')">✅ Confirm</button>` : ''}
-                        ${order.status !== 'delivered' ? `<button class="deliver-btn" onclick="updateOrderStatus(${index}, 'delivered')">📦 Delivered</button>` : ''}
+                        ${order.status !== 'confirmed' ? `<button class="confirm-btn" onclick="updateOrderStatus(${index}, 'confirmed')">✅ ${currentLang === 'am' ? 'አረጋግጥ' : 'Confirm'}</button>` : ''}
+                        ${order.status !== 'delivered' ? `<button class="deliver-btn" onclick="updateOrderStatus(${index}, 'delivered')">📦 ${currentLang === 'am' ? 'ተላከ' : 'Delivered'}</button>` : ''}
                         <button class="delete-btn" onclick="deleteOrder(${index})">🗑️</button>
                     </div>
                 </div>
@@ -2334,16 +3055,18 @@
             orders[index].status = status;
             saveOrders();
             renderOrders();
-            showToast(status === 'confirmed' ? '✅ Order confirmed!' : '📦 Order delivered!');
+            updateStats();
+            showToast(status === 'confirmed' ? getTranslation('order_confirmed') : getTranslation('order_delivered'));
         }
 
         function deleteOrder(index) {
             if (!isAdmin) return;
-            if (!confirm('Delete this order?')) return;
+            if (!confirm(currentLang === 'am' ? 'ይህን ትዕዛዝ መሰረዝ ይፈልጋሉ?' : 'Delete this order?')) return;
             orders.splice(index, 1);
             saveOrders();
             renderOrders();
-            showToast('🗑️ Order deleted');
+            updateStats();
+            showToast(getTranslation('order_deleted'));
         }
 
         function addOrder(orderData) {
@@ -2354,7 +3077,10 @@
                 id: orders.length + 1
             });
             saveOrders();
-            if (isAdmin) renderOrders();
+            if (isAdmin) {
+                renderOrders();
+                updateStats();
+            }
         }
 
         // ============================================================
@@ -2368,7 +3094,7 @@
                 grid.innerHTML = `
                     <div style="grid-column:1/-1;text-align:center;padding:30px 0;color:#999;">
                         <span style="font-size:36px;display:block;margin-bottom:6px;">🧴</span>
-                        <p style="font-size:13px;">No products in this category</p>
+                        <p style="font-size:13px;">${currentLang === 'am' ? 'በዚህ ምድብ ውስጥ ምርቶች የሉም' : 'No products in this category'}</p>
                     </div>
                 `;
                 return;
@@ -2389,7 +3115,7 @@
                             <span class="price">${p.price.toLocaleString()} ETB</span>
                             ${p.oldPrice ? `<span class="old-price">${p.oldPrice.toLocaleString()} ETB</span>` : ''}
                         </div>
-                        <button class="add-to-cart-btn" onclick="event.stopPropagation(); quickAdd(${p.id})">🛒 Add to Cart</button>
+                        <button class="add-to-cart-btn" onclick="event.stopPropagation(); quickAdd(${p.id})">🛒 ${currentLang === 'am' ? 'ወደ ጋሪ ጨምር' : 'Add to Cart'}</button>
                     </div>
                 </div>
             `}).join('');
@@ -2414,7 +3140,7 @@
             purchaseType = type;
             document.querySelectorAll('.purchase-option').forEach(el => el.classList.remove('active'));
             document.getElementById(type === 'inperson' ? 'inPersonOption' : 'deliveryOption').classList.add('active');
-            showToast(type === 'inperson' ? '🏪 In-person pickup selected' : '🚚 Delivery mode selected');
+            showToast(type === 'inperson' ? getTranslation('inperson_selected') : getTranslation('delivery_selected'));
         }
 
         function setModalPurchaseType(type) {
@@ -2441,7 +3167,7 @@
                 receiptImageData = e.target.result;
                 document.getElementById('receiptImage').src = receiptImageData;
                 document.getElementById('receiptPreview').classList.add('show');
-                showToast('📸 Receipt photo uploaded!');
+                showToast(getTranslation('receipt_uploaded'));
             };
             reader.readAsDataURL(file);
         }
@@ -2450,7 +3176,7 @@
             receiptImageData = null;
             document.getElementById('receiptPreview').classList.remove('show');
             document.getElementById('receiptInput').value = '';
-            showToast('🗑️ Receipt removed');
+            showToast(getTranslation('receipt_removed'));
         }
 
         function handleProductImageUpload(event) {
@@ -2461,7 +3187,7 @@
                 productImageData = e.target.result;
                 document.getElementById('productImagePreviewImg').src = productImageData;
                 document.getElementById('productImagePreview').classList.add('show');
-                showToast('📸 Product image uploaded!');
+                showToast(getTranslation('image_uploaded'));
             };
             reader.readAsDataURL(file);
         }
@@ -2538,7 +3264,7 @@
 
         function quickAdd(productId) {
             addToCart(productId, 1);
-            showToast('✅ Added to cart!');
+            showToast(getTranslation('added_to_cart'));
         }
 
         function addToCartFromModal() {
@@ -2550,18 +3276,18 @@
                 const address = document.getElementById('deliveryAddress').value.trim();
                 
                 if (!name || !phone || !address) {
-                    showToast('⚠️ Please fill in all delivery details');
+                    showToast(getTranslation('fill_delivery'));
                     return;
                 }
                 if (phone.length < 10) {
-                    showToast('⚠️ Please enter a valid phone number');
+                    showToast(getTranslation('valid_phone'));
                     return;
                 }
             }
             
             addToCart(currentProduct.id, 1);
             closeModal();
-            showToast('✅ ' + currentProduct.name + ' added to cart!');
+            showToast('✅ ' + currentProduct.name + ' ' + (currentLang === 'am' ? 'ወደ ጋሪ ተጨመረ' : 'added to cart!'));
         }
 
         function removeFromCart(index) {
@@ -2593,8 +3319,8 @@
                 cartItems.innerHTML = `
                     <div class="empty-cart">
                         <div class="icon">🛍️</div>
-                        <h4>Your cart is empty</h4>
-                        <p style="font-size:12px;color:#aaa;">Start adding beauty products!</p>
+                        <h4>${getTranslation('emptyCartTitle')}</h4>
+                        <p style="font-size:12px;color:#aaa;">${getTranslation('emptyCartSub')}</p>
                     </div>
                 `;
                 cartTotal.textContent = '0 ETB';
@@ -2669,7 +3395,7 @@
             cart = [];
             updateCartUI();
             toggleCart();
-            showToast('🎉 Order placed successfully!');
+            showToast(getTranslation('order_placed'));
         }
 
         // ============================================================
@@ -2688,7 +3414,7 @@
             const deliveryInfo = document.getElementById('newProductDelivery').value.trim() || 'Free delivery in Addis Ababa.';
 
             if (!name || !price || !description) {
-                showToast('⚠️ Please fill in all required fields');
+                showToast(getTranslation('fill_required'));
                 return;
             }
 
@@ -2702,7 +3428,7 @@
 
             renderProducts(currentCategory);
             renderProductList();
-            document.getElementById('productCount').textContent = products.length + ' items';
+            updateStats();
             
             document.getElementById('newProductName').value = '';
             document.getElementById('newProductBrand').value = '';
@@ -2715,23 +3441,23 @@
             document.getElementById('productImagePreview').classList.remove('show');
             document.getElementById('productImageInput').value = '';
 
-            showToast('✅ Product added successfully!');
+            showToast(getTranslation('product_added'));
         }
 
         function deleteProduct(id) {
             if (!isAdmin) return;
-            if (!confirm('Delete this product?')) return;
+            if (!confirm(currentLang === 'am' ? 'ይህን ምርት መሰረዝ ይፈልጋሉ?' : 'Delete this product?')) return;
             products = products.filter(p => p.id !== id);
             renderProducts(currentCategory);
             renderProductList();
-            document.getElementById('productCount').textContent = products.length + ' items';
-            showToast('🗑️ Product deleted');
+            updateStats();
+            showToast(getTranslation('product_deleted'));
         }
 
         function renderProductList() {
             const container = document.getElementById('productListItems');
             if (products.length === 0) {
-                container.innerHTML = '<p style="color:#999;font-size:12px;padding:10px 0;">No products added yet.</p>';
+                container.innerHTML = '<p style="color:#999;font-size:12px;padding:10px 0;">' + (currentLang === 'am' ? 'ምንም ምርቶች የሉም' : 'No products added yet.') + '</p>';
                 return;
             }
             container.innerHTML = products.map(p => `
@@ -2783,7 +3509,7 @@
         // ============================================================
         renderProducts('all');
         updateCartUI();
-        document.getElementById('productCount').textContent = products.length + ' items';
+        updateUI();
 
         if (sessionStorage.getItem('soyam_admin') === 'true') {
             isAdmin = true;
@@ -2791,8 +3517,8 @@
 
         console.log('💄 SoYam Cosmetics loaded!');
         console.log('📦 ' + products.length + ' products');
-        console.log('🔐 Biometric authentication enabled');
-        console.log('👤 Tap Admin > Use biometric to unlock');
+        console.log('🌍 10 Languages supported');
+        console.log('🔐 Admin passcode: ' + ADMIN_PASSCODE);
         console.log('📞 WhatsApp: ' + OWNER_WHATSAPP);
     </script>
 </body>
