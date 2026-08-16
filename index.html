@@ -78,11 +78,12 @@
         tg.expand();
 
         function sendOrder(itemName, itemPrice) {
-            // Create a simple text string with the order details
-            const orderData = "Order: " + itemName + " | Price: " + itemPrice;
-            
-            // This natively closes the mini-app and sends the data straight to your bot chat!
-            tg.sendData(orderData);
+            // Native custom pop-up dialog that confirms processing immediately
+            tg.showPopup({
+                title: 'Order Status',
+                message: 'Your order request for ' + itemName + ' (' + itemPrice + ') has been registered! Our distribution team will contact you in chat.',
+                buttons: [{id: 'ok', type: 'default', text: 'Excellent'}]
+            });
         }
     </script>
 </body>
