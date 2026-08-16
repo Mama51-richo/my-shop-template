@@ -14,18 +14,12 @@
             padding: 20px; 
             margin: 0;
         }
-        .catalog-container {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-            align-items: center;
-            margin: 20px auto;
-        }
         .card { 
             border: 1px solid #ccc; 
             border-radius: 12px; 
             padding: 15px; 
             width: 240px; 
+            margin: 20px auto;
             background-color: #f9f9f9;
         }
         .item-img {
@@ -55,44 +49,38 @@
 
     <h2>Clothing Catalog</h2>
     
-    <div id="catalog" class="catalog-container">
-        <!-- Products will safely display here -->
+    <!-- Item 1 -->
+    <div class="card">
+        <img class="item-img" src="https://picsum.photos" alt="Hoodie">
+        <h3>Streetwear Hoodie</h3>
+        <p class="price">1,500 ETB</p>
+        <button class="btn" onclick="confirmOrder('Streetwear Hoodie', '1,500 ETB')">Order Now</button>
+    </div>
+
+    <!-- Item 2 -->
+    <div class="card">
+        <img class="item-img" src="https://picsum.photos" alt="Pants">
+        <h3>Classic Cargo Pants</h3>
+        <p class="price">1,800 ETB</p>
+        <button class="btn" onclick="confirmOrder('Classic Cargo Pants', '1,800 ETB')">Order Now</button>
+    </div>
+
+    <!-- Item 3 -->
+    <div class="card">
+        <img class="item-img" src="https://picsum.photos" alt="Tee">
+        <h3>Oversized Vintage Tee</h3>
+        <p class="price">950 ETB</p>
+        <button class="btn" onclick="confirmOrder('Oversized Vintage Tee', '950 ETB')">Order Now</button>
     </div>
 
     <script>
-        // Force the app environment to initialize
         const tg = window.Telegram.WebApp;
         tg.expand();
 
-        // Run rendering only after the page is fully ready
-        window.addEventListener('DOMContentLoaded', () => {
-            const products = [
-                { name: "Streetwear Hoodie", price: "1,500 ETB", img: "https://picsum.photos" },
-                { name: "Classic Cargo Pants", price: "1,800 ETB", img: "https://picsum.photos" },
-                { name: "Oversized Vintage Tee", price: "950 ETB", img: "https://picsum.photos" }
-            ];
-
-            const catalogDiv = document.getElementById("catalog");
-            
-            let htmlContent = "";
-            products.forEach(item => {
-                htmlContent += `
-                    <div class="card">
-                        <img class="item-img" src="${item.img}" alt="${item.name}">
-                        <h3>${item.name}</h3>
-                        <p class="price">${item.price}</p>
-                        <button class="btn" onclick="confirmOrder('${item.name}', '${item.price}')">Order Now</button>
-                    </div>
-                `;
-            });
-            
-            catalogDiv.innerHTML = htmlContent;
-        });
-
         function confirmOrder(itemName, itemPrice) {
-            tg.showConfirm(`Are you sure you want to order the ${itemName} for ${itemPrice}?`, function(approved) {
+            tg.showConfirm("Are you sure you want to order the " + itemName + " for " + itemPrice + "?", function(approved) {
                 if (approved) {
-                    tg.showAlert(`Order for ${itemName} registered!`);
+                    tg.showAlert("Order for " + itemName + " registered!");
                 }
             });
         }
