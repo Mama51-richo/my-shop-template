@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Streetwear Shop</title>
-    <!-- Load Telegram Web App API -->
     <script src="https://telegram.org"></script>
     <style>
         body { 
@@ -15,12 +14,20 @@
             padding: 20px; 
             margin: 0;
         }
+        /* Grid layout to show items side-by-side or stacked cleanly */
+        .catalog-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            align-items: center;
+            max-width: 500px;
+            margin: 0 auto;
+        }
         .card { 
             border: 1px solid var(--tg-theme-hint-color, #ccc); 
             border-radius: 12px; 
             padding: 20px; 
-            max-width: 260px; 
-            margin: 30px auto; 
+            width: 260px; 
             background-color: var(--tg-theme-secondary-bg-color, #f9f9f9);
         }
         .item-img {
@@ -49,26 +56,40 @@
 </head>
 <body>
 
-    <h2>Clothing Shop</h2>
+    <h2>Clothing Catalog</h2>
     
-    <div class="card">
-        <!-- Live placeholder image for item layout -->
-        <img class="item-img" src="https://picsum.photos" alt="Hoodie">
-        <h3>Streetwear Hoodie</h3>
-        <p class="price">1,500 ETB</p>
-        <button class="btn" onclick="confirmOrder()">Order Now</button>
-    </div>
+    <!-- This empty container will hold all our items dynamically -->
+    <div id="catalog" class="catalog-container"></div>
 
     <script>
-        // Initialize Telegram interface
         const tg = window.Telegram.WebApp;
-        tg.expand(); // Make it open full screen
+        tg.expand();
 
-        // Native popup handler
-        function confirmOrder() {
-            tg.showConfirm("Are you sure you want to order this Streetwear Hoodie for 1,500 ETB?", function(approved) {
+        // 1. Digital Inventory List (Add as many items here as you want!)
+        const products = [
+            { id: 1, name: "Streetwear Hoodie", price: "1,500 ETB", img: "https://picsum.photos" },
+            { id: 2, name: "Classic Cargo Pants", price: "1,800 ETB", img: "https://picsum.photos" },
+            { id: 3, name: "Oversized Vintage Tee", price: "950 ETB", img: "https://picsum.photos" }
+        ];
+
+        // 2. Loop through our list and inject them into the page layout automatically
+        const catalogDiv = document.getElementById("catalog");
+        products.forEach(item => {
+            catalogDiv.innerHTML += `
+                <div class="card">
+                    <img class="item-img" src="${item.img}" alt="${item.name}">
+                    <h3>${item.name}</h3>
+                    <p class="price">${item.price}</p>
+                    <button class="btn" onclick="confirmOrder('${item.name}', '${item.price}')">Order Now</button>
+                </div>
+            `;
+        });
+
+        // 3. Dynamic popup showing the correct item details
+        function confirmOrder(itemName, itemPrice) {
+            tg.showConfirm(`Are you sure you want to order the ${itemName} for ${itemPrice}?`, function(approved) {
                 if (approved) {
-                    tg.showAlert("Order placement registered! Next, we will connect your backend token logic.");
+                    tg.showAlert(`Order for ${itemName} registered!`);
                 }
             });
         }
