@@ -138,14 +138,15 @@
             transform: scale(1.05);
         }
 
-        /* ===== ADMIN BUTTON - HIDDEN FROM USERS ===== */
+        /* ===== ADMIN BUTTON - ALWAYS VISIBLE ===== */
         #adminToggleBtn {
-            display: none !important;
+            display: flex !important;
+            background: rgba(232, 168, 124, 0.3) !important;
+            border: 1px solid #e8a87c !important;
         }
 
-        /* Only show when admin is logged in */
-        body.admin-mode #adminToggleBtn {
-            display: flex !important;
+        #adminToggleBtn:hover {
+            background: rgba(232, 168, 124, 0.5) !important;
         }
 
         .cart-badge {
@@ -1595,12 +1596,8 @@
             color: #2d1b14;
         }
 
-        /* ===== ADMIN NAV - HIDDEN FROM USERS ===== */
+        /* ===== ADMIN NAV - ALWAYS VISIBLE ===== */
         #adminNavBtn {
-            display: none !important;
-        }
-
-        body.admin-mode #adminNavBtn {
             display: block !important;
         }
 
@@ -1641,7 +1638,7 @@
                     </div>
                 </div>
                 <div class="header-actions">
-                    <!-- 🔐 ADMIN BUTTON - HIDDEN FROM REGULAR USERS -->
+                    <!-- 🔐 ADMIN BUTTON - VISIBLE TO EVERYONE -->
                     <button id="adminToggleBtn" onclick="showAdminLogin()" title="Admin Panel">🔐</button>
                     <button onclick="toggleCart()" title="Cart" id="cartBtn">
                         🛒
@@ -1739,7 +1736,7 @@
             <button class="nav-item" onclick="toggleCart()">
                 <span class="icon">🛒</span> <span id="navCart">Cart</span>
             </button>
-            <!-- ADMIN NAV - HIDDEN FROM REGULAR USERS -->
+            <!-- ADMIN NAV - VISIBLE TO EVERYONE -->
             <button class="nav-item" id="adminNavBtn" onclick="showAdminLogin()">
                 <span class="icon">⚙️</span> <span id="navAdmin">Admin</span>
             </button>
@@ -1960,34 +1957,20 @@
 
     <script>
         // ============================================================
-        // SECURITY: ADMIN PASSCODE & OWNER VERIFICATION
+        // SECURITY: ADMIN PASSCODE
         // ============================================================
         const ADMIN_PASSCODE = "2024";  // ← CHANGE THIS!
-        
-        // ============================================================
-        // 🔐 OWNER VERIFICATION - ONLY BOT OWNER CAN SEE ADMIN
-        // ============================================================
-        // The admin icon is hidden by default with CSS (display: none !important)
-        // Only when the owner enters the correct passcode does it appear
         
         let isAdmin = false;
 
         // ============================================================
-        // TELEGRAM INIT - Get User Info
+        // TELEGRAM INIT
         // ============================================================
         let tg = null;
-        let currentUser = null;
-        
         try {
             tg = window.Telegram.WebApp;
             tg.expand();
-            if (tg.initDataUnsafe && tg.initDataUnsafe.user) {
-                currentUser = tg.initDataUnsafe.user;
-                console.log('👤 User:', currentUser.first_name, 'ID:', currentUser.id);
-            }
-        } catch(e) {
-            console.log('Running outside Telegram');
-        }
+        } catch(e) {}
 
         // ============================================================
         // OWNER CONTACT
@@ -2162,9 +2145,6 @@
                 document.getElementById('productCount').textContent = products.length + ' items';
                 showToast('🔐 Admin access granted!');
                 sessionStorage.setItem('soyam_admin', 'true');
-                
-                // Show admin button after login
-                document.body.classList.add('admin-mode');
             } else {
                 document.getElementById('loginError').classList.add('show');
                 document.getElementById('adminPasscode').value = '';
@@ -2178,7 +2158,6 @@
             document.body.style.overflow = '';
             showToast('🚪 Logged out successfully');
             sessionStorage.removeItem('soyam_admin');
-            document.body.classList.remove('admin-mode');
         }
 
         function toggleDashboard() {
@@ -2686,7 +2665,7 @@
         });
 
         // ============================================================
-        // KEYBOARD SHORTCUT: Admin Login (Owner only)
+        // KEYBOARD SHORTCUT: Admin Login
         // ============================================================
         document.addEventListener('keydown', (e) => {
             if ((e.metaKey || e.ctrlKey) && e.shiftKey && e.key === 'A') {
@@ -2705,13 +2684,12 @@
         // Check if admin session exists
         if (sessionStorage.getItem('soyam_admin') === 'true') {
             isAdmin = true;
-            document.body.classList.add('admin-mode');
         }
 
         console.log('💄 SoYam Cosmetics loaded!');
         console.log('📦 ' + products.length + ' products');
-        console.log('🔐 Admin icon is HIDDEN from regular users');
-        console.log('👤 Only owner can see and access admin panel');
+        console.log('🔐 Admin icon is VISIBLE to everyone');
+        console.log('🔑 Enter passcode to access admin panel');
         console.log('📞 WhatsApp: ' + OWNER_WHATSAPP);
     </script>
 </body>
