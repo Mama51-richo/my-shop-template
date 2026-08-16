@@ -1,89 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Streetwear Shop</title>
-    <script src="https://telegram.org"></script>
-    <style>
-        body { 
-            font-family: sans-serif; 
-            text-align: center; 
-            background-color: #ffffff; 
-            color: #222222;
-            padding: 20px; 
-            margin: 0;
-        }
-        .card { 
-            border: 1px solid #ccc; 
-            border-radius: 12px; 
-            padding: 15px; 
-            width: 240px; 
-            margin: 20px auto;
-            background-color: #f9f9f9;
-        }
-        .item-img {
-            width: 100%;
-            border-radius: 8px;
-        }
-        .price { 
-            font-size: 18px; 
-            color: #2ec4b6; 
-            font-weight: bold; 
-            margin: 10px 0;
-        }
-        .btn { 
-            background-color: #2481cc; 
-            color: #ffffff; 
-            border: none; 
-            padding: 10px; 
-            width: 100%; 
-            border-radius: 6px; 
-            font-size: 14px;
-            font-weight: bold;
-            cursor: pointer; 
-        }
-    </style>
 </head>
-<body>
+<body style="font-family:sans-serif; text-align:center; padding:20px;">
 
     <h2>Clothing Catalog</h2>
     
-    <!-- Item 1 -->
-    <div class="card">
-        <img class="item-img" src="https://picsum.photos" alt="Hoodie">
+    <div style="border:1px solid #ccc; border-radius:10px; padding:15px; max-width:240px; margin:20px auto; background:#f9f9f9;">
         <h3>Streetwear Hoodie</h3>
-        <p class="price">1,500 ETB</p>
-        <button class="btn" onclick="confirmOrder('Streetwear Hoodie', '1,500 ETB')">Order Now</button>
+        <p style="color:#2ec4b6; font-weight:bold;">1,500 ETB</p>
     </div>
 
-    <!-- Item 2 -->
-    <div class="card">
-        <img class="item-img" src="https://picsum.photos" alt="Pants">
+    <div style="border:1px solid #ccc; border-radius:10px; padding:15px; max-width:240px; margin:20px auto; background:#f9f9f9;">
         <h3>Classic Cargo Pants</h3>
-        <p class="price">1,800 ETB</p>
-        <button class="btn" onclick="confirmOrder('Classic Cargo Pants', '1,800 ETB')">Order Now</button>
+        <p style="color:#2ec4b6; font-weight:bold;">1,800 ETB</p>
     </div>
 
-    <!-- Item 3 -->
-    <div class="card">
-        <img class="item-img" src="https://picsum.photos" alt="Tee">
-        <h3>Oversized Vintage Tee</h3>
-        <p class="price">950 ETB</p>
-        <button class="btn" onclick="confirmOrder('Oversized Vintage Tee', '950 ETB')">Order Now</button>
-    </div>
-
-    <script>
-        const tg = window.Telegram.WebApp;
-        tg.expand();
-
-        function confirmOrder(itemName, itemPrice) {
-            tg.showConfirm("Are you sure you want to order the " + itemName + " for " + itemPrice + "?", function(approved) {
-                if (approved) {
-                    tg.showAlert("Order for " + itemName + " registered!");
-                }
-            });
-        }
-    </script>
 </body>
 </html>
