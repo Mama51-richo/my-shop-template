@@ -138,6 +138,16 @@
             transform: scale(1.05);
         }
 
+        /* ===== ADMIN BUTTON - HIDDEN FROM USERS ===== */
+        #adminToggleBtn {
+            display: none !important;
+        }
+
+        /* Only show when admin is logged in */
+        body.admin-mode #adminToggleBtn {
+            display: flex !important;
+        }
+
         .cart-badge {
             position: absolute;
             top: -4px;
@@ -1585,6 +1595,15 @@
             color: #2d1b14;
         }
 
+        /* ===== ADMIN NAV - HIDDEN FROM USERS ===== */
+        #adminNavBtn {
+            display: none !important;
+        }
+
+        body.admin-mode #adminNavBtn {
+            display: block !important;
+        }
+
         .phonics-badge {
             display: inline-flex;
             align-items: center;
@@ -1597,11 +1616,6 @@
             font-weight: 700;
             letter-spacing: 0.5px;
             text-transform: uppercase;
-        }
-
-        /* Language display name in Amharic */
-        .lang-am {
-            font-family: 'Ethiopic', 'Abyssinica SIL', serif;
         }
     </style>
 </head>
@@ -1627,7 +1641,8 @@
                     </div>
                 </div>
                 <div class="header-actions">
-                    <button id="adminToggleBtn" onclick="showAdminLogin()" title="Admin Panel" style="display:none;">🔐</button>
+                    <!-- 🔐 ADMIN BUTTON - HIDDEN FROM REGULAR USERS -->
+                    <button id="adminToggleBtn" onclick="showAdminLogin()" title="Admin Panel">🔐</button>
                     <button onclick="toggleCart()" title="Cart" id="cartBtn">
                         🛒
                         <span class="cart-badge" id="cartBadge">0</span>
@@ -1663,8 +1678,8 @@
         <!-- ===== SOCIAL & CONTACT BAR ===== -->
         <div class="social-bar">
             <div class="social-links">
-                <a href="#" class="tiktok" onclick="showToast(getTranslation('tiktok_follow'))">🎵 @rm</a>
-                <a href="#" onclick="showToast(getTranslation('whatsapp_contact'))">📱 +251919096451</a>
+                <a href="#" class="tiktok" onclick="showToast('📱 Follow us on TikTok @rm!')">🎵 @rm</a>
+                <a href="#" onclick="showToast('📞 WhatsApp: +251919096451')">📱 +251919096451</a>
             </div>
             <button class="whatsapp-btn" onclick="openWhatsApp()">💬 <span id="whatsappLabel">Message Us</span></button>
         </div>
@@ -1724,7 +1739,8 @@
             <button class="nav-item" onclick="toggleCart()">
                 <span class="icon">🛒</span> <span id="navCart">Cart</span>
             </button>
-            <button class="nav-item" id="adminNavBtn" onclick="showAdminLogin()" style="display:none;">
+            <!-- ADMIN NAV - HIDDEN FROM REGULAR USERS -->
+            <button class="nav-item" id="adminNavBtn" onclick="showAdminLogin()">
                 <span class="icon">⚙️</span> <span id="navAdmin">Admin</span>
             </button>
         </div>
@@ -1944,1070 +1960,34 @@
 
     <script>
         // ============================================================
-        // MULTI-LANGUAGE SUPPORT - 10 Ethiopian Languages
-        // ============================================================
-        const translations = {
-            en: {
-                // Header
-                heroTitle: '✨ Premium <span class="highlight">Beauty</span> Essentials',
-                heroSub: 'Authentic cosmetics, detergents & beauty products. Shop with confidence.',
-                
-                // Language
-                langLabel: 'Language:',
-                
-                // Social
-                whatsappLabel: 'Message Us',
-                tiktok_follow: '📱 Follow us on TikTok @rm!',
-                whatsapp_contact: '📞 WhatsApp: +251919096451',
-                
-                // Location
-                locationText: 'Betel Commercial Building, <strong>Addis Ababa</strong>',
-                deliveryText: 'Nationwide Delivery',
-                
-                // Purchase Options
-                inPersonLabel: 'In-Person',
-                inPersonSub: 'Pickup at store',
-                deliveryLabel: 'Delivery',
-                deliverySub: 'Nationwide shipping',
-                
-                // Categories
-                catAll: 'All',
-                catSkincare: 'Skincare',
-                catMakeup: 'Makeup',
-                catFragrance: 'Fragrance',
-                catHaircare: 'Haircare',
-                catDetergent: 'Detergent',
-                catTools: 'Tools',
-                
-                // Featured
-                featuredTitle: '🌸 Featured Products',
-                browseAll: 'Browse All →',
-                
-                // Navigation
-                navHome: 'Home',
-                navExplore: 'Explore',
-                navCart: 'Cart',
-                navAdmin: 'Admin',
-                
-                // Admin Login
-                adminLoginTitle: 'Admin Access',
-                adminLoginSub: 'Enter the admin passcode to manage products and orders',
-                adminLoginBtn: '🔑 Unlock Dashboard',
-                adminContactNote: 'Contact owner for admin access',
-                loginError: '❌ Incorrect passcode. Please try again.',
-                logoutBtn: '🚪 Logout',
-                
-                // Admin Dashboard
-                ordersTitle: '📦 Orders',
-                addProductTitle: '➕ Add New Product',
-                labelName: 'Product Name *',
-                labelBrand: 'Brand',
-                labelCategory: 'Category *',
-                labelPrice: 'Price (ETB) *',
-                labelOldPrice: 'Old Price (optional)',
-                labelIngredients: 'Ingredients / Formula',
-                labelDescription: 'Description *',
-                labelDelivery: 'Delivery Info (optional)',
-                labelImage: 'Product Image',
-                uploadImageText: 'Tap to upload from gallery',
-                addProductBtn: '➕ Add Product to Store',
-                manageProductsTitle: '📋 Manage Products',
-                
-                // Modal
-                ingredientsLabel: '🧪 Ingredients & Formula',
-                deliveryInfoTitle: '📦 Delivery & Payment',
-                purchaseMethodLabel: 'Choose Purchase Method',
-                modalInPersonLabel: 'In-Person',
-                modalDeliveryLabel: 'Delivery',
-                addToCartLabel: 'Add to Cart',
-                
-                // Delivery Form
-                formFullName: 'Full Name *',
-                formPhone: 'Phone Number *',
-                formAddress: 'Delivery Address *',
-                formCity: 'City *',
-                formPayment: 'Payment Method',
-                formReceipt: 'Upload Payment Receipt',
-                receiptUploadText: 'Tap to upload receipt photo',
-                telebirrInfo: '💳 TeleBirr: 0919096451 (SoYam Cosmetics)',
-                
-                // Cart
-                cartTitle: '🛒 Your Cart',
-                emptyCartTitle: 'Your cart is empty',
-                emptyCartSub: 'Start adding beauty products!',
-                totalLabel: 'Total',
-                checkoutLabel: 'Proceed to Checkout',
-                
-                // Toasts
-                added_to_cart: '✅ Added to cart!',
-                order_placed: '🎉 Order placed successfully!',
-                fill_delivery: '⚠️ Please fill in all delivery details',
-                valid_phone: '⚠️ Please enter a valid phone number',
-                receipt_uploaded: '📸 Receipt photo uploaded!',
-                receipt_removed: '🗑️ Receipt removed',
-                image_uploaded: '📸 Product image uploaded!',
-                product_added: '✅ Product added successfully!',
-                product_deleted: '🗑️ Product deleted',
-                admin_granted: '🔐 Admin access granted!',
-                admin_logout: '🚪 Logged out successfully',
-                inperson_selected: '🏪 In-person pickup selected',
-                delivery_selected: '🚚 Delivery mode selected',
-                wishlist_added: '❤️ Added to wishlist!',
-                order_confirmed: '✅ Order confirmed!',
-                order_delivered: '📦 Order delivered!',
-                order_deleted: '🗑️ Order deleted',
-                fill_required: '⚠️ Please fill in all required fields'
-            },
-            am: {
-                heroTitle: '✨ የላቀ <span class="highlight">ውበት</span> ምርቶች',
-                heroSub: 'እውነተኛ የመዋቢያ እቃዎች፣ ሳሙናዎች እና የውበት ምርቶች። በእምነት ይግዙ።',
-                langLabel: 'ቋንቋ:',
-                whatsappLabel: 'አግኙን',
-                tiktok_follow: '📱 በቲክቶክ @rm ይከተሉን!',
-                whatsapp_contact: '📞 ዋትስአፕ: +251919096451',
-                locationText: 'ቤቴል ንግድ ህንፃ፣ <strong>አዲስ አበባ</strong>',
-                deliveryText: 'በመላ አገሪቱ መላኪያ',
-                inPersonLabel: 'በአካል',
-                inPersonSub: 'ከሱቅ ማንሳት',
-                deliveryLabel: 'መላኪያ',
-                deliverySub: 'በመላ አገሪቱ',
-                catAll: 'ሁሉም',
-                catSkincare: 'የቆዳ እንክብካቤ',
-                catMakeup: 'መዋቢያ',
-                catFragrance: 'ሽቶ',
-                catHaircare: 'የፀጉር እንክብካቤ',
-                catDetergent: 'ሳሙና',
-                catTools: 'መሳሪያዎች',
-                featuredTitle: '🌸 ተመራጭ ምርቶች',
-                browseAll: 'ሁሉንም ይመልከቱ →',
-                navHome: 'መነሻ',
-                navExplore: 'ፈልግ',
-                navCart: 'ጋሪ',
-                navAdmin: 'አስተዳዳሪ',
-                adminLoginTitle: 'የአስተዳዳሪ መግቢያ',
-                adminLoginSub: 'ምርቶችን እና ትዕዛዞችን ለማስተዳደር የአስተዳዳሪ ፓስኮድ ያስገቡ',
-                adminLoginBtn: '🔑 ዳሽቦርድ ክፈት',
-                adminContactNote: 'ለአስተዳዳሪ መዳረሻ ባለቤቱን ያግኙ',
-                loginError: '❌ የተሳሳተ ፓስኮድ። እባክዎ እንደገና ይሞክሩ።',
-                logoutBtn: '🚪 ውጣ',
-                ordersTitle: '📦 ትዕዛዞች',
-                addProductTitle: '➕ አዲስ ምርት ጨምር',
-                labelName: 'የምርት ስም *',
-                labelBrand: 'ብራንድ',
-                labelCategory: 'ምድብ *',
-                labelPrice: 'ዋጋ (ብር) *',
-                labelOldPrice: 'የድሮ ዋጋ (ካለ)',
-                labelIngredients: 'ንጥረ ነገሮች / ቀመር',
-                labelDescription: 'መግለጫ *',
-                labelDelivery: 'የመላኪያ መረጃ (ካለ)',
-                labelImage: 'የምርት ምስል',
-                uploadImageText: 'ለመስቀል ይንኩ',
-                addProductBtn: '➕ ምርት ወደ መደብር ጨምር',
-                manageProductsTitle: '📋 ምርቶችን ያስተዳድሩ',
-                ingredientsLabel: '🧪 ንጥረ ነገሮች እና ቀመር',
-                deliveryInfoTitle: '📦 መላኪያ እና ክፍያ',
-                purchaseMethodLabel: 'የግዢ ዘዴ ይምረጡ',
-                modalInPersonLabel: 'በአካል',
-                modalDeliveryLabel: 'መላኪያ',
-                addToCartLabel: 'ወደ ጋሪ ጨምር',
-                formFullName: 'ሙሉ ስም *',
-                formPhone: 'ስልክ ቁጥር *',
-                formAddress: 'የመላኪያ አድራሻ *',
-                formCity: 'ከተማ *',
-                formPayment: 'የክፍያ ዘዴ',
-                formReceipt: 'የክፍያ ደረሰኝ ያስገቡ',
-                receiptUploadText: 'የደረሰኝ ፎቶ ለመስቀል ይንኩ',
-                telebirrInfo: '💳 ቴሌብር: 0919096451 (ሶያም ኮስሞቲክስ)',
-                cartTitle: '🛒 የእርስዎ ጋሪ',
-                emptyCartTitle: 'ጋሪዎ ባዶ ነው',
-                emptyCartSub: 'የውበት ምርቶችን መጨመር ይጀምሩ!',
-                totalLabel: 'ጠቅላላ',
-                checkoutLabel: 'ወደ ክፍያ ይቀጥሉ',
-                added_to_cart: '✅ ወደ ጋሪ ተጨመረ!',
-                order_placed: '🎉 ትዕዛዝ በተሳካ ሁኔታ ተሰራ!',
-                fill_delivery: '⚠️ እባክዎ ሁሉንም የመላኪያ ዝርዝሮች ይሙሉ',
-                valid_phone: '⚠️ እባክዎ ትክክለኛ የስልክ ቁጥር ያስገቡ',
-                receipt_uploaded: '📸 የደረሰኝ ፎቶ ተሰቀለ!',
-                receipt_removed: '🗑️ ደረሰኝ ተወገደ',
-                image_uploaded: '📸 የምርት ምስል ተሰቀለ!',
-                product_added: '✅ ምርት በተሳካ ሁኔታ ተጨመረ!',
-                product_deleted: '🗑️ ምርት ተወገደ',
-                admin_granted: '🔐 የአስተዳዳሪ መዳረሻ ተሰጠ!',
-                admin_logout: '🚪 በተሳካ ሁኔታ ወጥተዋል',
-                inperson_selected: '🏪 በአካል መምረጥ ተመርጧል',
-                delivery_selected: '🚚 የመላኪያ ሁነታ ተመርጧል',
-                wishlist_added: '❤️ ወደ ምኞት ዝርዝር ተጨመረ!',
-                order_confirmed: '✅ ትዕዛዝ ተረጋግጧል!',
-                order_delivered: '📦 ትዕዛዝ ተላከ!',
-                order_deleted: '🗑️ ትዕዛዝ ተወገደ',
-                fill_required: '⚠️ እባክዎ ሁሉንም የሚፈለጉ መስኮች ይሙሉ'
-            },
-            or: {
-                heroTitle: '✨ <span class="highlight">Bilisa</span> Olaana',
-                heroSub: 'Akkaataa amantaa ta\'een kosmeetiksii, saamunaa fi meeshaa bilisaa mirgaa bitadhaa.',
-                langLabel: 'Afaan:',
-                whatsappLabel: 'Nu qunnamaa',
-                tiktok_follow: '📱 TikTok @rm irratti nu hordofaa!',
-                whatsapp_contact: '📞 WhatsApp: +251919096451',
-                locationText: 'Dhaabbata Daldala Betel, <strong>Finfinnee</strong>',
-                deliveryText: 'Biyyakeessatti erguu',
-                inPersonLabel: 'Lubbuun',
-                inPersonSub: 'Suuqii irraa fudhachuu',
-                deliveryLabel: 'Erguu',
-                deliverySub: 'Biayyatti erguu',
-                catAll: 'Hunda',
-                catSkincare: 'Goggogsa gogaa',
-                catMakeup: 'Faashii',
-                catFragrance: 'Urgooftuu',
-                catHaircare: 'Tiksa Rifeensa',
-                catDetergent: 'Saamunaa',
-                catTools: 'Meashaa',
-                featuredTitle: '🌸 Meeshaalee Filataman',
-                browseAll: 'Hunda ilaali →',
-                navHome: 'Mana',
-                navExplore: 'Barbaadi',
-                navCart: 'Garii',
-                navAdmin: 'Abbaa',
-                adminLoginTitle: 'Seensa Abbaa',
-                adminLoginSub: 'Meashaa fi ajajaa bulchuuf pasikoodii seennuu galchi',
-                adminLoginBtn: '🔑 Daashboordii banuu',
-                adminContactNote: 'Seensa abbaatiif abbaa qabataa quunnamaa',
-                loginError: '❌ Pasikoodiin dogoggora. Irra deddeebi\'aa.',
-                logoutBtn: '🚪 Bahuu',
-                ordersTitle: '📦 Ajajoota',
-                addProductTitle: '➕ Meeshaa haaraa dabaluu',
-                labelName: 'Maqaa meeshaa *',
-                labelBrand: 'Mallattoo',
-                labelCategory: 'Ramaddii *',
-                labelPrice: 'Gatii (Birrii) *',
-                labelOldPrice: 'Gatii moofaa (yoo jiraate)',
-                labelIngredients: 'Qabiyyee / Akkaataa',
-                labelDescription: 'Ibsa *',
-                labelDelivery: 'Odeeffannoo erguu (yoo jiraate)',
-                labelImage: 'Fotoo meeshaa',
-                uploadImageText: 'Fe\'uuf tuquu',
-                addProductBtn: '➕ Meeshaa suuqii dabaluu',
-                manageProductsTitle: '📋 Meeshaalee bulchuu',
-                ingredientsLabel: '🧪 Qabiyyee fi Akkaataa',
-                deliveryInfoTitle: '📦 Erguu fi Kaffaltii',
-                purchaseMethodLabel: 'Haala bitannaa filadhu',
-                modalInPersonLabel: 'Lubbuun',
-                modalDeliveryLabel: 'Erguu',
-                addToCartLabel: 'Gariitti dabaluu',
-                formFullName: 'Maqaa guutuu *',
-                formPhone: 'Lakkoobsa bilbilaa *',
-                formAddress: 'Teessoo erguu *',
-                formCity: 'Magaalaa *',
-                formPayment: 'Haala kaffaltii',
-                formReceipt: 'Rasheedii kaffaltii fe\'uu',
-                receiptUploadText: 'Fotoo rasheedii fe\'uuf tuquu',
-                telebirrInfo: '💳 TeleBirr: 0919096451 (SoYam Cosmetics)',
-                cartTitle: '🛒 Garii keessan',
-                emptyCartTitle: 'Garii keessan duwwaa dha',
-                emptyCartSub: 'Meeshaalee bilisaa dabaluu eegalii!',
-                totalLabel: 'Iddoo',
-                checkoutLabel: 'Kaffaltiif itti fufuu',
-                added_to_cart: '✅ Gariitti dabalamte!',
-                order_placed: '🎉 Ajajni milkaa\'inaan kennamte!',
-                fill_delivery: '⚠️ Odeeffannoo erguu hunda guutaa',
-                valid_phone: '⚠️ Lakkoobsa bilbilaa sirrii ta\'e galchaa',
-                receipt_uploaded: '📸 Fotoon rasheedii fe\'ame!',
-                receipt_removed: '🗑️ Rasheedii balleeffame',
-                image_uploaded: '📸 Fotoon meeshaa fe\'ame!',
-                product_added: '✅ Meeshaan milkaa\'inaan dabalamte!',
-                product_deleted: '🗑️ Meeshaan balleeffame',
-                admin_granted: '🔐 Seensa abbaa kennamte!',
-                admin_logout: '🚪 Milkaa\'inaan bahaniiru',
-                inperson_selected: '🏪 Lubbuun filatame',
-                delivery_selected: '🚚 Haala erguu filatame',
-                wishlist_added: '❤️ Yaada keessatti dabalamte!',
-                order_confirmed: '✅ Ajajni mirkanaa\'e!',
-                order_delivered: '📦 Ajajni ergame!',
-                order_deleted: '🗑️ Ajajni balleeffame',
-                fill_required: '⚠️ Bakkeewwan barbaachisan hunda guutaa'
-            },
-            ti: {
-                heroTitle: '✨ ልዑል <span class="highlight">ውበት</span> ፍርያት',
-                heroSub: 'ሓቀኛ መዋቢያታት፣ ሳሙናታትን ምርት ውበትን ብምትእምማን ዕደጉ።',
-                langLabel: 'ቋንቋ:',
-                whatsappLabel: 'ራኸበና',
-                tiktok_follow: '📱 ኣብ TikTok @rm ስዓቡና!',
-                whatsapp_contact: '📞 ዋትስአፕ: +251919096451',
-                locationText: 'ቤቴል ንግዲ ህንፃ፣ <strong>ኣዲስ ኣበባ</strong>',
-                deliveryText: 'ምልአ ሃገር ምዝዋው',
-                inPersonLabel: 'ብኣካል',
-                inPersonSub: 'ካብ ሱቕ ምቕባል',
-                deliveryLabel: 'ምዝዋው',
-                deliverySub: 'ምልአ ሃገር',
-                catAll: 'ኩሉ',
-                catSkincare: 'ክብካቤ ቘርበት',
-                catMakeup: 'መዋቢያ',
-                catFragrance: 'ሽቶ',
-                catHaircare: 'ክብካቤ ጸጕሪ',
-                catDetergent: 'ሳሙና',
-                catTools: 'መሳርሒታት',
-                featuredTitle: '🌸 ምርጽ ፍርያት',
-                browseAll: 'ኩሉ ርኣይ →',
-                navHome: 'ገዛ',
-                navExplore: 'ድለይ',
-                navCart: 'ቅርጢ',
-                navAdmin: 'ኣስተዳዳሪ',
-                adminLoginTitle: 'ምእትዋ ኣስተዳዳሪ',
-                adminLoginSub: 'ፍርያትን ትእዛዛትን ንምምራሕ ፓስኮድ ኣስተዳዳሪ ኣእትዉ',
-                adminLoginBtn: '🔑 ዳሽቦርድ ክፈት',
-                adminContactNote: 'ንመዳረሻ ኣስተዳዳሪ ባለቤቱ ራኸብዎ',
-                loginError: '❌ ጌጋ ፓስኮድ። በጃኹም ደጊምኩም ፈትኑ።',
-                logoutBtn: '🚪 ውጻእ',
-                ordersTitle: '📦 ትእዛዛት',
-                addProductTitle: '➕ ሓድሽ ፍርያት ወስኽ',
-                labelName: 'ስም ፍርያት *',
-                labelBrand: 'ብራንድ',
-                labelCategory: 'ምድብ *',
-                labelPrice: 'ዋጋ (ብር) *',
-                labelOldPrice: 'ናይ ቀደም ዋጋ (እንተሎ)',
-                labelIngredients: 'ንጥረ ነገራት / ቀመር',
-                labelDescription: 'መግለጺ *',
-                labelDelivery: 'ሓበሬታ ምዝዋው (እንተሎ)',
-                labelImage: 'ስእሊ ፍርያት',
-                uploadImageText: 'ንምስቃል ተውኩዎ',
-                addProductBtn: '➕ ፍርያት ናብ ሱቕ ወስኽ',
-                manageProductsTitle: '📋 ፍርያት ኣስተዳድር',
-                ingredientsLabel: '🧪 ንጥረ ነገራትን ቀመርን',
-                deliveryInfoTitle: '📦 ምዝዋውን ክፍሊትን',
-                purchaseMethodLabel: 'መንገዲ ዕዳጋ ምረጽ',
-                modalInPersonLabel: 'ብኣካል',
-                modalDeliveryLabel: 'ምዝዋው',
-                addToCartLabel: 'ናብ ቅርጢ ወስኽ',
-                formFullName: 'ምሉእ ስም *',
-                formPhone: 'ቁጽሪ ተሌፎን *',
-                formAddress: 'ኣድራሻ ምዝዋው *',
-                formCity: 'ከተማ *',
-                formPayment: 'መንገዲ ክፍሊት',
-                formReceipt: 'ደረሰኝ ክፍሊት ስቀል',
-                receiptUploadText: 'ስእሊ ደረሰኝ ንምስቃል ተውኩዎ',
-                telebirrInfo: '💳 ቴሌብር: 0919096451 (ሶያም ኮስሞቲክስ)',
-                cartTitle: '🛒 ቅርጽኹም',
-                emptyCartTitle: 'ቅርጽኹም ባዶ እዩ',
-                emptyCartSub: 'ምርት ውበት ምውሳኽ ጀምሩ!',
-                totalLabel: 'ጠቕላላ',
-                checkoutLabel: 'ናብ ክፍሊት ቀጽሉ',
-                added_to_cart: '✅ ናብ ቅርጢ ተወሲኹ!',
-                order_placed: '🎉 ትእዛዝ ብሰናይ ምዃኑ ተፈጺሙ!',
-                fill_delivery: '⚠️ ኩሉ ሓበሬታ ምዝዋው ምልኡ',
-                valid_phone: '⚠️ ቅኑዕ ቁጽሪ ተሌፎን ኣእትዉ',
-                receipt_uploaded: '📸 ስእሊ ደረሰኝ ተስቂሉ!',
-                receipt_removed: '🗑️ ደረሰኝ ተወጊዱ',
-                image_uploaded: '📸 ስእሊ ፍርያት ተስቂሉ!',
-                product_added: '✅ ፍርያት ብሰናይ ምዃኑ ተወሲኹ!',
-                product_deleted: '🗑️ ፍርያት ተወጊዱ',
-                admin_granted: '🔐 መዳረሻ ኣስተዳዳሪ ተዋሂቡ!',
-                admin_logout: '🚪 ብሰናይ ምዃኑ ወጺእኩም',
-                inperson_selected: '🏪 ብኣካል ተመሪጹ',
-                delivery_selected: '🚚 ምዝዋው ተመሪጹ',
-                wishlist_added: '❤️ ናብ ዝርዝር ትምኒት ተወሲኹ!',
-                order_confirmed: '✅ ትእዛዝ ተረጋጊጹ!',
-                order_delivered: '📦 ትእዛዝ ተዘዊዑ!',
-                order_deleted: '🗑️ ትእዛዝ ተወጊዱ',
-                fill_required: '⚠️ ኩለን ዝድለያ መዳያት ምልኡ'
-            },
-            so: {
-                heroTitle: '✨ Alaabaha <span class="highlight">Quruxda</span> ah',
-                heroSub: 'Alaabaha saxda ah ee qurxinta, nadiifinta & quruxda. Ku iibso kalsooni leh.',
-                langLabel: 'Luqadda:',
-                whatsappLabel: 'Nala soo xiriir',
-                tiktok_follow: '📱 Nagu xiriir TikTok @rm!',
-                whatsapp_contact: '📞 WhatsApp: +251919096451',
-                locationText: 'Dhismaha Ganacsiga Betel, <strong>Addis Ababa</strong>',
-                deliveryText: 'Dalka oo dhan',
-                inPersonLabel: 'Qof ahaan',
-                inPersonSub: 'Dukaanka ka soo qaad',
-                deliveryLabel: 'Gebis',
-                deliverySub: 'Dalka oo dhan',
-                catAll: 'Dhammaan',
-                catSkincare: 'Daryeelka Maqaarka',
-                catMakeup: 'Qurxin',
-                catFragrance: 'Uunsi',
-                catHaircare: 'Daryeelka Timaha',
-                catDetergent: 'Sabuun',
-                catTools: 'Qalab',
-                featuredTitle: '🌸 Alaabaha La Dooray',
-                browseAll: 'Dhamaan eeg →',
-                navHome: 'Guri',
-                navExplore: 'Baadhis',
-                navCart: 'Garii',
-                navAdmin: 'Maamule',
-                adminLoginTitle: 'Gelitaanka Maamulaha',
-                adminLoginSub: 'Geli koodka maamulaha si aad u maamusho alaabaha iyo dalabyada',
-                adminLoginBtn: '🔑 Fura Dashboard',
-                adminContactNote: 'La xiriir milkiilaha si aad u hesho gelitaan',
-                loginError: '❌ Koodka khaldan. Fadlan isku day mar kale.',
-                logoutBtn: '🚪 Bax',
-                ordersTitle: '📦 Dalabyada',
-                addProductTitle: '➕ Ku dar Alaab Cusub',
-                labelName: 'Magaca Alaabta *',
-                labelBrand: 'Summad',
-                labelCategory: 'Qaybta *',
-                labelPrice: 'Qiimaha (ETB) *',
-                labelOldPrice: 'Qiimihii Hore (haddii uu jiro)',
-                labelIngredients: 'Qaybaha / Qaacidada',
-                labelDescription: 'Sharaxaad *',
-                labelDelivery: 'Macluumaadka Gebiska (haddii uu jiro)',
-                labelImage: 'Sawirka Alaabta',
-                uploadImageText: 'Taabo si aad u soo gudbisid',
-                addProductBtn: '➕ Ku Dar Alaabta Dukaanka',
-                manageProductsTitle: '📋 Maamul Alaabaha',
-                ingredientsLabel: '🧪 Qaybaha & Qaacidada',
-                deliveryInfoTitle: '📦 Gebis & Bixinta',
-                purchaseMethodLabel: 'Dooro Habka Iibsiga',
-                modalInPersonLabel: 'Qof ahaan',
-                modalDeliveryLabel: 'Gebis',
-                addToCartLabel: 'Ku Dar Gariiga',
-                formFullName: 'Magaca Oo Dhan *',
-                formPhone: 'Lambarka Telefoonka *',
-                formAddress: 'Cinwaanka Gebiska *',
-                formCity: 'Magaalada *',
-                formPayment: 'Habka Bixinta',
-                formReceipt: 'Soo Gudbi Rasheedka Bixinta',
-                receiptUploadText: 'Taabo si aad u soo gudbisid sawirka rasheedka',
-                telebirrInfo: '💳 TeleBirr: 0919096451 (SoYam Cosmetics)',
-                cartTitle: '🛒 Gariigaaga',
-                emptyCartTitle: 'Gariigaagu waa madhan yahay',
-                emptyCartSub: 'Bilow inaad ku dartid alaabaha qurxinta!',
-                totalLabel: 'Wadarta',
-                checkoutLabel: 'U Gudub Bixinta',
-                added_to_cart: '✅ Lagu daray gariiga!',
-                order_placed: '🎉 Dalabka si guul leh loo dhamaystiray!',
-                fill_delivery: '⚠️ Fadlan buuxi dhammaan faahfaahinta gebiska',
-                valid_phone: '⚠️ Fadlan geli lambar telefoon oo sax ah',
-                receipt_uploaded: '📸 Sawirka rasheedka waa la soo gudbiyay!',
-                receipt_removed: '🗑️ Rasheedka waa la tirtiray',
-                image_uploaded: '📸 Sawirka alaabta waa la soo gudbiyay!',
-                product_added: '✅ Alaabta si guul leh loo daray!',
-                product_deleted: '🗑️ Alaabta waa la tirtiray',
-                admin_granted: '🔐 Gelitaanka maamulaha waa la siiyay!',
-                admin_logout: '🚪 Si guul leh ayaad u baxday',
-                inperson_selected: '🏪 Qof ahaan waa la doortay',
-                delivery_selected: '🚚 Habka gebiska waa la doortay',
-                wishlist_added: '❤️ Lagu daray liiska rabitaanka!',
-                order_confirmed: '✅ Dalabka waa la xaqiijiyay!',
-                order_delivered: '📦 Dalabka waa la geeyay!',
-                order_deleted: '🗑️ Dalabka waa la tirtiray',
-                fill_required: '⚠️ Fadlan buuxi dhammaan goobaha loo baahan yahay'
-            },
-            aa: {
-                heroTitle: '✨ <span class="highlight">Bilisa</span> Daffara',
-                heroSub: 'Kosmeetiksii dhaba, saabuun kee bilisa alaalaa. Lamaan amaanat.',
-                langLabel: 'Qafar:',
-                whatsappLabel: 'Nek yabbe',
-                tiktok_follow: '📱 TikTok @rm fere!',
-                whatsapp_contact: '📞 WhatsApp: +251919096451',
-                locationText: 'Betel Daldala Qari, <strong>Addis Ababa</strong>',
-                deliveryText: 'Dalka inkih',
-                inPersonLabel: 'Booda',
-                inPersonSub: 'Maqazinak ele',
-                deliveryLabel: 'Kah',
-                deliverySub: 'Dalka inkih',
-                catAll: 'Inkih',
-                catSkincare: 'Qanbat Qari',
-                catMakeup: 'Bilisa',
-                catFragrance: 'Cari',
-                catHaircare: 'Qanbat Cari',
-                catDetergent: 'Saabun',
-                catTools: 'Alaalah',
-                featuredTitle: '🌸 Alaalah Yimixxige',
-                browseAll: 'Inkih ugu →',
-                navHome: 'Maci',
-                navExplore: 'Gexe',
-                navCart: 'Garii',
-                navAdmin: 'Maaqala',
-                adminLoginTitle: 'Maaqala Culu',
-                adminLoginSub: 'Alaalah kee kah kah maaquluk passcode cul',
-                adminLoginBtn: '🔑 Dashboord Fak',
-                adminContactNote: 'Maaqala culuh kah maaquluk yoh yabbe',
-                loginError: '❌ Passcode makko. Ama aqib.',
-                logoutBtn: '🚪 Guffe',
-                ordersTitle: '📦 Kah',
-                addProductTitle: '➕ Alaalah Qado',
-                labelName: 'Alaalah Migaa *',
-                labelBrand: 'Braand',
-                labelCategory: 'Qayba *',
-                labelPrice: 'Qime (ETB) *',
-                labelOldPrice: 'Qime Nay (tani)',
-                labelIngredients: 'Alaalah / Formula',
-                labelDescription: 'Tafsiir *',
-                labelDelivery: 'Kah Tafsiir (tani)',
-                labelImage: 'Alaalah Xayyo',
-                uploadImageText: 'Xayyo culsuh anta',
-                addProductBtn: '➕ Alaalah Maqazin yaa',
-                manageProductsTitle: '📋 Alaalah Maaqul',
-                ingredientsLabel: '🧪 Alaalah kee Formula',
-                deliveryInfoTitle: '📦 Kah kee Qaltin',
-                purchaseMethodLabel: 'Maddaam Qadah Aq',
-                modalInPersonLabel: 'Booda',
-                modalDeliveryLabel: 'Kah',
-                addToCartLabel: 'Garii yaa',
-                formFullName: 'Migaa Duma *',
-                formPhone: 'Telfoon Namba *',
-                formAddress: 'Kah Akaar *',
-                formCity: 'Magaala *',
-                formPayment: 'Qaltin Maddaam',
-                formReceipt: 'Rasheed Qaltin Cul',
-                receiptUploadText: 'Rasheed Xayyo culsuh anta',
-                telebirrInfo: '💳 TeleBirr: 0919096451 (SoYam Cosmetics)',
-                cartTitle: '🛒 Garii',
-                emptyCartTitle: 'Garii qulu',
-                emptyCartSub: 'Alaalah bilisa qaduu dibi!',
-                totalLabel: 'Inkih',
-                checkoutLabel: 'Qaltin Ama',
-                added_to_cart: '✅ Garii yaa!',
-                order_placed: '🎉 Kah faca!',
-                fill_delivery: '⚠️ Kah tafsiir duma cul',
-                valid_phone: '⚠️ Telfoon namba dhaba cul',
-                receipt_uploaded: '📸 Rasheed xayyo cul!',
-                receipt_removed: '🗑️ Rasheed aysik',
-                image_uploaded: '📸 Alaalah xayyo cul!',
-                product_added: '✅ Alaalah yaa!',
-                product_deleted: '🗑️ Alaalah aysik',
-                admin_granted: '🔐 Maaqala culuh faca!',
-                admin_logout: '🚪 Guffeh!',
-                inperson_selected: '🏪 Booda aq',
-                delivery_selected: '🚚 Kah maddaam aq',
-                wishlist_added: '❤️ Yaad yaa!',
-                order_confirmed: '✅ Kah numaa!',
-                order_delivered: '📦 Kah yaa!',
-                order_deleted: '🗑️ Kah aysik',
-                fill_required: '⚠️ Tafsiir duma cul'
-            },
-            sid: {
-                heroTitle: '✨ <span class="highlight">Bilisa</span> Laalo',
-                heroSub: 'Kosmeetiksi, saamuna fi meesha bilisa amantaa. Amantin bita.',
-                langLabel: 'Afanna:',
-                whatsappLabel: 'Nu qonna',
-                tiktok_follow: '📱 TikTok @rm nu hordofa!',
-                whatsapp_contact: '📞 WhatsApp: +251919096451',
-                locationText: 'Betel Daldala Mana, <strong>Addis Ababa</strong>',
-                deliveryText: 'Biitessa marsa',
-                inPersonLabel: 'Boodan',
-                inPersonSub: 'Suuqira fudhata',
-                deliveryLabel: 'Gaaffisa',
-                deliverySub: 'Biitessa marsa',
-                catAll: 'Hunduma',
-                catSkincare: 'Gogaa Kunuunsa',
-                catMakeup: 'Faashii',
-                catFragrance: 'Urgii',
-                catHaircare: 'Rifeensa Kunuunsa',
-                catDetergent: 'Saamuna',
-                catTools: 'Meashaa',
-                featuredTitle: '🌸 Meesha Filatama',
-                browseAll: 'Hunduma ilaala →',
-                navHome: 'Mana',
-                navExplore: 'Barbaada',
-                navCart: 'Gari',
-                navAdmin: 'Moora',
-                adminLoginTitle: 'Moora Seensa',
-                adminLoginSub: 'Meesha fi ajaja mooruuf passcode seensa',
-                adminLoginBtn: '🔑 Dashboord Banaana',
-                adminContactNote: 'Moora seensaf abbaa qonna',
-                loginError: '❌ Passcode dogoggora. Ama harre.',
-                logoutBtn: '🚪 Baasa',
-                ordersTitle: '📦 Ajaja',
-                addProductTitle: '➕ Meesha Hara Bitissa',
-                labelName: 'Meesha Maqaa *',
-                labelBrand: 'Braand',
-                labelCategory: 'Kitaaba *',
-                labelPrice: 'Qixxa (ETB) *',
-                labelOldPrice: 'Qixxa Gafara (yoo jiraate)',
-                labelIngredients: 'Akkataa / Foormulaa',
-                labelDescription: 'Ibsa *',
-                labelDelivery: 'Gaaffisa Ibsa (yoo jiraate)',
-                labelImage: 'Meesha Suura',
-                uploadImageText: 'Fidisuuf cupha',
-                addProductBtn: '➕ Meesha Suuqi Bitissa',
-                manageProductsTitle: '📋 Meesha Moora',
-                ingredientsLabel: '🧪 Akkataa fi Foormulaa',
-                deliveryInfoTitle: '📦 Gaaffisa fi Kaffalti',
-                purchaseMethodLabel: 'Bita Haala Filadhu',
-                modalInPersonLabel: 'Boodan',
-                modalDeliveryLabel: 'Gaaffisa',
-                addToCartLabel: 'Gari Bitissa',
-                formFullName: 'Maqaa Guutuu *',
-                formPhone: 'Bilbila Lakko *',
-                formAddress: 'Gaaffisa Teessoo *',
-                formCity: 'Magalaa *',
-                formPayment: 'Kaffalti Haala',
-                formReceipt: 'Rasiidii Kaffalti Fidisa',
-                receiptUploadText: 'Rasiidii Suura fidisuuf cupha',
-                telebirrInfo: '💳 TeleBirr: 0919096451 (SoYam Cosmetics)',
-                cartTitle: '🛒 Gari Keessan',
-                emptyCartTitle: 'Gari duwwa',
-                emptyCartSub: 'Meesha bilisa bitissu jalqaba!',
-                totalLabel: 'Wal-gumma',
-                checkoutLabel: 'Kaffalti Ama',
-                added_to_cart: '✅ Gari bitamte!',
-                order_placed: '🎉 Ajajni milkaa\'inaan bitamte!',
-                fill_delivery: '⚠️ Gaaffisa ibsa guutuu guuta',
-                valid_phone: '⚠️ Bilbila lakko sirrii taate galcha',
-                receipt_uploaded: '📸 Rasiidii suura fidame!',
-                receipt_removed: '🗑️ Rasiidiin balleeffame',
-                image_uploaded: '📸 Meesha suura fidame!',
-                product_added: '✅ Meeshi milkaa\'inaan bitamte!',
-                product_deleted: '🗑️ Meeshi balleeffame',
-                admin_granted: '🔐 Moora seensi kennamte!',
-                admin_logout: '🚪 Milkaa\'inaan baate!',
-                inperson_selected: '🏪 Boodan filatame',
-                delivery_selected: '🚚 Gaaffisa filatame',
-                wishlist_added: '❤️ Yaada bitamte!',
-                order_confirmed: '✅ Ajajni mirkanaa\'e!',
-                order_delivered: '📦 Ajajni gaafame!',
-                order_deleted: '🗑️ Ajajni balleeffame',
-                fill_required: '⚠️ Hunda guuta'
-            },
-            wal: {
-                heroTitle: '✨ <span class="highlight">Bilisa</span> Laalo',
-                heroSub: 'Kosmeetiksii, saamuunaa kee bilisa alaalaa. Amantaa bitte.',
-                langLabel: 'Aanaa:',
-                whatsappLabel: 'Nu qonna',
-                tiktok_follow: '📱 TikTok @rm nu hordofa!',
-                whatsapp_contact: '📞 WhatsApp: +251919096451',
-                locationText: 'Betel Daldala Mana, <strong>Addis Ababa</strong>',
-                deliveryText: 'Aseetta karsa',
-                inPersonLabel: 'Boodan',
-                inPersonSub: 'Suuqira fudhata',
-                deliveryLabel: 'Gaaffisa',
-                deliverySub: 'Aseetta karsa',
-                catAll: 'Kumetta',
-                catSkincare: 'Aseetta Kunuunsa',
-                catMakeup: 'Bilisa',
-                catFragrance: 'Urgii',
-                catHaircare: 'Gogaa Kunuunsa',
-                catDetergent: 'Saamuunaa',
-                catTools: 'Meashaa',
-                featuredTitle: '🌸 Meashaa Filatama',
-                browseAll: 'Kumetta be7a →',
-                navHome: 'Mana',
-                navExplore: 'Koyya',
-                navCart: 'Garii',
-                navAdmin: 'Mooraa',
-                adminLoginTitle: 'Mooraa Seensa',
-                adminLoginSub: 'Meashaa kee ajaaja mooruuf passcode seensa',
-                adminLoginBtn: '🔑 Dashboord Banaana',
-                adminContactNote: 'Mooraa seensaf abbaa qonna',
-                loginError: '❌ Passcode dogoggora. Ama harre.',
-                logoutBtn: '🚪 Baasa',
-                ordersTitle: '📦 Ajaaja',
-                addProductTitle: '➕ Meashaa Hara Bitta',
-                labelName: 'Meashaa Suntha *',
-                labelBrand: 'Braand',
-                labelCategory: 'Kitaaba *',
-                labelPrice: 'Qixxa (ETB) *',
-                labelOldPrice: 'Qixxa Gafara (yoo jiraate)',
-                labelIngredients: 'Akkataa / Foormulaa',
-                labelDescription: 'Ibsa *',
-                labelDelivery: 'Gaaffisa Ibsa (yoo jiraate)',
-                labelImage: 'Meashaa Suura',
-                uploadImageText: 'Fidisuuf cupha',
-                addProductBtn: '➕ Meashaa Suuqi Bitta',
-                manageProductsTitle: '📋 Meashaa Moora',
-                ingredientsLabel: '🧪 Akkataa fi Foormulaa',
-                deliveryInfoTitle: '📦 Gaaffisa fi Kaffalti',
-                purchaseMethodLabel: 'Bita Haala Filadhu',
-                modalInPersonLabel: 'Boodan',
-                modalDeliveryLabel: 'Gaaffisa',
-                addToCartLabel: 'Garii Bitta',
-                formFullName: 'Suntha Guutuu *',
-                formPhone: 'Bilbila Lakko *',
-                formAddress: 'Gaaffisa Teessoo *',
-                formCity: 'Magalaa *',
-                formPayment: 'Kaffalti Haala',
-                formReceipt: 'Rasiidii Kaffalti Fidisa',
-                receiptUploadText: 'Rasiidii Suura fidisuuf cupha',
-                telebirrInfo: '💳 TeleBirr: 0919096451 (SoYam Cosmetics)',
-                cartTitle: '🛒 Garii Ke',
-                emptyCartTitle: 'Garii duwwa',
-                emptyCartSub: 'Meashaa bilisa bittu jalqaba!',
-                totalLabel: 'Wal-gumma',
-                checkoutLabel: 'Kaffalti Ama',
-                added_to_cart: '✅ Garii bitamte!',
-                order_placed: '🎉 Ajaajni milkaa\'inaan bitamte!',
-                fill_delivery: '⚠️ Gaaffisa ibsa guutuu guuta',
-                valid_phone: '⚠️ Bilbila lakko sirrii taate galcha',
-                receipt_uploaded: '📸 Rasiidii suura fidame!',
-                receipt_removed: '🗑️ Rasiidiin balleeffame',
-                image_uploaded: '📸 Meashaa suura fidame!',
-                product_added: '✅ Meashii milkaa\'inaan bitamte!',
-                product_deleted: '🗑️ Meashii balleeffame',
-                admin_granted: '🔐 Mooraa seensi kennamte!',
-                admin_logout: '🚪 Milkaa\'inaan baate!',
-                inperson_selected: '🏪 Boodan filatame',
-                delivery_selected: '🚚 Gaaffisa filatame',
-                wishlist_added: '❤️ Yaada bitamte!',
-                order_confirmed: '✅ Ajaajni mirkanaa\'e!',
-                order_delivered: '📦 Ajaajni gaafame!',
-                order_deleted: '🗑️ Ajaajni balleeffame',
-                fill_required: '⚠️ Hunda guuta'
-            },
-            gru: {
-                heroTitle: '✨ <span class="highlight">Giza</span> Meqmaq',
-                heroSub: 'Kosmeetiks, saabuna nna meqmaq meqmaq. Amantaa bit.',
-                langLabel: 'Afa:',
-                whatsappLabel: 'Nu qonna',
-                tiktok_follow: '📱 TikTok @rm nu hordofa!',
-                whatsapp_contact: '📞 WhatsApp: +251919096451',
-                locationText: 'Betel Daldala Mana, <strong>Addis Ababa</strong>',
-                deliveryText: 'Aseetta karsa',
-                inPersonLabel: 'Boodan',
-                inPersonSub: 'Suuqira fudhata',
-                deliveryLabel: 'Gaaffisa',
-                deliverySub: 'Aseetta karsa',
-                catAll: 'Kumetta',
-                catSkincare: 'Aseetta Kunuunsa',
-                catMakeup: 'Giza',
-                catFragrance: 'Urgii',
-                catHaircare: 'Gogaa Kunuunsa',
-                catDetergent: 'Saabuna',
-                catTools: 'Meashaa',
-                featuredTitle: '🌸 Meqmaq Filatama',
-                browseAll: 'Kumetta be7a →',
-                navHome: 'Mana',
-                navExplore: 'Koyya',
-                navCart: 'Garii',
-                navAdmin: 'Mooraa',
-                adminLoginTitle: 'Mooraa Seensa',
-                adminLoginSub: 'Meqmaq nna ajaaja mooruuf passcode seensa',
-                adminLoginBtn: '🔑 Dashboord Banaana',
-                adminContactNote: 'Mooraa seensaf abbaa qonna',
-                loginError: '❌ Passcode dogoggora. Ama harre.',
-                logoutBtn: '🚪 Baasa',
-                ordersTitle: '📦 Ajaaja',
-                addProductTitle: '➕ Meqmaq Hara Bitta',
-                labelName: 'Meqmaq Suntha *',
-                labelBrand: 'Braand',
-                labelCategory: 'Kitaaba *',
-                labelPrice: 'Qixxa (ETB) *',
-                labelOldPrice: 'Qixxa Gafara (yoo jiraate)',
-                labelIngredients: 'Akkataa / Foormulaa',
-                labelDescription: 'Ibsa *',
-                labelDelivery: 'Gaaffisa Ibsa (yoo jiraate)',
-                labelImage: 'Meqmaq Suura',
-                uploadImageText: 'Fidisuuf cupha',
-                addProductBtn: '➕ Meqmaq Suuqi Bitta',
-                manageProductsTitle: '📋 Meqmaq Moora',
-                ingredientsLabel: '🧪 Akkataa fi Foormulaa',
-                deliveryInfoTitle: '📦 Gaaffisa fi Kaffalti',
-                purchaseMethodLabel: 'Bita Haala Filadhu',
-                modalInPersonLabel: 'Boodan',
-                modalDeliveryLabel: 'Gaaffisa',
-                addToCartLabel: 'Garii Bitta',
-                formFullName: 'Suntha Guutuu *',
-                formPhone: 'Bilbila Lakko *',
-                formAddress: 'Gaaffisa Teessoo *',
-                formCity: 'Magalaa *',
-                formPayment: 'Kaffalti Haala',
-                formReceipt: 'Rasiidii Kaffalti Fidisa',
-                receiptUploadText: 'Rasiidii Suura fidisuuf cupha',
-                telebirrInfo: '💳 TeleBirr: 0919096451 (SoYam Cosmetics)',
-                cartTitle: '🛒 Garii Ke',
-                emptyCartTitle: 'Garii duwwa',
-                emptyCartSub: 'Meqmaq giza bittu jalqaba!',
-                totalLabel: 'Wal-gumma',
-                checkoutLabel: 'Kaffalti Ama',
-                added_to_cart: '✅ Garii bitamte!',
-                order_placed: '🎉 Ajaajni milkaa\'inaan bitamte!',
-                fill_delivery: '⚠️ Gaaffisa ibsa guutuu guuta',
-                valid_phone: '⚠️ Bilbila lakko sirrii taate galcha',
-                receipt_uploaded: '📸 Rasiidii suura fidame!',
-                receipt_removed: '🗑️ Rasiidiin balleeffame',
-                image_uploaded: '📸 Meqmaq suura fidame!',
-                product_added: '✅ Meqmii milkaa\'inaan bitamte!',
-                product_deleted: '🗑️ Meqmii balleeffame',
-                admin_granted: '🔐 Mooraa seensi kennamte!',
-                admin_logout: '🚪 Milkaa\'inaan baate!',
-                inperson_selected: '🏪 Boodan filatame',
-                delivery_selected: '🚚 Gaaffisa filatame',
-                wishlist_added: '❤️ Yaada bitamte!',
-                order_confirmed: '✅ Ajaajni mirkanaa\'e!',
-                order_delivered: '📦 Ajaajni gaafame!',
-                order_deleted: '🗑️ Ajaajni balleeffame',
-                fill_required: '⚠️ Hunda guuta'
-            },
-            had: {
-                heroTitle: '✨ <span class="highlight">Giza</span> Meqmaq',
-                heroSub: 'Kosmeetiks, saabuna nna meqmaq meqmaq. Amantaa bit.',
-                langLabel: 'Afa:',
-                whatsappLabel: 'Nu qonna',
-                tiktok_follow: '📱 TikTok @rm nu hordofa!',
-                whatsapp_contact: '📞 WhatsApp: +251919096451',
-                locationText: 'Betel Daldala Mana, <strong>Addis Ababa</strong>',
-                deliveryText: 'Aseetta karsa',
-                inPersonLabel: 'Boodan',
-                inPersonSub: 'Suuqira fudhata',
-                deliveryLabel: 'Gaaffisa',
-                deliverySub: 'Aseetta karsa',
-                catAll: 'Kumetta',
-                catSkincare: 'Aseetta Kunuunsa',
-                catMakeup: 'Giza',
-                catFragrance: 'Urgii',
-                catHaircare: 'Gogaa Kunuunsa',
-                catDetergent: 'Saabuna',
-                catTools: 'Meashaa',
-                featuredTitle: '🌸 Meqmaq Filatama',
-                browseAll: 'Kumetta be7a →',
-                navHome: 'Mana',
-                navExplore: 'Koyya',
-                navCart: 'Garii',
-                navAdmin: 'Mooraa',
-                adminLoginTitle: 'Mooraa Seensa',
-                adminLoginSub: 'Meqmaq nna ajaaja mooruuf passcode seensa',
-                adminLoginBtn: '🔑 Dashboord Banaana',
-                adminContactNote: 'Mooraa seensaf abbaa qonna',
-                loginError: '❌ Passcode dogoggora. Ama harre.',
-                logoutBtn: '🚪 Baasa',
-                ordersTitle: '📦 Ajaaja',
-                addProductTitle: '➕ Meqmaq Hara Bitta',
-                labelName: 'Meqmaq Suntha *',
-                labelBrand: 'Braand',
-                labelCategory: 'Kitaaba *',
-                labelPrice: 'Qixxa (ETB) *',
-                labelOldPrice: 'Qixxa Gafara (yoo jiraate)',
-                labelIngredients: 'Akkataa / Foormulaa',
-                labelDescription: 'Ibsa *',
-                labelDelivery: 'Gaaffisa Ibsa (yoo jiraate)',
-                labelImage: 'Meqmaq Suura',
-                uploadImageText: 'Fidisuuf cupha',
-                addProductBtn: '➕ Meqmaq Suuqi Bitta',
-                manageProductsTitle: '📋 Meqmaq Moora',
-                ingredientsLabel: '🧪 Akkataa fi Foormulaa',
-                deliveryInfoTitle: '📦 Gaaffisa fi Kaffalti',
-                purchaseMethodLabel: 'Bita Haala Filadhu',
-                modalInPersonLabel: 'Boodan',
-                modalDeliveryLabel: 'Gaaffisa',
-                addToCartLabel: 'Garii Bitta',
-                formFullName: 'Suntha Guutuu *',
-                formPhone: 'Bilbila Lakko *',
-                formAddress: 'Gaaffisa Teessoo *',
-                formCity: 'Magalaa *',
-                formPayment: 'Kaffalti Haala',
-                formReceipt: 'Rasiidii Kaffalti Fidisa',
-                receiptUploadText: 'Rasiidii Suura fidisuuf cupha',
-                telebirrInfo: '💳 TeleBirr: 0919096451 (SoYam Cosmetics)',
-                cartTitle: '🛒 Garii Ke',
-                emptyCartTitle: 'Garii duwwa',
-                emptyCartSub: 'Meqmaq giza bittu jalqaba!',
-                totalLabel: 'Wal-gumma',
-                checkoutLabel: 'Kaffalti Ama',
-                added_to_cart: '✅ Garii bitamte!',
-                order_placed: '🎉 Ajaajni milkaa\'inaan bitamte!',
-                fill_delivery: '⚠️ Gaaffisa ibsa guutuu guuta',
-                valid_phone: '⚠️ Bilbila lakko sirrii taate galcha',
-                receipt_uploaded: '📸 Rasiidii suura fidame!',
-                receipt_removed: '🗑️ Rasiidiin balleeffame',
-                image_uploaded: '📸 Meqmaq suura fidame!',
-                product_added: '✅ Meqmii milkaa\'inaan bitamte!',
-                product_deleted: '🗑️ Meqmii balleeffame',
-                admin_granted: '🔐 Mooraa seensi kennamte!',
-                admin_logout: '🚪 Milkaa\'inaan baate!',
-                inperson_selected: '🏪 Boodan filatame',
-                delivery_selected: '🚚 Gaaffisa filatame',
-                wishlist_added: '❤️ Yaada bitamte!',
-                order_confirmed: '✅ Ajaajni mirkanaa\'e!',
-                order_delivered: '📦 Ajaajni gaafame!',
-                order_deleted: '🗑️ Ajaajni balleeffame',
-                fill_required: '⚠️ Hunda guuta'
-            },
-            kam: {
-                heroTitle: '✨ <span class="highlight">Giza</span> Meqmaq',
-                heroSub: 'Kosmeetiks, saabuna nna meqmaq meqmaq. Amantaa bit.',
-                langLabel: 'Afa:',
-                whatsappLabel: 'Nu qonna',
-                tiktok_follow: '📱 TikTok @rm nu hordofa!',
-                whatsapp_contact: '📞 WhatsApp: +251919096451',
-                locationText: 'Betel Daldala Mana, <strong>Addis Ababa</strong>',
-                deliveryText: 'Aseetta karsa',
-                inPersonLabel: 'Boodan',
-                inPersonSub: 'Suuqira fudhata',
-                deliveryLabel: 'Gaaffisa',
-                deliverySub: 'Aseetta karsa',
-                catAll: 'Kumetta',
-                catSkincare: 'Aseetta Kunuunsa',
-                catMakeup: 'Giza',
-                catFragrance: 'Urgii',
-                catHaircare: 'Gogaa Kunuunsa',
-                catDetergent: 'Saabuna',
-                catTools: 'Meashaa',
-                featuredTitle: '🌸 Meqmaq Filatama',
-                browseAll: 'Kumetta be7a →',
-                navHome: 'Mana',
-                navExplore: 'Koyya',
-                navCart: 'Garii',
-                navAdmin: 'Mooraa',
-                adminLoginTitle: 'Mooraa Seensa',
-                adminLoginSub: 'Meqmaq nna ajaaja mooruuf passcode seensa',
-                adminLoginBtn: '🔑 Dashboord Banaana',
-                adminContactNote: 'Mooraa seensaf abbaa qonna',
-                loginError: '❌ Passcode dogoggora. Ama harre.',
-                logoutBtn: '🚪 Baasa',
-                ordersTitle: '📦 Ajaaja',
-                addProductTitle: '➕ Meqmaq Hara Bitta',
-                labelName: 'Meqmaq Suntha *',
-                labelBrand: 'Braand',
-                labelCategory: 'Kitaaba *',
-                labelPrice: 'Qixxa (ETB) *',
-                labelOldPrice: 'Qixxa Gafara (yoo jiraate)',
-                labelIngredients: 'Akkataa / Foormulaa',
-                labelDescription: 'Ibsa *',
-                labelDelivery: 'Gaaffisa Ibsa (yoo jiraate)',
-                labelImage: 'Meqmaq Suura',
-                uploadImageText: 'Fidisuuf cupha',
-                addProductBtn: '➕ Meqmaq Suuqi Bitta',
-                manageProductsTitle: '📋 Meqmaq Moora',
-                ingredientsLabel: '🧪 Akkataa fi Foormulaa',
-                deliveryInfoTitle: '📦 Gaaffisa fi Kaffalti',
-                purchaseMethodLabel: 'Bita Haala Filadhu',
-                modalInPersonLabel: 'Boodan',
-                modalDeliveryLabel: 'Gaaffisa',
-                addToCartLabel: 'Garii Bitta',
-                formFullName: 'Suntha Guutuu *',
-                formPhone: 'Bilbila Lakko *',
-                formAddress: 'Gaaffisa Teessoo *',
-                formCity: 'Magalaa *',
-                formPayment: 'Kaffalti Haala',
-                formReceipt: 'Rasiidii Kaffalti Fidisa',
-                receiptUploadText: 'Rasiidii Suura fidisuuf cupha',
-                telebirrInfo: '💳 TeleBirr: 0919096451 (SoYam Cosmetics)',
-                cartTitle: '🛒 Garii Ke',
-                emptyCartTitle: 'Garii duwwa',
-                emptyCartSub: 'Meqmaq giza bittu jalqaba!',
-                totalLabel: 'Wal-gumma',
-                checkoutLabel: 'Kaffalti Ama',
-                added_to_cart: '✅ Garii bitamte!',
-                order_placed: '🎉 Ajaajni milkaa\'inaan bitamte!',
-                fill_delivery: '⚠️ Gaaffisa ibsa guutuu guuta',
-                valid_phone: '⚠️ Bilbila lakko sirrii taate galcha',
-                receipt_uploaded: '📸 Rasiidii suura fidame!',
-                receipt_removed: '🗑️ Rasiidiin balleeffame',
-                image_uploaded: '📸 Meqmaq suura fidame!',
-                product_added: '✅ Meqmii milkaa\'inaan bitamte!',
-                product_deleted: '🗑️ Meqmii balleeffame',
-                admin_granted: '🔐 Mooraa seensi kennamte!',
-                admin_logout: '🚪 Milkaa\'inaan baate!',
-                inperson_selected: '🏪 Boodan filatame',
-                delivery_selected: '🚚 Gaaffisa filatame',
-                wishlist_added: '❤️ Yaada bitamte!',
-                order_confirmed: '✅ Ajaajni mirkanaa\'e!',
-                order_delivered: '📦 Ajaajni gaafame!',
-                order_deleted: '🗑️ Ajaajni balleeffame',
-                fill_required: '⚠️ Hunda guuta'
-            }
-        };
-
-        let currentLang = 'en';
-
-        function getTranslation(key) {
-            return translations[currentLang]?.[key] || translations.en[key] || key;
-        }
-
-        function setLanguage(lang) {
-            currentLang = lang;
-            // Update language selector buttons
-            document.querySelectorAll('.lang-selector button').forEach(btn => {
-                btn.classList.toggle('active', btn.dataset.lang === lang);
-            });
-            updateUI();
-            showToast('🌍 ' + (lang === 'en' ? 'Language changed to English' : 
-                             lang === 'am' ? 'ቋንቋ ወደ አማርኛ ተቀየረ' :
-                             lang === 'or' ? 'Afaan Oromoofiitti jijjiirame' :
-                             lang === 'ti' ? 'ቋንቋ ናብ ትግርኛ ተቀይሩ' :
-                             lang === 'so' ? 'Luqadda loo beddelay Soomaali' :
-                             'Language changed'));
-        }
-
-        function updateUI() {
-            // Update all elements with data-lang attribute
-            document.querySelectorAll('[data-lang-key]').forEach(el => {
-                const key = el.dataset.langKey;
-                if (key && translations[currentLang]?.[key]) {
-                    el.innerHTML = translations[currentLang][key];
-                }
-            });
-            
-            // Update specific elements
-            document.getElementById('heroTitle').innerHTML = getTranslation('heroTitle');
-            document.getElementById('heroSub').textContent = getTranslation('heroSub');
-            document.getElementById('langLabel').textContent = getTranslation('langLabel');
-            document.getElementById('whatsappLabel').textContent = getTranslation('whatsappLabel');
-            document.getElementById('locationText').innerHTML = getTranslation('locationText');
-            document.getElementById('deliveryText').innerHTML = getTranslation('deliveryText');
-            document.getElementById('inPersonLabel').textContent = getTranslation('inPersonLabel');
-            document.getElementById('inPersonSub').textContent = getTranslation('inPersonSub');
-            document.getElementById('deliveryLabel').textContent = getTranslation('deliveryLabel');
-            document.getElementById('deliverySub').textContent = getTranslation('deliverySub');
-            document.getElementById('catAll').textContent = getTranslation('catAll');
-            document.getElementById('catSkincare').textContent = getTranslation('catSkincare');
-            document.getElementById('catMakeup').textContent = getTranslation('catMakeup');
-            document.getElementById('catFragrance').textContent = getTranslation('catFragrance');
-            document.getElementById('catHaircare').textContent = getTranslation('catHaircare');
-            document.getElementById('catDetergent').textContent = getTranslation('catDetergent');
-            document.getElementById('catTools').textContent = getTranslation('catTools');
-            document.getElementById('featuredTitle').innerHTML = getTranslation('featuredTitle') + ' <span class="phonics-badge">✨ Premium</span>';
-            document.getElementById('browseAllBtn').textContent = getTranslation('browseAll');
-            document.getElementById('navHome').textContent = getTranslation('navHome');
-            document.getElementById('navExplore').textContent = getTranslation('navExplore');
-            document.getElementById('navCart').textContent = getTranslation('navCart');
-            document.getElementById('navAdmin').textContent = getTranslation('navAdmin');
-            document.getElementById('adminLoginTitle').textContent = getTranslation('adminLoginTitle');
-            document.getElementById('adminLoginSub').textContent = getTranslation('adminLoginSub');
-            document.getElementById('adminLoginBtn').textContent = getTranslation('adminLoginBtn');
-            document.getElementById('adminContactNote').textContent = getTranslation('adminContactNote');
-            document.getElementById('logoutBtn').textContent = getTranslation('logoutBtn');
-            document.getElementById('ordersTitle').innerHTML = getTranslation('ordersTitle');
-            document.getElementById('addProductTitle').textContent = getTranslation('addProductTitle');
-            document.getElementById('labelName').textContent = getTranslation('labelName');
-            document.getElementById('labelBrand').textContent = getTranslation('labelBrand');
-            document.getElementById('labelCategory').textContent = getTranslation('labelCategory');
-            document.getElementById('labelPrice').textContent = getTranslation('labelPrice');
-            document.getElementById('labelOldPrice').textContent = getTranslation('labelOldPrice');
-            document.getElementById('labelIngredients').textContent = getTranslation('labelIngredients');
-            document.getElementById('labelDescription').textContent = getTranslation('labelDescription');
-            document.getElementById('labelDelivery').textContent = getTranslation('labelDelivery');
-            document.getElementById('labelImage').textContent = getTranslation('labelImage');
-            document.getElementById('uploadImageText').textContent = getTranslation('uploadImageText');
-            document.getElementById('addProductBtn').textContent = getTranslation('addProductBtn');
-            document.getElementById('manageProductsTitle').textContent = getTranslation('manageProductsTitle');
-            document.getElementById('ingredientsLabel').textContent = getTranslation('ingredientsLabel');
-            document.getElementById('deliveryInfoTitle').textContent = getTranslation('deliveryInfoTitle');
-            document.getElementById('purchaseMethodLabel').textContent = getTranslation('purchaseMethodLabel');
-            document.getElementById('modalInPersonLabel').textContent = getTranslation('modalInPersonLabel');
-            document.getElementById('modalDeliveryLabel').textContent = getTranslation('modalDeliveryLabel');
-            document.getElementById('addToCartLabel').textContent = getTranslation('addToCartLabel');
-            document.getElementById('formFullName').textContent = getTranslation('formFullName');
-            document.getElementById('formPhone').textContent = getTranslation('formPhone');
-            document.getElementById('formAddress').textContent = getTranslation('formAddress');
-            document.getElementById('formCity').textContent = getTranslation('formCity');
-            document.getElementById('formPayment').textContent = getTranslation('formPayment');
-            document.getElementById('formReceipt').textContent = getTranslation('formReceipt');
-            document.getElementById('receiptUploadText').textContent = getTranslation('receiptUploadText');
-            document.getElementById('telebirrInfo').textContent = getTranslation('telebirrInfo');
-            document.getElementById('cartTitle').textContent = getTranslation('cartTitle');
-            document.getElementById('emptyCartTitle').textContent = getTranslation('emptyCartTitle');
-            document.getElementById('emptyCartSub').textContent = getTranslation('emptyCartSub');
-            document.getElementById('totalLabel').textContent = getTranslation('totalLabel');
-            document.getElementById('checkoutLabel').textContent = getTranslation('checkoutLabel');
-        }
-
-        // ============================================================
-        // SECURITY: ADMIN PASSCODE
+        // SECURITY: ADMIN PASSCODE & OWNER VERIFICATION
         // ============================================================
         const ADMIN_PASSCODE = "2024";  // ← CHANGE THIS!
+        
+        // ============================================================
+        // 🔐 OWNER VERIFICATION - ONLY BOT OWNER CAN SEE ADMIN
+        // ============================================================
+        // The admin icon is hidden by default with CSS (display: none !important)
+        // Only when the owner enters the correct passcode does it appear
+        
         let isAdmin = false;
 
         // ============================================================
-        // TELEGRAM INIT
+        // TELEGRAM INIT - Get User Info
         // ============================================================
         let tg = null;
+        let currentUser = null;
+        
         try {
             tg = window.Telegram.WebApp;
             tg.expand();
-        } catch(e) {}
+            if (tg.initDataUnsafe && tg.initDataUnsafe.user) {
+                currentUser = tg.initDataUnsafe.user;
+                console.log('👤 User:', currentUser.first_name, 'ID:', currentUser.id);
+            }
+        } catch(e) {
+            console.log('Running outside Telegram');
+        }
 
         // ============================================================
         // OWNER CONTACT
@@ -3176,14 +2156,15 @@
                 isAdmin = true;
                 document.getElementById('adminLoginOverlay').classList.remove('active');
                 document.getElementById('adminDashboard').classList.add('active');
-                document.getElementById('adminToggleBtn').style.display = 'block';
-                document.getElementById('adminNavBtn').style.display = 'block';
                 document.body.style.overflow = 'hidden';
                 renderOrders();
                 renderProductList();
                 document.getElementById('productCount').textContent = products.length + ' items';
-                showToast(getTranslation('admin_granted'));
+                showToast('🔐 Admin access granted!');
                 sessionStorage.setItem('soyam_admin', 'true');
+                
+                // Show admin button after login
+                document.body.classList.add('admin-mode');
             } else {
                 document.getElementById('loginError').classList.add('show');
                 document.getElementById('adminPasscode').value = '';
@@ -3194,11 +2175,10 @@
         function logoutAdmin() {
             isAdmin = false;
             document.getElementById('adminDashboard').classList.remove('active');
-            document.getElementById('adminToggleBtn').style.display = 'none';
-            document.getElementById('adminNavBtn').style.display = 'none';
             document.body.style.overflow = '';
-            showToast(getTranslation('admin_logout'));
+            showToast('🚪 Logged out successfully');
             sessionStorage.removeItem('soyam_admin');
+            document.body.classList.remove('admin-mode');
         }
 
         function toggleDashboard() {
@@ -3221,7 +2201,7 @@
                 container.innerHTML = `
                     <div style="text-align:center;padding:20px 0;color:#999;">
                         <span style="font-size:30px;display:block;margin-bottom:6px;">📭</span>
-                        <p style="font-size:13px;">${currentLang === 'am' ? 'ምንም ትዕዛዝ የለም' : currentLang === 'or' ? 'Ajajni hin jiru' : 'No orders yet'}</p>
+                        <p style="font-size:13px;">No orders yet</p>
                     </div>
                 `;
                 return;
@@ -3261,16 +2241,16 @@
             orders[index].status = status;
             saveOrders();
             renderOrders();
-            showToast(status === 'confirmed' ? getTranslation('order_confirmed') : getTranslation('order_delivered'));
+            showToast(status === 'confirmed' ? '✅ Order confirmed!' : '📦 Order delivered!');
         }
 
         function deleteOrder(index) {
             if (!isAdmin) return;
-            if (!confirm(currentLang === 'am' ? 'ይህን ትዕዛዝ መሰረዝ ይፈልጋሉ?' : 'Delete this order?')) return;
+            if (!confirm('Delete this order?')) return;
             orders.splice(index, 1);
             saveOrders();
             renderOrders();
-            showToast(getTranslation('order_deleted'));
+            showToast('🗑️ Order deleted');
         }
 
         function addOrder(orderData) {
@@ -3295,7 +2275,7 @@
                 grid.innerHTML = `
                     <div style="grid-column:1/-1;text-align:center;padding:30px 0;color:#999;">
                         <span style="font-size:36px;display:block;margin-bottom:6px;">🧴</span>
-                        <p style="font-size:13px;">${currentLang === 'am' ? 'በዚህ ምድብ ውስጥ ምርቶች የሉም' : currentLang === 'or' ? 'Meeshaaleen ramaddii kana keessa hin jiran' : 'No products in this category'}</p>
+                        <p style="font-size:13px;">No products in this category</p>
                     </div>
                 `;
                 return;
@@ -3316,7 +2296,7 @@
                             <span class="price">${p.price.toLocaleString()} ETB</span>
                             ${p.oldPrice ? `<span class="old-price">${p.oldPrice.toLocaleString()} ETB</span>` : ''}
                         </div>
-                        <button class="add-to-cart-btn" onclick="event.stopPropagation(); quickAdd(${p.id})">🛒 ${currentLang === 'am' ? 'ወደ ጋሪ ጨምር' : currentLang === 'or' ? 'Gariitti dabaluu' : 'Add to Cart'}</button>
+                        <button class="add-to-cart-btn" onclick="event.stopPropagation(); quickAdd(${p.id})">🛒 Add to Cart</button>
                     </div>
                 </div>
             `}).join('');
@@ -3341,7 +2321,7 @@
             purchaseType = type;
             document.querySelectorAll('.purchase-option').forEach(el => el.classList.remove('active'));
             document.getElementById(type === 'inperson' ? 'inPersonOption' : 'deliveryOption').classList.add('active');
-            showToast(type === 'inperson' ? getTranslation('inperson_selected') : getTranslation('delivery_selected'));
+            showToast(type === 'inperson' ? '🏪 In-person pickup selected' : '🚚 Delivery mode selected');
         }
 
         function setModalPurchaseType(type) {
@@ -3368,7 +2348,7 @@
                 receiptImageData = e.target.result;
                 document.getElementById('receiptImage').src = receiptImageData;
                 document.getElementById('receiptPreview').classList.add('show');
-                showToast(getTranslation('receipt_uploaded'));
+                showToast('📸 Receipt photo uploaded!');
             };
             reader.readAsDataURL(file);
         }
@@ -3377,7 +2357,7 @@
             receiptImageData = null;
             document.getElementById('receiptPreview').classList.remove('show');
             document.getElementById('receiptInput').value = '';
-            showToast(getTranslation('receipt_removed'));
+            showToast('🗑️ Receipt removed');
         }
 
         function handleProductImageUpload(event) {
@@ -3388,7 +2368,7 @@
                 productImageData = e.target.result;
                 document.getElementById('productImagePreviewImg').src = productImageData;
                 document.getElementById('productImagePreview').classList.add('show');
-                showToast(getTranslation('image_uploaded'));
+                showToast('📸 Product image uploaded!');
             };
             reader.readAsDataURL(file);
         }
@@ -3465,7 +2445,7 @@
 
         function quickAdd(productId) {
             addToCart(productId, 1);
-            showToast(getTranslation('added_to_cart'));
+            showToast('✅ Added to cart!');
         }
 
         function addToCartFromModal() {
@@ -3477,18 +2457,18 @@
                 const address = document.getElementById('deliveryAddress').value.trim();
                 
                 if (!name || !phone || !address) {
-                    showToast(getTranslation('fill_delivery'));
+                    showToast('⚠️ Please fill in all delivery details');
                     return;
                 }
                 if (phone.length < 10) {
-                    showToast(getTranslation('valid_phone'));
+                    showToast('⚠️ Please enter a valid phone number');
                     return;
                 }
             }
             
             addToCart(currentProduct.id, 1);
             closeModal();
-            showToast('✅ ' + currentProduct.name + ' ' + (currentLang === 'am' ? 'ወደ ጋሪ ተጨመረ' : currentLang === 'or' ? 'gariitti dabalamte' : 'added to cart!'));
+            showToast('✅ ' + currentProduct.name + ' added to cart!');
         }
 
         function removeFromCart(index) {
@@ -3520,8 +2500,8 @@
                 cartItems.innerHTML = `
                     <div class="empty-cart">
                         <div class="icon">🛍️</div>
-                        <h4>${getTranslation('emptyCartTitle')}</h4>
-                        <p style="font-size:12px;color:#aaa;">${getTranslation('emptyCartSub')}</p>
+                        <h4>Your cart is empty</h4>
+                        <p style="font-size:12px;color:#aaa;">Start adding beauty products!</p>
                     </div>
                 `;
                 cartTotal.textContent = '0 ETB';
@@ -3596,7 +2576,7 @@
             cart = [];
             updateCartUI();
             toggleCart();
-            showToast(getTranslation('order_placed'));
+            showToast('🎉 Order placed successfully!');
         }
 
         // ============================================================
@@ -3615,7 +2595,7 @@
             const deliveryInfo = document.getElementById('newProductDelivery').value.trim() || 'Free delivery in Addis Ababa.';
 
             if (!name || !price || !description) {
-                showToast(getTranslation('fill_required'));
+                showToast('⚠️ Please fill in all required fields');
                 return;
             }
 
@@ -3642,23 +2622,23 @@
             document.getElementById('productImagePreview').classList.remove('show');
             document.getElementById('productImageInput').value = '';
 
-            showToast(getTranslation('product_added'));
+            showToast('✅ Product added successfully!');
         }
 
         function deleteProduct(id) {
             if (!isAdmin) return;
-            if (!confirm(currentLang === 'am' ? 'ይህን ምርት መሰረዝ ይፈልጋሉ?' : 'Delete this product?')) return;
+            if (!confirm('Delete this product?')) return;
             products = products.filter(p => p.id !== id);
             renderProducts(currentCategory);
             renderProductList();
             document.getElementById('productCount').textContent = products.length + ' items';
-            showToast(getTranslation('product_deleted'));
+            showToast('🗑️ Product deleted');
         }
 
         function renderProductList() {
             const container = document.getElementById('productListItems');
             if (products.length === 0) {
-                container.innerHTML = '<p style="color:#999;font-size:12px;padding:10px 0;">' + (currentLang === 'am' ? 'ምንም ምርቶች የሉም' : 'No products added yet.') + '</p>';
+                container.innerHTML = '<p style="color:#999;font-size:12px;padding:10px 0;">No products added yet.</p>';
                 return;
             }
             container.innerHTML = products.map(p => `
@@ -3706,7 +2686,7 @@
         });
 
         // ============================================================
-        // KEYBOARD SHORTCUT: Admin Login
+        // KEYBOARD SHORTCUT: Admin Login (Owner only)
         // ============================================================
         document.addEventListener('keydown', (e) => {
             if ((e.metaKey || e.ctrlKey) && e.shiftKey && e.key === 'A') {
@@ -3721,19 +2701,18 @@
         renderProducts('all');
         updateCartUI();
         document.getElementById('productCount').textContent = products.length + ' items';
-        updateUI();
 
+        // Check if admin session exists
         if (sessionStorage.getItem('soyam_admin') === 'true') {
             isAdmin = true;
-            document.getElementById('adminToggleBtn').style.display = 'block';
-            document.getElementById('adminNavBtn').style.display = 'block';
+            document.body.classList.add('admin-mode');
         }
 
         console.log('💄 SoYam Cosmetics loaded!');
         console.log('📦 ' + products.length + ' products');
-        console.log('🌍 10 Languages: Amharic, Oromo, Tigrinya, Somali, Afar, Sidama, Wolaytta, Gurage, Hadiyya, Kambaata');
+        console.log('🔐 Admin icon is HIDDEN from regular users');
+        console.log('👤 Only owner can see and access admin panel');
         console.log('📞 WhatsApp: ' + OWNER_WHATSAPP);
-        console.log('🔐 Admin: Press Cmd+Shift+A or tap 🔐 to login');
     </script>
 </body>
 </html>
