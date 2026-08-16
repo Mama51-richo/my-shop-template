@@ -54,7 +54,7 @@
         <img class="item-img" src="https://picsum.photos" alt="Hoodie">
         <h3>Streetwear Hoodie</h3>
         <p class="price">1,500 ETB</p>
-        <button class="btn" onclick="sendOrder('Streetwear Hoodie', '1,500 ETB')">Order Now</button>
+        <button class="btn" onclick="confirmOrder('Streetwear Hoodie', '1,500 ETB')">Order Now</button>
     </div>
 
     <!-- Item 2 -->
@@ -62,7 +62,7 @@
         <img class="item-img" src="https://picsum.photos" alt="Pants">
         <h3>Classic Cargo Pants</h3>
         <p class="price">1,800 ETB</p>
-        <button class="btn" onclick="sendOrder('Classic Cargo Pants', '1,800 ETB')">Order Now</button>
+        <button class="btn" onclick="confirmOrder('Classic Cargo Pants', '1,800 ETB')">Order Now</button>
     </div>
 
     <!-- Item 3 -->
@@ -70,19 +70,18 @@
         <img class="item-img" src="https://picsum.photos" alt="Tee">
         <h3>Oversized Vintage Tee</h3>
         <p class="price">950 ETB</p>
-        <button class="btn" onclick="sendOrder('Oversized Vintage Tee', '950 ETB')">Order Now</button>
+        <button class="btn" onclick="confirmOrder('Oversized Vintage Tee', '950 ETB')">Order Now</button>
     </div>
 
     <script>
         const tg = window.Telegram.WebApp;
         tg.expand();
 
-        function sendOrder(itemName, itemPrice) {
-            // Native custom pop-up dialog that confirms processing immediately
-            tg.showPopup({
-                title: 'Order Status',
-                message: 'Your order request for ' + itemName + ' (' + itemPrice + ') has been registered! Our distribution team will contact you in chat.',
-                buttons: [{id: 'ok', type: 'default', text: 'Excellent'}]
+        function confirmOrder(itemName, itemPrice) {
+            tg.showConfirm("Are you sure you want to order the " + itemName + " for " + itemPrice + "?", function(approved) {
+                if (approved) {
+                    tg.showAlert("Order for " + itemName + " registered!");
+                }
             });
         }
     </script>
